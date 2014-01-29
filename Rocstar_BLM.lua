@@ -65,8 +65,8 @@ function get_sets()
     sets.WeatherAndOrDay.Wind = {waist='Furin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
     sets.WeatherAndOrDay.Ice = {waist='Hyorin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
     sets.WeatherAndOrDay.Thunder = {waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
-    sets.WeatherAndOrDay.Light = {waist='Korin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
-    sets.WeatherAndOrDay.Dark = {waist='Anrin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+    sets.WeatherAndOrDay.Light = {waist='Korin Obi',back='Twilight Cape'}
+    sets.WeatherAndOrDay.Dark = {waist='Anrin Obi',back='Twilight Cape'}
     send_command('input /macro book 5;wait .1;input /macro set 1')
     end
 
