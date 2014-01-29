@@ -67,7 +67,8 @@ function get_sets()
     sets.WeatherAndOrDay.Thunder = {waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
     sets.WeatherAndOrDay.Light = {waist='Korin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
     sets.WeatherAndOrDay.Dark = {waist='Anrin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
-    send_command('input /macro book 5;wait .1;input /macro set 1')end
+    send_command('input /macro book 5;wait .1;input /macro set 1')
+    end
 
 function precast(spell)
 if spell.action_type=='Magic'then equip(sets.precast.FC.Normal)
@@ -76,30 +77,37 @@ if sets.precast.FC[spell.element]then equip(sets.precast.FC[spell.element])
 elseif spell.english:startswith('Cur')then equip(sets.precast.FC.Cure)
 elseif spell.type=='EnhancingMagic'then equip(sets.precast.EnhancingMagic)
 elseif sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
-elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])end end end end end
+elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
+	end end end end end
 
 function midcast(spell)
 if spell.skill=='ElementalMagic'then equip(sets.midcast.Nuke)
-if spell.element == world.weather_element or spell_element == world.day_element then equip(sets.WeatherAndOrDay[spell.element])
+if spell.element==world.weather_element or spell_element==world.day_element 
+then equip(sets.WeatherAndOrDay[spell.element])
 elseif spell.english:startswith('Cur')then equip(sets.midcast.Cure)
-if spell.element == world.weather_element or spell_element == world.day_element then equip(sets.WeatherAndOrDay[spell.element])
+if spell.element==world.weather_element or spell_element==world.day_element 
+then equip(sets.WeatherAndOrDay[spell.element])
 elseif spell.english:startswith('Shell')then equip(sets.midcast.Shell)
 elseif spell.english:startswith('Pro')then equip(sets.midcast.Pro)
 elseif spell.english=='Blink'and buffactive.blink then send_command('cancel 36')
 elseif spell.english=='Stoneskin'and buffactive.stoneskin then send_command('cancel 37')equip(sets.midcast.Stoneskin)
-elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')end end end end
+elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')
+	end end end end
 
 function weathercheck(spell_element,set)
 if spell_element==world.weather_element 
 or spell_element==world.day_element 
 then equip(set,sets['WeatherAndOrDay_'..spell_element])
-else equip(set)end end
+else equip(set)
+	end end
 
 function aftercast(spell)
 if player.status=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
-else equip(sets.aftercast.Idle)end end
+else equip(sets.aftercast.Idle)
+	end end
 
 function status_change(new,old)
 if new=='Engaged'then equip(sets.aftercast.Engaged)
 elseif new=='Resting'then equip(sets.aftercast.HealingMP)enable('main','sub')
-elseif new=='Idle'then equip(sets.aftercast.Idle)end end
+elseif new=='Idle'then equip(sets.aftercast.Idle)
+	end end
