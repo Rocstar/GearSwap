@@ -11,12 +11,13 @@ function get_sets()
     sets.precast.JA['Elemental Seal'] = {main="Baqil Staff"}
 	
 	sets.precast.FC = {}
-	sets.precast.FC.Normal = {ammo="Impatiens",head="Nahtirah Hat",neck="Orunmila's Torque",ear1="Loquacious Earring",
-	body="Marduk's Jubbah +1",hands="Gendewitha Gages",ring1="Prolix Ring",ring2="Veneficium Ring",
-	back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
+	sets.precast.FC.Normal = {ammo="Impatiens",head="Nahtirah Hat",neck="Orunmila's Torque",
+	ear1="Loquacious Earring",body="Marduk's Jubbah +1",hands="Gendewitha Gages",ring1="Prolix Ring",
+	ring2="Veneficium Ring",back="Swith Cape +1",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
 		
-    sets.precast.FC.Cure = set_combine(sets.precast.FC.Light, {sub="Dominie's Grip",head="Cleric's cap +2",neck="Aceso's Choker",body="Heka's Kalasiris",
-	back="Pahtli Cape",waist="Capricornian Rope",legs="Nabu's Shalwar",feet="Cure Clogs"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC.Light, {sub="Dominie's Grip",head="Cleric's cap +2",
+    	neck="Aceso's Choker",body="Heka's Kalasiris",back="Pahtli Cape",waist="Capricornian Rope",
+    	legs="Nabu's Shalwar",feet="Cure Clogs"})
 		
     sets.precast.FC.Stoneskin = set_combine(sets.precast.EnhancingMagic, {hands="Carapacho Cuffs"})
 	
@@ -88,14 +89,15 @@ if spell.action_type=='Magic'then equip(sets.precast.FC.Normal)
 if spell.english:startswith('Cur') and spell.name ~= 'Cursna' then equip(sets.precast.FC.Cure)
 if sets.precast.FC[spell.element]then equip(sets.precast.FC[spell.element]) 
 elseif spell.type=='EnhancingMagic'then equip(sets.precast.EnhancingMagic)
-if spell.english=='Stoneskin'then equip(sets.precast.FC.Stoneskin)
-if sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
+elseif spell.english=='Stoneskin'then equip(sets.precast.FC.Stoneskin)
+elseif sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
 elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
-end end end end end end end
+end end end end end
 
 function midcast(spell)
 if spell.english:startswith('Cure')or spell.english:startswith('Cura')then equip(sets.midcast.CurePotency)
-if spell.element == world.weather_element or spell_element == world.day_element then equip(sets.WeatherAndOrDay[spell.element])
+if spell.element==world.weather_element or spell_element==world.day_element 
+then equip(sets.WeatherAndOrDay[spell.element])
 elseif spell.english=='Cursna'then equip(sets.midcast.Cursna) 
 elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')
 elseif spell.english=='Blink'and buffactive.blink then send_command('cancel 36')
@@ -120,6 +122,8 @@ elseif new=='Resting'then equip(sets.aftercast.HealingMP)
 end end
 
 function weathercheck(spell_element,set)
-if spell_element==world.weather_element or spell_element==world.day_element then 
-equip(set,sets['Obi_'..spell_element]) else equip(set)
+if spell_element==world.weather_element 
+or spell_element==world.day_element 
+then equip(set,sets['WeatherAndOrDay_'..spell_element])
+else equip(set)
 end end
