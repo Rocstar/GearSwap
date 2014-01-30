@@ -10,7 +10,7 @@ sets.precast.JA['Hundred Fists'] = {legs="Melee hose +2"}
 sets.precast.JA.Chakra = {body="Anchorite's Cyclas",hands="Melee Gloves +2"}
 sets.precast.JA['Formless Strikes'] = {body="Melee cyclas +2"}
 sets.precast.JA['Chi Blast'] = {body="Melee crown +2"}
-sets.precast.Waltz = {head="Anwig Salade",neck="Dualism Collar",ring1="Valseur's Ring",ring2="Veela Ring",
+sets.precast.JA.Waltz = {head="Anwig Salade",neck="Dualism Collar",ring1="Valseur's Ring",ring2="Veela Ring",
 waist="Aristo Belt",legs="Desultor Tassets",feet="Dance Shoes"}
 sets.precast.WS = {}
 --WS sets
