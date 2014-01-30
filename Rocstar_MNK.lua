@@ -1,8 +1,7 @@
---To toggle sets in game type //gs c toggle sets. Or macro /console gs c toggle sets. 
---Also a command for each tp set /console gs c ACC /console gs c DD /console gs c PD /console gs c MD
+--To toggle sets in game type //gs c toggle sets. Or macro /console gs c toggle sets
 function get_sets()
+sets.precast = {}
 sets.precast.JA = {}
---JA sets
 sets.precast.JA.Footwork = {feet="Tantra Gaiters +2"}
 sets.precast.JA.Counterstance = {feet="Melee Gaiters +2"}
 sets.precast.JA.Mantra = {feet="Melee Gaiters +2"}
@@ -21,17 +20,21 @@ sets.precast.WS['Victory Smite'] = {head="???",feet="???"}
 sets.precast.WS['Final Heaven'] = set_combine(sets.precast.WS['Victory Smite'], {head="???",feet="???"})
 sets.precast.WS['Ascetic\'s Fury'] = set_combine(sets.precast.WS['Victory Smite'], {head="???",feet="???"})
 sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS['Victory Smite'], {head="???",feet="???"})
+sets.TP = {}
+--Damage Dealer set
+sets.TP.DD = {head="???",feet="???"}
+--Accuracy set
+sets.TP.AC = {head="???",feet="???"}
+--Magic Damage Taken - set
+sets.MD = {head="???",feet="???"}
+--Physical Damage Taken - set
+sets.PD = {head="???",feet="???"}
+--Resting Set
+sets.Resting = {ammo="Iron Gobbet"}
 sets.aftercast = {}
---Idle set
+sets.aftercast.TP = sets.TP.DD
 sets.aftercast.Idle = {head="Oce. Headpiece",neck="Wiglen Gorget",body="Melee cyclas +2",
 ring1="Paguroidea Ring",ring2="Sheltered Ring"}
-sets.aftercast.TP = sets.TP.DD
-sets.TP = {}
---TP sets DD normal gear
-sets.TP.DD = {head="???",feet="???"}
-sets.TP.MD = {head="???",feet="???"}
-sets.TP.PD = {head="???",feet="???"}
-sets.TP.ACC = {head="???",feet="???"}
 send_command('input /macro book 5;wait .1;input /macro set 1')
 end
 
@@ -40,7 +43,7 @@ if sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
 elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
 elseif spell.english=='Spectral Jig'then send_command('cancel 71')end end end
 
-function midcast(spell) 
+function midcast(spell)
 end
 
 function aftercast(spell)
@@ -49,21 +52,17 @@ else equip(sets.aftercast.Idle)end end
 
 function status_change(new,old)
     if new=='Engaged'then equip(sets.aftercast.TP)
-elseif new=='Idle'equip(sets.aftercast.Idle)end end
+elseif new=='Idle'then equip(sets.aftercast.Idle)
+elseif new=='Resting'then equip(sets.Resting)end end
 
 
 function self_command(command)
 if command=='toggle sets' then
-if sets.aftercast.TP==sets.TP.ACC then sets.aftercast.TP=sets.TP.MD 
+if sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.MD 
 send_command('@input /echo MAGIC DAMAGE TAKEN - SET')
-elseif sets.aftercast.TP==sets.TP.MD then sets.aftercast.TP=sets.TP.PD 
+elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
 send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')
-elseif sets.aftercast.TP==sets.TP.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo DD SET')
-elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.ACC 
-send_command('@input /echo ACC SET')
-elseif command=='MD' then equip(sets.TP.MD)send_command('@input /echo MAGIC DAMAGE TAKEN - SET')
-elseif command=='PD' then equip(sets.TP.PD)send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')
-elseif command=='DD' then equip(sets.TP.DD)send_command('@input /echo DD SET')
-elseif command=='ACC' then equip(sets.TP.ACC)send_command('@input /echo ACC SET')end end end
-
+elseif sets.aftercast.TP==sets.PD then sets.aftercast.TP=sets.TP.DD 
+send_command('@input /echo DAMAGE DEALING SET')
+elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.AC 
+send_command('@input /echo ACCURACY SET')end end end
