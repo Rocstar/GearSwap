@@ -62,8 +62,8 @@ elseif sets.aftercast.TP==sets.TP.PD then sets.aftercast.TP=sets.TP.DD
 send_command('@input /echo DD SET')
 elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.ACC 
 send_command('@input /echo ACC SET')
-elseif command=='MD' then equip(sets.MT)send_command('@input /echo MAGIC DAMAGE TAKEN - SET')
-elseif command=='PD' then equip(sets.DT)send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')
-elseif command=='DD' then equip(sets.DD)send_command('@input /echo DD SET')
-elseif command=='ACC' then equip(sets.ACC)send_command('@input /echo ACC SET')end end end
+elseif command=='MD' then equip(sets.TP.MT)send_command('@input /echo MAGIC DAMAGE TAKEN - SET')
+elseif command=='PD' then equip(sets.TP.DT)send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')
+elseif command=='DD' then equip(sets.TP.DD)send_command('@input /echo DD SET')
+elseif command=='ACC' then equip(sets.TP.ACC)send_command('@input /echo ACC SET')end end end
 
