@@ -1,4 +1,4 @@
---To toggle sets in game type //gs c toggle sets. Or macro /console gs c toggle sets
+--To toggle modes macro /console gs c toggle modes
 function get_sets()
 --JA sets
 sets.precast = {}
@@ -84,7 +84,7 @@ elseif new=='Resting'then equip(sets.Resting)
 end end
 
 function self_command(command)
-if command=='toggle sets' then
+if command=='toggle modes' then
 if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.MD 
 send_command('@input /echo Magic Damage Taken - Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
