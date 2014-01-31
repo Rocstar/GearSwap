@@ -39,19 +39,24 @@ sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'],
 sets.precast.WS['Mercy Stroke'] = {feet="???"}
 sets.TP = {}
 
-sets.TP.DD = {head="Manibozho Beret",neck="Love Torque",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-body="Manibozho Jerkin",hands="Buremte Gloves",ring1="Epona's Ring",ring2="Cho'j Band",
-back="Atheling Mantle",waist="Twilight Belt",legs="Manibozho Brais",feet="Manibozho Boots"}
+sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",neck="Love Torque",
+ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
+ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
+legs="Manibozho Brais",feet="Manibozho Boots"}
 
-sets.TP.AC = set_combine(sets.TP.DD, {head="Manibozho Beret",neck="Love Torque",body="Manibozho Jerkin",
-hands="Buremte Gloves",waist="Dynamic Belt",legs="Manibozho Brais",feet="Manibozho Boots"})
+sets.TP.AC = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",
+neck="Love Torque",body="Manibozho Jerkin",hands="Buremte Gloves",waist="Dynamic Belt",
+legs="Manibozho Brais",feet="Manibozho Boots"})
 
-sets.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
-hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
+sets.MD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Ejekamal Mask",
+neck="Twilight Torque",body="Iuitl Vest",hands="Buremte Gloves",
+back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
-sets.PD = set_combine(sets.TP.DD, {neck="Twilight Torque",back="Mollusca Mantle"})
+sets.PD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",neck="Twilight Torque",
+back="Mollusca Mantle"})
 
-sets.TP.TH = set_combine(sets.TP.DD, {hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
+sets.TP.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
+hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
 sets.Resting = {ammo="Iron Gobbet"}
 sets.aftercast = {}
@@ -80,13 +85,15 @@ end end
 
 function self_command(command)
 if command=='toggle sets' then
-if sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.MD 
-send_command('@input /echo MAGIC DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
+if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.MD 
+send_command('@input /echo Magic Damage Taken - Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
-send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
+send_command('@input /echo Physical Damage Taken - Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo DAMAGE DEALING SET')equip(sets.aftercast.TP)
+send_command('@input /echo Damage Dealer Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.TH 
-send_command('@input /echo TREASURE HUNTER SET')equip(sets.aftercast.TP)
+send_command('@input /echo Treasure Hunter Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.TH then sets.aftercast.TP=sets.TP.AC 
-send_command('@input /echo ACCURACY SET')equip(sets.aftercast.TP)end end end
+send_command('@input /echo Accuracy Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.aftercast.Idle 
+send_command('@input /echo Idle Mode')equip(sets.aftercast.TP)end end end
