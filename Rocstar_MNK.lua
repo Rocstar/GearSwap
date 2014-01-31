@@ -1,4 +1,4 @@
---To toggle sets in game type //gs c toggle sets. Or macro /console gs c toggle sets
+--To toggle modes macro /console gs c toggle modes
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
@@ -33,6 +33,7 @@ sets.PD = {head="???",feet="???"}
 sets.Resting = {ammo="Iron Gobbet"}
 sets.aftercast = {}
 sets.aftercast.TP = sets.TP.DD
+--Idle Set
 sets.aftercast.Idle = {head="Oce. Headpiece",neck="Wiglen Gorget",body="Melee cyclas +2",
 ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 send_command('input /macro book 5;wait .1;input /macro set 1')
@@ -57,12 +58,14 @@ elseif new=='Resting'then equip(sets.Resting)end end
 
 
 function self_command(command)
-if command=='toggle sets' then
-if sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.MD 
-send_command('@input /echo MAGIC DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
+if command=='toggle modes' then
+if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.MD 
+send_command('@input /echo Magic Damage Taken - Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
-send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
+send_command('@input /echo Physical Damage Taken - Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo DAMAGE DEALING SET')equip(sets.aftercast.TP)
+send_command('@input /echo Damage Dealer Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.AC 
-send_command('@input /echo ACCURACY SET')equip(sets.aftercast.TP)end end end
+send_command('@input /echo Accuracy Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.aftercast.Idle 
+send_command('@input /echo Idle Mode')equip(sets.aftercast.TP)end end end
