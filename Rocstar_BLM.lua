@@ -102,12 +102,12 @@ else equip(set)
 	end end
 
 function aftercast(spell)
-if player.status=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
+if player.status=='Engaged'then equip(sets.aftercast.Engaged)
 else equip(sets.aftercast.Idle)
 	end end
 
 function status_change(new,old)
-if new=='Engaged'then equip(sets.aftercast.Engaged)
+if new=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
 elseif new=='Resting'then equip(sets.aftercast.HealingMP)enable('main','sub')
 elseif new=='Idle'then equip(sets.aftercast.Idle)
 	end end
