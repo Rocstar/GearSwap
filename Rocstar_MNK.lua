@@ -59,10 +59,10 @@ elseif new=='Resting'then equip(sets.Resting)end end
 function self_command(command)
 if command=='toggle sets' then
 if sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.MD 
-send_command('@input /echo MAGIC DAMAGE TAKEN - SET')
+send_command('@input /echo MAGIC DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
-send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')
+send_command('@input /echo PHYSICAL DAMAGE TAKEN - SET')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo DAMAGE DEALING SET')
+send_command('@input /echo DAMAGE DEALING SET')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.AC 
-send_command('@input /echo ACCURACY SET')end end end
+send_command('@input /echo ACCURACY SET')equip(sets.aftercast.TP)end end end
