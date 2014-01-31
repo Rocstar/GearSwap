@@ -1,4 +1,4 @@
-GearSwap Scripts to change gear in FFXI
+GearSwap Scripts for FFXI
 ========
 
 Weapon Skill sets need filling possibly more.
