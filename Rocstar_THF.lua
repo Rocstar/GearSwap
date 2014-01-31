@@ -1,6 +1,3 @@
---To toggle modes, macro /console gs c toggle modes
---To switch to Magic Damage Taken - set, macro /console gs equip sets.MD
---To switch to Physical Damage Taken - set, macro /console gs equip sets.PD
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
