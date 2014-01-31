@@ -1,4 +1,3 @@
---To toggle modes macro /console gs c toggle modes
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
