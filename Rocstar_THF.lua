@@ -88,7 +88,7 @@ sets.aftercast = {}
 sets.aftercast.TP = sets.TP.DD
 
 --Idle set
-sets.aftercast.Idle = {head="Ocelomeh Headpiece",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+sets.aftercast.Idle = {head="Ocelomeh Headpiece +1",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Command to set macro book when reloading file
 send_command('input /macro book 4;wait .1;input /macro set 1')
