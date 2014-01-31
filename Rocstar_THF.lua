@@ -1,8 +1,12 @@
---To toggle modes macro /console gs c toggle modes
+--To toggle modes, macro /console gs c toggle modes
+--To switch to Magic Damage Taken - set, macro /console gs equip sets.MD
+--To switch to Physical Damage Taken - set, macro /console gs equip sets.PD
 function get_sets()
---JA sets
 sets.precast = {}
 sets.precast.JA = {}
+
+--JA sets
+sets.precast.JA.Mug = {head="Assassin's bonnet +2"}
 sets.precast.JA.Steal = {head="Assassin's bonnet +2",
 hands="Pillager's armlets +1",legs="Pillager's culottes +1",feet="Pillager's poulaines +1"}
 sets.precast.JA['Perfect Dodge'] = {hands="Assassin's armlets +2"}
@@ -16,59 +20,89 @@ sets.precast.JA.Despoil = {legs="Raider's Culottes +2",feet="Raider's Poulaines 
 sets.precast.JA.Hide = {body="Pillager's vest +1"}
 sets.precast.JA['Trick Attack'] = {hands="Pillager's armlets +1"}
 sets.precast.JA.Flee = {feet="Pillager's poulaines +1"}
-sets.precast.JA.Step = {feet="???"}
-sets.precast.JA['Violent Flourish'] = {feet="???"}
-sets.precast.JA.Waltz = {feet="???"}
+
+--VIT set for Curing Waltz
+sets.precast.JA.Waltz = {head="Ejekamal Mask",body="Iuitl Vest",hands="Buremte Gloves",
+back="Iximulew Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
+
 sets.precast.WS = {}
 --WS sets
 --73% AGI mod on 1st merit, +3% for 2nd-5th merits. 85% AGI mod at 5/5.
-sets.precast.WS.Exenterator = {feet="???"}
---60% DEX
-sets.precast.WS['Rudra\'s Storm'] = {feet="???"}
---30% DEX
-sets.precast.WS.Evisceration = set_combine(sets.precast.WS['Rudra\'s Storm'], {feet="???"})
---30% DEX
-sets.precast.WS['Mandalic Stab'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {feet="???"})
---50% DEX
-sets.precast.WS['Shark Bite'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {feet="???"})
---28% DEX / 28% INT
-sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {feet="???"})
---40% CHR / 30% DEX
-sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {feet="???"})
---60% STR
-sets.precast.WS['Mercy Stroke'] = {feet="???"}
-sets.TP = {}
+sets.precast.WS.Exenterator = {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"}
 
+--60% DEX
+sets.precast.WS['Rudra\'s Storm'] = {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"}
+
+--30% DEX
+sets.precast.WS.Evisceration = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"})
+
+--30% DEX
+sets.precast.WS['Mandalic Stab'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"})
+
+--50% DEX
+sets.precast.WS['Shark Bite'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"})
+
+--28% DEX / 28% INT
+sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"})
+
+--40% CHR / 30% DEX
+sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
+feet="Asn. poulaines +2"})
+
+--60% STR
+sets.precast.WS['Mercy Stroke'] = {Body="Asn. Vest +2",feet="Asn. poulaines +2"}
+
+sets.TP = {}
+--DD Set
 sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",neck="Love Torque",
 ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
 ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
 legs="Manibozho Brais",feet="Manibozho Boots"}
 
+--Accuracy set
 sets.TP.AC = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",
 neck="Love Torque",body="Manibozho Jerkin",hands="Buremte Gloves",waist="Dynamic Belt",
 legs="Manibozho Brais",feet="Manibozho Boots"})
 
+--Magic Damage Taken - set
 sets.MD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Ejekamal Mask",
 neck="Twilight Torque",body="Iuitl Vest",hands="Buremte Gloves",
 back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
+--Physical Damage Taken - set
 sets.PD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",neck="Twilight Torque",
 back="Mollusca Mantle"})
 
+--Treasure Hunter set
 sets.TP.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
 hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
+--HP recovered while healing set
 sets.Resting = {ammo="Iron Gobbet"}
 sets.aftercast = {}
+
+--Variable to toggle modes
 sets.aftercast.TP = sets.TP.DD
+
+--Idle set
 sets.aftercast.Idle = {head="Ocelomeh Headpiece",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+
+--Command to set macro book when reloading file
 send_command('input /macro book 4;wait .1;input /macro set 1')
 end
 
 function precast(spell)
-if sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
+if spell.english == 'Spectral Jig'and buffactive.sneak then send_command('cancel 71')
+elseif spell.english:startswith('Cur')then equip(sets.precast.JA.Waltz)
+elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.AC)
 elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
-elseif spell.english=='Sneak'then send_command('cancel 71')end end end
+elseif sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])end end end
 
 function midcast(spell) 
 end
