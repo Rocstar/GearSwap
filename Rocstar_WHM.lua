@@ -91,8 +91,8 @@ if sets.precast.FC[spell.element]then equip(sets.precast.FC[spell.element])
 elseif spell.type=='EnhancingMagic'then equip(sets.precast.EnhancingMagic)
 elseif spell.english=='Stoneskin'then equip(sets.precast.FC.Stoneskin)
 elseif sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
-elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
-end end end end end
+elseif spell.type=='WeaponSkill'then 
+if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])end end end end end
 
 function midcast(spell)
 if spell.english:startswith('Cure')or spell.english:startswith('Cura')then equip(sets.midcast.CurePotency)
@@ -107,23 +107,17 @@ elseif spell.english:startswith('Shell*')then equip(sets.midcast.Shell)
 elseif spell.english:startswith('Pro*')then equip(sets.midcast.Pro)
 elseif spell.english:startswith('na')and spell.name ~= 'Cursna' then equip(sets.midcast.na)
 elseif spell.english:startswith('Bar')then if buffactive['Afflatus Solace']
-then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)
-end end end end
+then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)end end end end
 
 function aftercast(spell)
 if player.status=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
-else equip(sets.aftercast.Idle)
-end end
+else equip(sets.aftercast.Idle)end end
 
 function status_change(new,old)
 if new=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
 elseif new=='Idle'then equip(sets.aftercast.Idle)
-elseif new=='Resting'then equip(sets.aftercast.HealingMP)
-end end
+elseif new=='Resting'then equip(sets.aftercast.HealingMP)end end
 
 function weathercheck(spell_element,set)
-if spell_element==world.weather_element 
-or spell_element==world.day_element 
-then equip(set,sets['WeatherAndOrDay_'..spell_element])
-else equip(set)
-end end
+if spell_element==world.weather_element or spell_element==world.day_element 
+then equip(set,sets['WeatherAndOrDay_'..spell_element])else equip(set)end end
