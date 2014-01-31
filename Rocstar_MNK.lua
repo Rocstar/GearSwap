@@ -24,13 +24,13 @@ sets.TP = {}
 --Damage Dealer set
 sets.TP.DD = {head="???",feet="???"}
 --Accuracy set
-sets.TP.AC = {head="???",feet="???"}
+sets.TP.AC = set_combine(sets.TP.DD, {head="???",feet="???"})
 --Magic Damage Taken - set
-sets.MD = {head="???",feet="???"}
+sets.MD = set_combine(sets.TP.DD, {head="???",feet="???"})
 --Physical Damage Taken - set
-sets.PD = {head="???",feet="???"}
+sets.PD = set_combine(sets.TP.DD, {head="???",feet="???"})
 --Resting Set
-sets.Resting = {ammo="Iron Gobbet"}
+sets.Resting = {head="???",feet="???"}
 sets.aftercast = {}
 sets.aftercast.TP = sets.TP.DD
 --Idle Set
