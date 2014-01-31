@@ -110,13 +110,13 @@ elseif spell.english:startswith('Bar')then if buffactive['Afflatus Solace']
 then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)end end end end
 
 function aftercast(spell)
-if player.status=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
+if player.status=='Engaged'then equip(sets.aftercast.Engaged)
 else equip(sets.aftercast.Idle)end end
 
 function status_change(new,old)
 if new=='Engaged'then equip(sets.aftercast.Engaged)disable('main','sub')
 elseif new=='Idle'then equip(sets.aftercast.Idle)
-elseif new=='Resting'then equip(sets.aftercast.HealingMP)end end
+elseif new=='Resting'then equip(sets.aftercast.HealingMP)enable('main','sub')end end
 
 function weathercheck(spell_element,set)
 if spell_element==world.weather_element or spell_element==world.day_element 
