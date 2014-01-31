@@ -1,8 +1,6 @@
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
-
---JA sets
 sets.precast.JA.Mug = {head="Assassin's bonnet +2"}
 sets.precast.JA.Steal = {head="Assassin's bonnet +2",
 hands="Pillager's armlets +1",legs="Pillager's culottes +1",feet="Pillager's poulaines +1"}
@@ -29,8 +27,7 @@ sets.precast.WS.Exenterator = {Body="Asn. Vest +2",
 feet="Asn. poulaines +2"}
 
 --60% DEX
-sets.precast.WS['Rudra\'s Storm'] = {Body="Asn. Vest +2",
-feet="Asn. poulaines +2"}
+sets.precast.WS['Rudra\'s Storm'] = {feet="Assassin's poulaines +2"}
 
 --30% DEX
 sets.precast.WS.Evisceration = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
@@ -49,8 +46,7 @@ sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'],
 feet="Asn. poulaines +2"})
 
 --40% CHR / 30% DEX
-sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {Body="Asn. Vest +2",
-feet="Asn. poulaines +2"})
+sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'], {head="???"})
 
 --60% STR
 sets.precast.WS['Mercy Stroke'] = {Body="Asn. Vest +2",feet="Asn. poulaines +2"}
@@ -96,11 +92,11 @@ send_command('input /macro book 4;wait .1;input /macro set 1')
 end
 
 function precast(spell)
-if spell.english == 'Spectral Jig'and buffactive.sneak then send_command('cancel 71')
+if sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])
+elseif spell.english == 'Spectral Jig'and buffactive.sneak then send_command('cancel 71')
 elseif spell.english:startswith('Cur')then equip(sets.precast.JA.Waltz)
 elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.AC)
-elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])
-elseif sets.precast.JA[spell.english]then equip(sets.precast.JA[spell.english])end end end
+elseif spell.type=='WeaponSkill'then if sets.precast.WS[spell.name]then equip(sets.precast.WS[spell.name])end end end
 
 function midcast(spell) 
 end
