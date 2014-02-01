@@ -51,38 +51,55 @@ sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS['Rudra\'s Storm'],
 --60% STR
 sets.precast.WS['Mercy Stroke'] = {Body="Asn. Vest +2",feet="Asn. poulaines +2"}
 
+--Engaged sets
 sets.TP = {}
---DD Set
+
+--Engaged Regen set
+sets.TP.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+
+--Engaged DD Set
 sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",neck="Love Torque",
 ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
 ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
 legs="Manibozho Brais",feet="Manibozho Boots"}
 
---Accuracy set
-sets.TP.AC = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",
-neck="Love Torque",body="Manibozho Jerkin",hands="Buremte Gloves",waist="Dynamic Belt",
-legs="Manibozho Brais",feet="Manibozho Boots"})
+--Engaged Accuracy set
+sets.TP.AC = set_combine(sets.TP.DD, {head="Manibozho Beret",neck="Love Torque",body="Manibozho Jerkin",
+hands="Buremte Gloves",waist="Dynamic Belt",legs="Manibozho Brais",feet="Manibozho Boots"})
 
---Magic Damage Taken - set
-sets.TP.MD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Ejekamal Mask",
-neck="Twilight Torque",body="Iuitl Vest",hands="Buremte Gloves",
-back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
+--Engaged Magic Damage Taken - set
+sets.TP.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
+hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
---Physical Damage Taken - set
-sets.TP.PD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",neck="Twilight Torque",
-back="Mollusca Mantle"})
+--Engaged Physical Damage Taken - set
+sets.TP.PD = set_combine(sets.TP.DD, {neck="Twilight Torque",back="Mollusca Mantle"})
 
---Treasure Hunter set
+--Engaged Treasure Hunter set
 sets.TP.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
 hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
---Idle set
-sets.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",body="Iuitl Vest",
-ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Iximulew Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
+--Idle sets
+sets.Idle = {}
+
+--Idle Regen set
+sets.Idle.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",
+ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+
+--Idle Treasure Hunter set
+sets.Idle.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
+hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
+
+--Idle Physical Damage Taken - set
+sets.Idle.PD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
+hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
+
+--Idle Magic Damage Taken - set
+sets.Idle.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
+hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 sets.aftercast = {}
 sets.aftercast.TP = sets.TP.DD
-sets.aftercast.Idle = sets.RE 
+sets.aftercast.Idle = sets.Idle.RE 
 --Command to set macro book when reloading file
 send_command('input /macro book 4;wait .1;input /macro set 1')
 end
@@ -107,16 +124,28 @@ elseif new=='Idle'then equip(sets.aftercast.Idle)
 end end
 
 function self_command(command)
-if command=='toggle engaged' then
-if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.TP.MD 
-send_command('@input /echo Engaged set to Magic Damage Taken - Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.TP.MD then sets.aftercast.TP=sets.TP.PD 
-send_command('@input /echo Engaged set to Physical Damage Taken - Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.TP.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo Engaged set to Damage Dealer Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.TH 
+if command=='toggle engaged'then 
+if sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.TH 
 send_command('@input /echo Engaged set to Treasure Hunter Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.TP.TH then sets.aftercast.TP=sets.TP.AC 
+elseif sets.aftercast.TP==sets.TP.TH then sets.aftercast.TP=sets.TP.PD 
+send_command('@input /echo Engaged set to Physical Damage Taken - Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.PD then sets.aftercast.TP=sets.TP.MD 
+send_command('@input /echo Engaged set to Magic Damage Taken - Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.MD then sets.aftercast.TP=sets.TP.RE 
+send_command('@input /echo Engaged set to Regen Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.RE then sets.aftercast.TP=sets.TP.AC 
 send_command('@input /echo Engaged set to Accuracy Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.aftercast.Idle 
-send_command('@input /echo Engaged set to Idle Mode')equip(sets.aftercast.TP)end end end
+elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.TP.DD 
+send_command('@input /echo Engaged set to Damage Dealer Mode')equip(sets.aftercast.TP)end 
+
+elseif command=='toggle idle'then
+if sets.aftercast.Idle==sets.Idle.RE then sets.aftercast.Idle=sets.Idle.TH
+send_command('@input /echo Idle set to Treasure Hunter Mode')equip(sets.aftercast.Idle)
+elseif sets.aftercast.Idle==sets.Idle.TH then sets.aftercast.Idle=sets.Idle.PD 
+send_command('@input /echo Idle set to Physical Damage Taken - Mode')equip(sets.aftercast.Idle)
+elseif sets.aftercast.Idle==sets.Idle.PD then sets.aftercast.Idle=sets.Idle.MD 
+send_command('@input /echo Idle set to Magic Damage Taken - Mode')equip(sets.aftercast.Idle)
+elseif sets.aftercast.Idle==sets.Idle.MD then sets.aftercast.Idle=sets.Idle.RE 
+send_command('@input /echo Idle set to Regen Mode')equip(sets.aftercast.Idle)end 
+end
+end
