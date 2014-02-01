@@ -1,3 +1,4 @@
+--Macros /console gs c toggle idle or /console gs c toggle engaged 
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
