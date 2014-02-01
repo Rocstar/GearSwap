@@ -64,29 +64,25 @@ neck="Love Torque",body="Manibozho Jerkin",hands="Buremte Gloves",waist="Dynamic
 legs="Manibozho Brais",feet="Manibozho Boots"})
 
 --Magic Damage Taken - set
-sets.MD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Ejekamal Mask",
+sets.TP.MD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",head="Ejekamal Mask",
 neck="Twilight Torque",body="Iuitl Vest",hands="Buremte Gloves",
 back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 --Physical Damage Taken - set
-sets.PD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",neck="Twilight Torque",
+sets.TP.PD = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Atoyac",neck="Twilight Torque",
 back="Mollusca Mantle"})
 
 --Treasure Hunter set
 sets.TP.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
 hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
---HP recovered while healing set
-sets.Resting = {ammo="Iron Gobbet"}
-sets.aftercast = {}
-
---Variable to toggle modes
-sets.aftercast.TP = sets.TP.DD
-
 --Idle set
-sets.aftercast.Idle = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",body="Iuitl Vest",
+sets.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",body="Iuitl Vest",
 ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Iximulew Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
 
+sets.aftercast = {}
+sets.aftercast.TP = sets.TP.DD
+sets.aftercast.Idle = sets.RE 
 --Command to set macro book when reloading file
 send_command('input /macro book 4;wait .1;input /macro set 1')
 end
@@ -108,20 +104,19 @@ else equip(sets.aftercast.Idle)end end
 function status_change(new,old)
     if new=='Engaged'then equip(sets.aftercast.TP)
 elseif new=='Idle'then equip(sets.aftercast.Idle)
-elseif new=='Resting'then equip(sets.Resting)
 end end
 
 function self_command(command)
-if command=='toggle modes' then
-if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.MD 
-send_command('@input /echo Magic Damage Taken - Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.MD then sets.aftercast.TP=sets.PD 
-send_command('@input /echo Physical Damage Taken - Mode')equip(sets.aftercast.TP)
-elseif sets.aftercast.TP==sets.PD then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo Damage Dealer Mode')equip(sets.aftercast.TP)
+if command=='toggle engaged' then
+if sets.aftercast.TP==sets.aftercast.Idle then sets.aftercast.TP=sets.TP.MD 
+send_command('@input /echo Engaged set to Magic Damage Taken - Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.MD then sets.aftercast.TP=sets.TP.PD 
+send_command('@input /echo Engaged set to Physical Damage Taken - Mode')equip(sets.aftercast.TP)
+elseif sets.aftercast.TP==sets.TP.PD then sets.aftercast.TP=sets.TP.DD 
+send_command('@input /echo Engaged set to Damage Dealer Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.DD then sets.aftercast.TP=sets.TP.TH 
-send_command('@input /echo Treasure Hunter Mode')equip(sets.aftercast.TP)
+send_command('@input /echo Engaged set to Treasure Hunter Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.TH then sets.aftercast.TP=sets.TP.AC 
-send_command('@input /echo Accuracy Mode')equip(sets.aftercast.TP)
+send_command('@input /echo Engaged set to Accuracy Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.aftercast.Idle 
-send_command('@input /echo Idle Mode')equip(sets.aftercast.TP)end end end
+send_command('@input /echo Engaged set to Idle Mode')equip(sets.aftercast.TP)end end end
