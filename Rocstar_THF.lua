@@ -1,4 +1,3 @@
---Macros /console gs c toggle idle or /console gs c toggle engaged 
 function get_sets()
 sets.precast = {}
 sets.precast.JA = {}
@@ -19,7 +18,7 @@ sets.precast.JA.Flee = {feet="Pillager's poulaines +1"}
 
 --VIT set for Curing Waltz
 sets.precast.JA.Waltz = {head="Ejekamal Mask",body="Iuitl Vest",hands="Buremte Gloves",
-back="Iximulew Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
+back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
 
 sets.precast.WS = {}
 --WS sets
@@ -56,13 +55,13 @@ sets.precast.WS['Mercy Stroke'] = {Body="Asn. Vest +2",feet="Asn. poulaines +2"}
 sets.TP = {}
 
 --Engaged Regen set
-sets.TP.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+sets.TP.RE = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Engaged DD Set
-sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Manibozho Beret",neck="Love Torque",
+sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Uk'uxkaj Cap",neck="Love Torque",
 ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
 ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
-legs="Manibozho Brais",feet="Manibozho Boots"}
+legs="Quiahuiz Leggings",feet="Manibozho Boots"}
 
 --Engaged Accuracy set
 sets.TP.AC = set_combine(sets.TP.DD, {head="Manibozho Beret",neck="Love Torque",body="Manibozho Jerkin",
@@ -73,7 +72,7 @@ sets.TP.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque
 hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 --Engaged Physical Damage Taken - set
-sets.TP.PD = set_combine(sets.TP.DD, {neck="Twilight Torque",back="Mollusca Mantle"})
+sets.TP.PD = set_combine(sets.TP.DD, {neck="Wiglen Gorget",back="Mollusca Mantle"})
 
 --Engaged Treasure Hunter set
 sets.TP.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
@@ -83,7 +82,7 @@ hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 sets.Idle = {}
 
 --Idle Regen set
-sets.Idle.RE = {head="Ocelomeh Headpiece +1",neck="Orochi Nodowa",
+sets.Idle.RE = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
 ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Idle Treasure Hunter set
@@ -91,7 +90,7 @@ sets.Idle.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife
 hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
 --Idle Physical Damage Taken - set
-sets.Idle.PD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
+sets.Idle.PD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Wiglen Gorget",body="Iuitl Vest",
 hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 --Idle Magic Damage Taken - set
@@ -99,10 +98,13 @@ sets.Idle.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torq
 hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 sets.aftercast = {}
-sets.aftercast.TP = sets.TP.DD
-sets.aftercast.Idle = sets.Idle.RE 
+sets.aftercast.TP = sets.TP.TH
+sets.aftercast.Idle = sets.Idle.TH 
 --Command to set macro book when reloading file
 send_command('input /macro book 4;wait .1;input /macro set 1')
+send_command('bind ^= gs c toggle engaged')
+send_command('bind ^- gs c toggle idle')
+send_command('@input /echo Engaged TH mode, Idle TH mode. ctrl = and ctrl - to change mode.')
 end
 
 function precast(spell)
@@ -149,4 +151,8 @@ send_command('@input /echo Idle set to Magic Damage Taken - Mode')equip(sets.aft
 elseif sets.aftercast.Idle==sets.Idle.MD then sets.aftercast.Idle=sets.Idle.RE 
 send_command('@input /echo Idle set to Regen Mode')equip(sets.aftercast.Idle)end 
 end
+end
+function file_unload()
+send_command('unbind ^=')
+send_command('unbind ^-')
 end
