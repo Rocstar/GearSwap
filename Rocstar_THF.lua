@@ -17,7 +17,7 @@ sets.precast.JA['Trick Attack'] = {hands="Pillager's armlets +1"}
 sets.precast.JA.Flee = {feet="Pillager's poulaines +1"}
 
 --VIT set for Curing Waltz
-sets.precast.JA.Waltz = {head="Ejekamal Mask",body="Iuitl Vest",hands="Buremte Gloves",
+sets.precast.JA.Waltz = {head="Uk'uxkaj Cap",body="Iuitl Vest",hands="Buremte Gloves",
 back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
 
 sets.precast.WS = {}
