@@ -69,7 +69,7 @@ function precast(spell)
 if sets.JA[spell.english]then equip(sets.JA[spell.english])
 elseif spell.type=="WeaponSkill"then if sets.WS[spell.english]then equip(sets.WS[spell.english])
 elseif spell.english:startswith('Cur')then equip(sets.JA.Waltz)
-elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.AC)
+elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.ACC)
 elseif spell.english == 'Spectral Jig'and buffactive.sneak then send_command('cancel 71')end end end
 
 function aftercast(spell)
