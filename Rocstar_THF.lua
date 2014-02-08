@@ -23,8 +23,7 @@ back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",feet="Iuitl G
 sets.precast.WS = {}
 --WS sets
 --73% AGI mod on 1st merit, +3% for 2nd-5th merits. 85% AGI mod at 5/5.
-sets.precast.WS.Exenterator = {Body="Asn. Vest +2",
-feet="Asn. poulaines +2"}
+sets.precast.WS.Exenterator = {feet="Asn. poulaines +2"}
 
 --60% DEX
 sets.precast.WS['Rudra\'s Storm'] = {feet="Assassin's poulaines +2"}
@@ -58,7 +57,7 @@ sets.TP = {}
 sets.TP.RE = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Engaged DD Set
-sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",head="Uk'uxkaj Cap",neck="Love Torque",
+sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",range="Raider's Boomerang",head="Uk'uxkaj Cap",neck="Love Torque",
 ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
 ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
 legs="Quiahuiz Leggings",feet="Manibozho Boots"}
@@ -86,25 +85,28 @@ sets.Idle.RE = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
 ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Idle Treasure Hunter set
-sets.Idle.TH = set_combine(sets.TP.DD, {main="Eminent Dagger",sub="Thief's Knife",
+sets.Idle.TH = set_combine(sets.Idle.RE, {main="Eminent Dagger",sub="Thief's Knife",
 hands="Assassin's armlets +2",feet="Raider's Poulaines +2"})
 
 --Idle Physical Damage Taken - set
-sets.Idle.PD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Wiglen Gorget",body="Iuitl Vest",
+sets.Idle.PD = set_combine(sets.Idle.RE, {head="Ejekamal Mask",neck="Wiglen Gorget",body="Iuitl Vest",
 hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
 --Idle Magic Damage Taken - set
-sets.Idle.MD = set_combine(sets.TP.DD, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
+sets.Idle.MD = set_combine(sets.Idle.RE, {head="Ejekamal Mask",neck="Twilight Torque",body="Iuitl Vest",
 hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuitl Gaiters"})
 
+--Aftercast Variables 
 sets.aftercast = {}
 sets.aftercast.TP = sets.TP.TH
-sets.aftercast.Idle = sets.Idle.TH 
+sets.aftercast.Idle = sets.Idle.RE
+
 --Command to set macro book when reloading file
-send_command('input /macro book 4;wait .1;input /macro set 1')
+send_command('@input /macro book 4;wait .1;input /macro set 1')
+send_command('@input //gs equip sets.aftercast.Idle')
+send_command('@input /echo Idle Regen mode, Engaged TH mode. ctrl = and ctrl - to change.')
 send_command('bind ^= gs c toggle engaged')
 send_command('bind ^- gs c toggle idle')
-send_command('@input /echo Engaged TH mode, Idle TH mode. ctrl = and ctrl - to change mode.')
 end
 
 function precast(spell)
