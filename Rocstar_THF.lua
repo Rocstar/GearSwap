@@ -138,7 +138,8 @@ elseif spell.english == 'Spectral Jig'and buffactive.sneak then send_command('ca
 elseif spell.english:startswith('Cur')then equip(sets.JA.Waltz)
 elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.AC)
 elseif spell.type=='WeaponSkill'then if sets.WS[spell.name]then equip(sets.WS[spell.name])
-if buffactive['sneak attack']and buffactive['trick attack']and sets.WS.SATA[spell.english]then equip(sets.WS.SATA[spell.english])
+if buffactive['sneak attack']and buffactive['trick attack']and sets.WS.SATA[spell.english]
+then equip(sets.WS.SATA[spell.english])
 elseif buffactive['sneak attack'] and sets.WS.SA[spell.english] then equip(sets.WS.SA[spell.english])
 elseif buffactive['trick attack'] and sets.WS.TA[spell.english] then equip(sets.WS.TA[spell.english])end end end end
 
