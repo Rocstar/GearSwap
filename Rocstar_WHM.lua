@@ -44,7 +44,7 @@ sets.WS.Retribution = {head="gear",feet="more gear"}
 sets.WS['Spirit Taker'] = {head="gear",feet="more gear"}
 
 sets.midcast = {}
-sets.midcast.nuke = {waist="Tarutaru Sash"}
+sets.midcast.nuke = {main="Eminent Staff",waist="Tarutaru Sash"}
 
 sets.midcast.CurePotency = {main="Arka IV",sub="Verse Strap +1",ammo="Incantor Stone",head="Gendewitha Caubeen",
 neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Orison Bliaud +2",
@@ -103,7 +103,7 @@ sets.aftercast.TP = sets.TP.DD
 sets.aftercast.Idle = sets.Idle.Refresh
 sets.aftercast.Resting = set_combine(sets.aftercast.Idle, {head="gear",feet="more gear"})
 
-send_command('@input /macro book 2;wait .1;input /macro set 1')
+send_command('@input /macro book 1;wait .1;input /macro set 8	')
 send_command('@input /echo Idle Refresh mode, Engaged DD mode. ctrl = and ctrl - to change.')
 send_command('bind ^= gs c toggle engaged')
 send_command('bind ^- gs c toggle idle')
@@ -119,32 +119,28 @@ if sets.FC[(spell.element)]then equip(sets.FC[(spell.element)])
 if spell.action_type=='Magic'then equip(sets.FC.Normal)
 if spell.english:startswith('Cur') and spell.name ~= 'Cursna' then equip(sets.FC.Cure)
 elseif spell.type=='EnhancingMagic'then equip(sets.FC.EnhancingMagic)
-elseif spell.english=='Stoneskin'then equip(sets.FC.Stoneskin)
+elseif spell.english=='Stoneskin'then equip(sets.FC.Stoneskin)send_command('cancel 37')
 elseif sets.JA[spell.english]then equip(sets.JA[spell.english])
 elseif spell.type=='WeaponSkill'then if sets.WS[spell.name]then equip(sets.WS[spell.name])end end end end end
 
 function midcast(spell)
-if spell.skill=='ElementalMagic'then equip(sets.midcast.nuke)
-if spell.element==world.weather or spell.element==world.day_element then 
-equip(sets.WeatherAndOrDay[spell.element])equip(sets.midcast.nuke)end
-elseif spell.skill=='DivineMagic'then equip(sets.midcast.nuke)
-if spell.element==world.weather or spell.element==world.day_element then 
-equip(sets.WeatherAndOrDay[spell.element])equip(sets.midcast.nuke)end
-elseif spell.english:startswith('Cure')or spell.english:startswith('Cura')then 
-equip(sets.midcast.CurePotency)
-if spell.element==world.weather or spell.element==world.day_element then 
-equip(sets.WeatherAndOrDay[spell.element])end
+if spell.skill=='ElementalMagic'or spell.skill=='DarkMagic'
+or spell.skill=='EnfeeblingMagic'or spell.skill=='DivineMagic'then equip(sets.midcast.nuke)
+if spell.element==world.weather_element or spell.element==world.day_element 
+then equip(sets.WeatherAndOrDay[spell.element])equip(sets.midcast.nuke)end
+elseif spell.english:startswith('Cure')or spell.english:startswith('Cura')then equip(sets.midcast.CurePotency)
+if spell.element==world.weather_element or spell.element==world.day_element 
+then equip(sets.WeatherAndOrDay[spell.element])end
 elseif spell.english=='Cursna'then equip(sets.midcast.Cursna)
 elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')
 elseif spell.english=='Blink'and buffactive.blink then send_command('cancel 36')
-elseif spell.english=='Stoneskin' and buffactive.stoneskin then send_command('cancel 37')equip(sets.midcast.Stoneskin)
+elseif spell.english=='Stoneskin'then equip(sets.midcast.Stoneskin)
 elseif spell.english:startswith('Regen*')then equip(sets.midcast.Regen)
 elseif spell.english:startswith('Shell')then equip(sets.midcast.Shell)
 elseif spell.english:startswith('Pro')then equip(sets.midcast.Pro)
 elseif spell.english:startswith('na')and spell.name ~= 'Cursna'then equip(sets.midcast.na)
 elseif spell.english:startswith('Bar')then 
-if buffactive['Afflatus Solace'] then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)end
-end 
+if buffactive['Afflatus Solace'] then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)end end
 end
 
 function aftercast(spell)
@@ -156,9 +152,13 @@ if new=='Engaged'then equip(sets.aftercast.TP)disable('main','sub')
 elseif new=='Idle'then equip(sets.aftercast.Idle)
 elseif new=='Resting'then equip(sets.aftercast.Resting)enable('main','sub')end end
 
-function weathercheck(spell_element)
-if spell_element==world.weather_element or spell_element==world.day_element 
-then equip(sets.WeatherAndOrDay[spell.element])end end 
+function weathercheck(spell_element,set)
+	if spell_element == world.weather_element or spell_element == world.day_element then
+		equip(set,sets['WeatherAndOrDay_'..spell_element])
+	else
+		equip(set)
+	end
+end
 
 function self_command(command)
 if command=='toggle engaged'
