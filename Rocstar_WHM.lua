@@ -30,14 +30,14 @@ sets.FC.Light = {main="Arka I"}
 sets.FC.Dark = {main="Xsaeta I"}
 
 sets.WeatherAndOrDay = {}
-sets.WeatherAndOrDay.Fire = {waist='Karin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Earth = {waist='Dorin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Water = {waist='Suirin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Wind = {waist='Furin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Ice = {waist='Hyorin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Thunder = {waist='Rairin Obi',back='Toro Cape',ring1='Zodiac Ring'}
-sets.WeatherAndOrDay.Light = {waist='Korin Obi',back='Toro Cape'}
-sets.WeatherAndOrDay.Dark = {waist='Anrin Obi',back='Toro Cape'}
+sets.WeatherAndOrDay.Fire = {waist='Karin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Earth = {waist='Dorin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Water = {waist='Suirin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Wind = {waist='Furin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Ice = {waist='Hyorin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Thunder = {waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
+sets.WeatherAndOrDay.Light = {waist='Korin Obi',back='Twilight Cape'}
+sets.WeatherAndOrDay.Dark = {waist='Anrin Obi',back='Twilight Cape'}
 
 sets.WS = {}
 sets.WS.Retribution = {head="gear",feet="more gear"}
