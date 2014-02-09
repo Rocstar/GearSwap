@@ -125,14 +125,14 @@ elseif spell.type=='WeaponSkill'then if sets.WS[spell.name]then equip(sets.WS[sp
 
 function midcast(spell)
 if spell.skill=='ElementalMagic'then equip(sets.midcast.nuke)
-if spell.element==world.weather_element or spell.element==world.day_element then 
+if spell.element==world.weather or spell.element==world.day_element then 
 equip(sets.WeatherAndOrDay[spell.element])equip(sets.midcast.nuke)end
 elseif spell.skill=='DivineMagic'then equip(sets.midcast.nuke)
-if spell.element==world.weather_element or spell.element==world.day_element then 
+if spell.element==world.weather or spell.element==world.day_element then 
 equip(sets.WeatherAndOrDay[spell.element])equip(sets.midcast.nuke)end
 elseif spell.english:startswith('Cure')or spell.english:startswith('Cura')then 
 equip(sets.midcast.CurePotency)
-if spell.element==world.weather_element or spell.element==world.day_element then 
+if spell.element==world.weather or spell.element==world.day_element then 
 equip(sets.WeatherAndOrDay[spell.element])end
 elseif spell.english=='Cursna'then equip(sets.midcast.Cursna)
 elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')
@@ -146,10 +146,6 @@ elseif spell.english:startswith('Bar')then
 if buffactive['Afflatus Solace'] then equip(sets.midcast.BarSolace)else equip(sets.midcast.BarNoSolace)end
 end 
 end
-
---end
- 
-
 
 function aftercast(spell)
 if player.status=='Engaged'then equip(sets.aftercast.TP)
