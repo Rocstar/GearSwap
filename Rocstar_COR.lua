@@ -1,6 +1,6 @@
-RangedAttackBullet='Bronze Bullet'
+RangedAttackBullet='Adlivun Bullet'
 QuickDrawBullet='Animikii Bullet'
-PhysicalWeaponSkillBullet='Bronze Bullet'
+PhysicalWeaponSkillBullet='Achiyalabopa Bullet'
 MagicWeaponSkillBullet='Bronze Bullet'
 
 function get_sets()
