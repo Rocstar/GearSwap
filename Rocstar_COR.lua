@@ -140,7 +140,7 @@ sets.Idle['Breath Damage Taken -'] = {neck="Twilight Torque",ring1="Defending Ri
 sets.Idle['Damage Taken -'] = {neck="Twilight Torque",ring1="Defending Ring",back="Mollusca Mantle"}
 
 -- Aftercast Variables
--- Change sets.Idle.Regen to sets.Idle.Refresh for default refresh or use key binds 
+-- Change sets.Idle['Physical Damage Taken -'] to sets.Idle.Refresh for default refresh or use key binds 
 sets.aftercast = {}
 sets.aftercast.TP = sets.TP.DD
 sets.aftercast.Idle = sets.Idle['Physical Damage Taken -']
