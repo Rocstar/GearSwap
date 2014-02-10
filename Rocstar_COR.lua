@@ -162,7 +162,7 @@ function precast(spell)
 if sets.JA[spell.english]then equip(sets.JA[spell.english])
 elseif spell.english:endswith('Roll')then equip(sets.JA['Phantom Roll'])
 elseif spell.english:endswith('Up')then equip(sets.JA.LuzafRing)
-elseif spell.english=='Curing Waltz III'then equip(sets.JA.Waltz)
+elseif spell.english:startswith('Curing Waltz')then equip(sets.JA.Waltz)
 elseif spell.english=='Spectral Jig'and buffactive.sneak then send_command('cancel 71')
 elseif spell.type=="WeaponSkill"then if sets.WS[spell.english]then equip(sets.WS[spell.english])end
 elseif spell.type=='Step'or spell.type=='Flourish1'then equip(sets.TP.AC)end end
