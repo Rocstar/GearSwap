@@ -59,7 +59,7 @@ ear1="Friomisi Earring",ear2="Hecate's Earring"}
 sets.WS.Physical = {
 head="Uk'uxkaj Cap",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring"}
 
--- Ranged Magic Attack Bonus + WS SetMAB + WS Set
+-- Ranged Magic Attack Bonus + WS Set
 sets.WS.RangedMagical = {ear1="Friomisi Earring",ear2="Hecate's Earring"}
 
 -- Critical Hit Damage +, Critical Hit Rate +, Ranged Attack/Accuracy WS Set
