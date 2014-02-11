@@ -1,14 +1,14 @@
 --Ranged Attack Bullet
-RAB   = "Adlivun Bullet"
+RAB   = "Titanium Bullet"
 
 --Quick Draw Bullet
-QDB   = "Titanium Bullet"
+QDB   = "Animikii Bullet"
 
 --Physical Ranged Weapon Skill Bullet
 PRWSB = "Adlivun Bullet"
 
 --Magical Ranged Weapon Skill Bullet
-MRWSB = "Bronze Bullet"
+MRWSB = "Adlivun Bullet"
 
 --Empty ammo to prevent firing Quick Draw Bullet
 X     = empty
