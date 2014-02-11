@@ -29,23 +29,24 @@ sets.MRWS = {ammo=MRWSB,ear1="Friomisi Earring",ear2="Hecate's Earring",back="Gu
 sets.PRWS = {ammo=PRWSB,head="Uk'uxkaj Cap",body="Navarch's Frac +2",hands="Navarch's Gants +2",ring1="Rajas Ring",
 ring2="Dark Ring",back="Gunslinger's Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
 
---Snapshot and Rapid Shot Set
+-- Snapshot Set
 sets.Snapshot={range="Donderbuss",ammo=RAB,head="Navarch's Tricorne +2",body="Laksamana's frac +1",
 hands="Iuitl Wristbands",back="Navarch's Mantle",waist="Impulse Belt",legs="Navarch's Culottes +2",
 feet="Wurrukatte Boots"}
 
---Ranged Attack/Ranged Accuracy/Critical Hit Rate + Set
+-- Midcast Ranged Attack Set
 sets.RangedAttack = {head="Uk'uxkaj Cap",body="Navarch's Frac +2",hands="Navarch's Gants +2"}
 
---Double-Up Set
+-- Double-Up Set
 sets.Luz = {ring2="Luzaf's Ring"}
 
---Phantom Roll Set
+-- Phantom Roll Set
 sets.Roll = set_combine(sets.Luz, {head="Commodore's Tricorne +2",hands="Navarch's Gants +2"})
 
---Quick Draw Set
+-- Quick Draw Set
 sets['Quick Draw'] = {range="Donderbuss",ammo=QDB,head="Laksamana's Hat +1",feet="Laksamana's Bottes +1"}
 
+-- Fast Cast Set
 sets['Fast Cast'] = {head="Haruspex Hat",neck="Orunmila's Torque",ear2="Loquacious Earring",
 hands="Thaumas Gloves",legs="Blood Cuisses"}
 
@@ -60,17 +61,17 @@ sets.JA.Fold = {hands="Commodore Gants +2"}
 
 sets.JA['Snake Eye'] = {legs="Commodore Culottes +2"}
 
-sets.JA['Caster\'s Roll'] = set_combine(sets.Roll, {legs="Navarch's Culottes +2"})
+sets.JA["Caster's Roll"] = set_combine(sets.Roll, {legs="Navarch's Culottes +2"})
 
-sets.JA['Courser\'s Roll'] = set_combine(sets.Roll, {feet="Navarch's Bottes +2"})
+sets.JA["Courser's Roll"] = set_combine(sets.Roll, {feet="Navarch's Bottes +2"})
 
-sets.JA['Blitzer\'s Roll'] = set_combine(sets.Roll, {head="Navarch's Tricorne +2"})
+sets.JA["Blitzer's Roll"] = set_combine(sets.Roll, {head="Navarch's Tricorne +2"})
 	
-sets.JA['Tactician\'s Roll'] = set_combine(sets.Roll, {body="Navarch's Frac +2"})
+sets.JA["Tactician's Roll"] = set_combine(sets.Roll, {body="Navarch's Frac +2"})
 	
-sets.JA['Allies\' Roll'] = set_combine(sets.Roll, {hands="Navarch's Gants +2"})
+sets.JA["Allies' Roll"] = set_combine(sets.Roll, {hands="Navarch's Gants +2"})
 
--- Waltz Ability Delay -/TP Cost -/Potency +/VIT + Set
+-- Waltz Set
 sets.JA.Waltz = {head="Uk'uxkaj Cap",body="Wayfarer Robe",hands="Buremte Gloves",ring2="Dark Ring",
 back="Iximulew Cape",legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
 
@@ -134,7 +135,7 @@ sets.TP.MDT = {ammo=X,head="Wayfarer Circlet",neck="Twilight Torque",body="Wayfa
 hands="Wayfarer Cuffs",ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
 legs="Wayfarer Slops",feet="Wayfarer Clogs"}
 
--- Engaged Physical Damage Taken - 50% Set
+-- Engaged Physical Damage Taken - Set
 sets.TP.PDT = {ammo=X,head="Iuitl Headgear",neck="Wiglen Gorget",ear1="Darkness Earring",
 ear2="Darkness Earring",body="Iuitl Vest",hands="Iuitl Wristbands",ring1="Defending Ring",
 ring2="Dark Ring",back="Iximulew Cape",legs="Iuitl Tights",feet="Iuitl Gaiters"}
@@ -166,11 +167,11 @@ neck="Wiglen Gorget",ear1="Darkness Earring",ear2="Darkness Earring",body="Wayfa
 hands="Wayfarer Cuffs",ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
 waist="Flume Belt",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
 
--- Idle Magic Damage Taken - / Magic Def. Bonus + Set
+-- Idle Magic Damage Taken - and Magic Def. Bonus + Set
 sets.Idle.MDT = {ammo=X,neck="Twilight Torque",ring1="Defending Ring",
 ring2="Dark Ring",back="Mollusca Mantle"}
 
--- Idle Physical Damage Taken - 50% Set
+-- Idle Physical Damage Taken - Set
 sets.Idle.PDT = {ammo=X,head="Iuitl Headgear",neck="Wiglen Gorget",ear1="Darkness Earring",
 ear2="Darkness Earring",body="Iuitl Vest",hands="Iuitl Wristbands",ring1="Defending Ring",
 ring2="Dark Ring",back="Iximulew Cape",legs="Iuitl Tights",feet="Iuitl Gaiters"}
