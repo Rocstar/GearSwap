@@ -1,14 +1,14 @@
 --Ranged Attack Bullet
-RAB   = "Titanium Bullet"
+RAB   = "Bronze Bullet"
 
 --Quick Draw Bullet
-QDB   = "Animikii Bullet"
+QDB   = "Titanium Bullet"
 
 --Physical Ranged Weapon Skill Bullet
-PRWSB = "Adlivun Bullet"
+PRWSB = "Titanium Bullet"
 
 --Magical Ranged Weapon Skill Bullet
-MRWSB = "Adlivun Bullet"
+MRWSB = "Titanium Bullet"
 
 --Empty ammo to prevent firing Quick Draw Bullet
 X     = empty
@@ -17,7 +17,7 @@ function get_sets()
 sets = {}
 
 -- Magical WS Set
-sets.MWS = {ear1="Friomisi Earring",ear2="Hecate's Earring"}
+sets.MWS = {ear1="Friomisi Earring",ear2="Hecate's Earring",back="Gunslinger's Cape"}
 
 -- Physical WS Set
 sets.PWS = {head="Uk'uxkaj Cap",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring"}
@@ -138,7 +138,7 @@ legs="Wayfarer Slops",feet="Wayfarer Clogs"}
 -- Engaged Physical Damage Taken - Set
 sets.TP.PDT = {ammo=X,head="Iuitl Headgear",neck="Wiglen Gorget",ear1="Darkness Earring",
 ear2="Darkness Earring",body="Iuitl Vest",hands="Iuitl Wristbands",ring1="Defending Ring",
-ring2="Dark Ring",back="Iximulew Cape",legs="Iuitl Tights",feet="Iuitl Gaiters"}
+ring2="Dark Ring",back="Mollusca Mantle",legs="Iuitl Tights",feet="Iuitl Gaiters"}
 
 -- Engaged Breath Damage Taken - Set
 sets.TP.BDT = {ammo=X,neck="Twilight Torque",ring1="Defending Ring",back="Mollusca Mantle"}
@@ -174,7 +174,7 @@ ring2="Dark Ring",back="Mollusca Mantle"}
 -- Idle Physical Damage Taken - Set
 sets.Idle.PDT = {ammo=X,head="Iuitl Headgear",neck="Wiglen Gorget",ear1="Darkness Earring",
 ear2="Darkness Earring",body="Iuitl Vest",hands="Iuitl Wristbands",ring1="Defending Ring",
-ring2="Dark Ring",back="Iximulew Cape",legs="Iuitl Tights",feet="Iuitl Gaiters"}
+ring2="Dark Ring",back="Mollusca Mantle",legs="Iuitl Tights",feet="Iuitl Gaiters"}
 
 -- Idle Breath Damage Taken - Set
 sets.Idle.BDT = {ammo=X,neck="Twilight Torque",ring1="Defending Ring",back="Mollusca Mantle"}
@@ -190,7 +190,7 @@ sets.aftercast.Idle = sets.Idle.Reg
 --Command to set macro book
 --Key Binds when file loads  
 send_command('@input /macro book 19;wait .1;input /macro set 10')
-send_command('@input /echo Idle Refresh mode, Engaged DD mode. ctrl = and ctrl - to change.')
+send_command('@input /echo Idle Regen mode, Engaged DD mode. ctrl = and ctrl - to change.')
 send_command('bind ^= gs c toggle engaged')
 send_command('bind ^- gs c toggle idle')
 end
@@ -234,7 +234,7 @@ then if sets.aftercast.TP==sets.TP.DD
 then sets.aftercast.TP=sets.TP.Reg 
 send_command('@input /echo Engaged set to Regen Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.Reg 
-then sets.aftercast.TP=sets.TP.Refr 
+then sets.aftercast.TP=sets.TP.Ref 
 send_command('@input /echo Engaged set to Refresh Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.Ref 
 then sets.aftercast.TP=sets.TP.MDT 
