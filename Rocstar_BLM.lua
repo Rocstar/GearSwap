@@ -38,7 +38,7 @@ sets.FC.Cure = set_combine(sets.FC.Light,{body="Heka's Kalasiris",back="Pahtli C
 
 sets.FC.EnhancingMagic = {waist="Siegel Sash"}
 
-sets.FC.Stoneskin = set_combine(sets.FC.EnhancingMagic,{hands="Otomi Gloves"})
+sets.FC.Stoneskin = set_combine(sets.FC.EnhancingMagic,{hands="Carapacho Cuffs"})
 
 sets.FC.ElementalMagic = set_combine(sets.FC.Normal,{head="Goetia Petasos +2"})
 
