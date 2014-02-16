@@ -6,7 +6,7 @@ BDRing1 = {name="Dark Ring",augments={"Breath Damage Taken -6%", "Magic Damage T
 
 function file_unload()
 send_command('unbind ^=')
-send_command('unbind ^-'end
+send_command('unbind ^-')end
 
 function get_sets()
 send_command('bind ^- gs disable main sub')
