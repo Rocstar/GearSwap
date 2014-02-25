@@ -26,7 +26,7 @@ sets.WS.TA = {}
 sets.WS.SATA = {}
 
 -- Exenterator 73% AGI mod on 1st merit, +3% for 2nd-5th merits. 85% AGI mod at 5/5.
-sets.WS.Exenterator = {feet="Asn. poulaines +2"}
+sets.WS.Exenterator = {head="Uk'uxkaj Cap",legs="Quiahuiz Leggings",feet="Asn. poulaines +2"}
 sets.WS.SA.Exenterator = set_combine(sets.WS.Exenterator,{hands="Raider's Armlets +2"})
 sets.WS.TA.Exenterator = set_combine(sets.WS.Exenterator,{hands="Iuitl Wristbands"})
 sets.WS.SATA.Exenterator = sets.WS.TA.Exenterator
@@ -80,10 +80,10 @@ sets.TP = {}
 sets.TP.RE = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Engaged DD Set
-sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",range="Raider's Boomerang",head="Uk'uxkaj Cap",neck="Love Torque",
+sets.TP.DD = {main="Eminent Dagger",sub="Atoyac",range="Raider's Boomerang",head="Manibozho Beret",neck="Love Torque",
 ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Buremte Gloves",
 ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Twilight Belt",
-legs="Quiahuiz Leggings",feet="Manibozho Boots"}
+legs="Manibozho Brais",feet="Manibozho Boots"}
 
 --Engaged Accuracy set
 sets.TP.AC = {head="Manibozho Beret",neck="Love Torque",body="Manibozho Jerkin",
@@ -121,13 +121,12 @@ hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuit
 
 --Aftercast Variables 
 sets.aftercast = {}
-sets.aftercast.TP = sets.TP.TH
+sets.aftercast.TP = sets.TP.DD
 sets.aftercast.idle = sets.idle.RE
 
 --Command to set macro book when reloading file
 send_command('@input /macro book 4;wait .1;input /macro set 1')
-send_command('@input //gs equip sets.aftercast.idle')
-send_command('@input /echo Idle Regen mode, Engaged TH mode. ctrl = and ctrl - to change.')
+send_command('@input /echo Idle Regen mode, Engaged DD mode. ctrl = and ctrl - to change.')
 send_command('bind ^= gs c toggle engaged')
 send_command('bind ^- gs c toggle idle')
 end
@@ -144,12 +143,13 @@ elseif buffactive['sneak attack'] and sets.WS.SA[spell.english] then equip(sets.
 elseif buffactive['trick attack'] and sets.WS.TA[spell.english] then equip(sets.WS.TA[spell.english])end end end end
 
 function aftercast(spell)
-if player.status=='Engaged'then equip(sets.aftercast.TP)else equip(sets.aftercast.idle)end end
+if player.status=='Engaged'then equip(sets.aftercast.TP)
+else equip(sets.aftercast.idle)end end
 
 function status_change(new,old)
 if new=='Idle'then equip(sets.aftercast.idle)
-elseif new=='Resting'then equip(sets.aftercast.idle)
-elseif new=='Engaged'then equip(sets.aftercast.TP)end end
+elseif new=='Engaged'then equip(sets.aftercast.TP)
+end end
 
 function self_command(command)
 if command=='toggle engaged'then 
@@ -164,16 +164,16 @@ send_command('@input /echo Engaged set to Regen Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.RE then sets.aftercast.TP=sets.TP.AC 
 send_command('@input /echo Engaged set to Accuracy Mode')equip(sets.aftercast.TP)
 elseif sets.aftercast.TP==sets.TP.AC then sets.aftercast.TP=sets.TP.DD 
-send_command('@input /echo Engaged set to Damage Dealer Mode')equip(sets.aftercast.TP)
+send_command('@input /echo Engaged set to Damage Dealer Mode')equip(sets.aftercast.TP)end
 elseif command=='toggle idle'then
-if sets.aftercast.Idle==sets.Idle.RE then sets.aftercast.Idle=sets.idle.TH
+if sets.aftercast.idle==sets.idle.RE then sets.aftercast.idle=sets.idle.TH
 send_command('@input /echo Idle set to Treasure Hunter Mode')equip(sets.aftercast.idle)
-elseif sets.aftercast.Idle==sets.Idle.TH then sets.aftercast.Idle=sets.idle.PD 
+elseif sets.aftercast.idle==sets.idle.TH then sets.aftercast.idle=sets.idle.PD 
 send_command('@input /echo Idle set to Physical Damage Taken - Mode')equip(sets.aftercast.idle)
-elseif sets.aftercast.Idle==sets.Idle.PD then sets.aftercast.Idle=sets.idle.MD 
+elseif sets.aftercast.idle==sets.idle.PD then sets.aftercast.idle=sets.idle.MD 
 send_command('@input /echo Idle set to Magic Damage Taken - Mode')equip(sets.aftercast.idle)
-elseif sets.aftercast.Idle==sets.Idle.MD then sets.aftercast.Idle=sets.idle.RE 
-send_command('@input /echo Idle set to Regen Mode')equip(sets.aftercast.idle)end end end 
+elseif sets.aftercast.idle==sets.idle.MD then sets.aftercast.idle=sets.idle.RE 
+send_command('@input /echo Idle set to Regen Mode')equip(sets.aftercast.idle)end end  
 end
 
 function file_unload()
