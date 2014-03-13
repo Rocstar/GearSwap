@@ -1,33 +1,48 @@
 function get_sets()
-
+	
+----Values
 JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}Stun={}
 
+----Macro Book Change
 send_command('@input /macro book 1;wait .1;input /macro set 8')
+
+----Message to display when loading the file
 add_to_chat(200, '------Gearswap: Engaged mode Refresh (ALT + F2 to change)------')
 add_to_chat(200, '------Gearswap: Idle mode Refresh (ALT + F3 to change)------')
 add_to_chat(200, '------Gearswap: Auto Stun is Disabled (ALT + F4 to change)------')
+
+----Key Binds
 send_command('bind !F2 gs c E')
 send_command('bind !F3 gs c I')
 send_command('bind !F4 gs c S')
- 
+
+----Job Ability Sets
 JA.Benediction = {body="Cleric's Briault +2"}
+
 JA.Devotion = {body="Cleric's Cap +2"}
+
 JA.Martyr = {body="Cleric's Mitts +2"}
+
 JA['Elemental Seal'] = {main="Baqil Staff"}
 
+----Enhancing Magic Spellcasting Time set
 FC.EnhancingMagic = {waist="Siegel Sash"}
 
+----Stoneskin Spellcasting Time set
 FC.Stoneskin = set_combine(FC.EnhancingMagic, {hands="Carapacho Cuffs"})
-	
+
+----Fast Cast set	
 FC.Normal = {ammo="Impatiens",head="Haruspex Hat",neck="Orison Locket",
 ear1="Gifted Earring",ear2="Loquacious Earring",body="Marduk's Jubbah +1",hands="Gendewitha Gages",ring1="Prolix Ring",
 ring2="Veneficium Ring",back="Swith Cape",waist="Witful Belt",legs="Orvail Pants +1",feet="Chelona Boots +1"}
 
+----Cure Spelcasting Time set
 FC.Cure = {sub="Dominie's Grip",head="Cleric's cap +2",
 neck="Aceso's Choker",body="Heka's Kalasiris",ring1="Prolix Ring",
 ring2="Veneficium Ring",back="Pahtli Cape",waist="Capricornian Rope",
 legs="Nabu's Shalwar",feet="Cure Clogs"}
 
+----Fast Cast Spell Element sets
 FC.Earth = {main="Vishrava I"}
 FC.Fire = {main="Atar I"}
 FC.Water = {main="Haoma I"}
@@ -37,6 +52,7 @@ FC.Thunder = {main="Apamajas I"}
 FC.Light = {main="Arka I"}
 FC.Dark = {main="Xsaeta I"}
 
+----Weather and or Day sets
 WeatherDay.Fire = {waist='Karin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
 WeatherDay.Earth = {waist='Dorin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
 WeatherDay.Water = {waist='Suirin Obi',back='Twilight Cape',ring1='Zodiac Ring'}
@@ -46,85 +62,114 @@ WeatherDay.Thunder = {waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring
 WeatherDay.Light = {waist='Korin Obi',back='Twilight Cape'}
 WeatherDay.Dark = {waist='Anrin Obi',back='Twilight Cape'}
 
+----Weapon Skill sets
 WS.Retribution = {neck="Twilight Torque"}
+
 WS['Spirit Taker'] = {neck="Twilight Torque"}
 
+----Divine Magic set
 Mid.Divine = {neck="Twilight Torque"}
 
---MND Enfeebling Magic set
+----MND Enfeebling Magic set
 Mid.MND_Enfeeb = {neck="Twilight Torque"}
 
---INT Enfeebling Magic set
+----INT Enfeebling Magic set
 Mid.INT_Enfeeb = {neck="Twilight Torque"}
 
+----Elemental Magic set
 Mid.Elemental = {neck="Twilight Torque"}
 
---Dark Magic set
+----Dark Magic set
 Mid.Dark = {main="Eminent Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Espial Cap",
 neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Espial Gambison",
 hands="Espial Cuffs",ring1="Prolix Ring",ring2="Veneficium Ring",back="Swith Cape",
 waist="Witful Belt",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
 
+----Cure Potency set
 Mid.Cure = {main="Arka IV",sub="Verse Strap +1",ammo="Incantor Stone",head="Gendewitha Caubeen",
 neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Orison Bliaud +2",
 hands="Bokwus Gloves",ring1="Prolix Ring",ring2="Sirona's Ring",back="Orison Cape",
 waist="Witful Belt",legs="Orison Pantaloons +2",feet="Wayfarer Clogs"}
 
+----Status Removal set
 Mid.NA = {head="Orison Cap +2",legs="Orison Pantaloons +2"}
 
+----Regen set
 Mid.Regen = {body="Cleric's Briault +2",hands="Orison Mitts +2",legs="Theophany pantaloons"}
-	
+
+----Cursna set	
 Mid.Cursna = {main="Beneficus",sub="Genbu's Shield",head="Hyksos Khat",neck="Malison medallion",
 body="Orison Bliaud +2",hands="Hieros mittens",ring1="Ephedra ring", ring2="Ephedra ring",
 back="Mending cape",legs="Theophany pantaloons"}
-	
+
+----Stoneskin set	
 Mid.Stoneskin = {hands="Gendewitha Gages",feet="Wayfarer Clogs"}
-	
+
+----Bar Element  set	
 Mid.BarSolace = {main="Beneficus",head="Orison Cap +2",body="Orison Bliaud +2",hands="Orison Mitts +2",
 legs="Cleric's Pantaloons +2",feet="Orison Duckbills +2"}
-	
+
+----Bar Element No Afflatus Solace set	
 Mid.BarNoSolace = set_combine(Mid.BarSolace,{body="Blessed Briault"})
-	
+
+----Shell set	
 Mid.Shell = {ring2="Sheltered Ring",legs="Cleric's pantaloons +2"}
-	
+
+----Protect set	
 Mid.Pro = {ring2="Sheltered Ring",feet="Cleric's duckbills +2"}
 
+----Engaged Damage Dealing set
 TP.DD = {main="Eminent Staff"}
 
+----Engaged Accuracy set
 TP.ACC = {main="Eminent Staff"}
 
+----Engaged Refresh set
 TP.REF = {main="Eminent Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
 	neck="Twilight Torque",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
 	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
 	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
 	
+----Engaged Magic Damage Taken - set
 TP.MDT = {neck="Twilight Torque"}
 
+----Engaged Physical Damage Taken - set
 TP.PDT = {neck="Twilight Torque"}
 
+----Engaged Damage Taken - set
 TP.DT = {neck="Twilight Torque"}
 
+----Idle Refresh set
 Idle.REF = {main="Terra's Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
 	neck="Wiglen Gorget",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
 	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
 	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
 	
+----Idle Regen set
 Idle.REG = set_combine(Idle.REF, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"})
 
+----Idle Magic Damage Taken - set
 Idle.MDT = {ring1="Dark Ring",ring2="Dark Ring"}
 
+----Idle Physical Damage Taken - set
 Idle.PDT = {ring1="Dark Ring",ring2="Dark Ring"}
 
+----Idle Damage Taken - set
 Idle.DT = {ring1="Dark Ring",ring2="Dark Ring"}
 
+----Healing MP set
 Idle.Rest = {ring1="Dark Ring",ring2="Dark Ring"}
 
+----Engaged is a variable
 E = TP.REF
 
+----Idle is a variable
 I = Idle.REF
 
+----Stun Mode is a variable
 Stun.Mode = false
 
+----Register a Event when loading the file
 windower.register_event('action', function(act)
 if Stun.Mode == true then
 if act.target_count ~= 0 then
@@ -133,7 +178,7 @@ if act.targets[1].actions[1].message ~= 0 then
 local mob = windower.ffxi.get_mob_by_target('bt')
 if (mob and mob.is_npc and mob.id == act.actor_id) 
 and S{7,8}:contains(act.category) then --{7} for TP, {8} for casting, {7,8} for TP and casting
-windower.send_command('input /ma Stun <bt>')end end end end end end)end
+windower.send_command('input /ma Stun <bt>')end end end end end end)end ----End Of First Function
 
 function precast(spell)
 if FC[(spell.element)]then equip(FC[(spell.element)])
