@@ -1,21 +1,18 @@
 function get_sets()
 
-JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}
+JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}Stun={}
 
 send_command('@input /macro book 1;wait .1;input /macro set 8')
-
 add_to_chat(200, '------Gearswap: Engaged mode Refresh (ALT + F2 to change)------')
-
 add_to_chat(200, '------Gearswap: Idle mode Refresh (ALT + F3 to change)------')
-
+add_to_chat(200, '------Gearswap: Auto Stun is Disabled (ALT + F4 to change)------')
 send_command('bind !F2 gs c E')
-
 send_command('bind !F3 gs c I')
-
+send_command('bind !F4 gs c S')
  
-JA.Benediction = {body="Cleric's briault +2"}
-JA.Devotion = {body="Cleric's cap +2"}
-JA.Martyr = {body="Cleric's mitts +2"}
+JA.Benediction = {body="Cleric's Briault +2"}
+JA.Devotion = {body="Cleric's Cap +2"}
+JA.Martyr = {body="Cleric's Mitts +2"}
 JA['Elemental Seal'] = {main="Baqil Staff"}
 
 FC.EnhancingMagic = {waist="Siegel Sash"}
@@ -53,10 +50,10 @@ WS.Retribution = {neck="Twilight Torque"}
 WS['Spirit Taker'] = {neck="Twilight Torque"}
 
 
-Mid.Nuke = {main="Eminent Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Wayfarer Circlet",
-neck="Quanpur Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",body="Wayfarer Robe",
-hands="Wayfarer Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Toro Cape",
-waist="Aswang Sash",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
+Mid.Nuke = {main="Eminent Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Espial Cap",
+neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Espial Gambison",
+hands="Espial Cuffs",ring1="Prolix Ring",ring2="Veneficium Ring",back="Swith Cape",
+waist="Witful Belt",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
 
 Mid.Cure = {main="Arka IV",sub="Verse Strap +1",ammo="Incantor Stone",head="Gendewitha Caubeen",
 neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Orison Bliaud +2",
@@ -86,7 +83,7 @@ TP.DD = {main="Eminent Staff"}
 
 TP.ACC = {main="Eminent Staff"}
 
-TP.REF = {main="Eminent Staff",sub="Verse Strap +1",ammo="Incantor Stone",head="Wivre Hairpin",
+TP.REF = {main="Eminent Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
 	neck="Twilight Torque",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
 	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
 	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
@@ -97,7 +94,7 @@ TP.PDT = {neck="Twilight Torque"}
 
 TP.DT = {neck="Twilight Torque"}
 
-Idle.REF = {main="Owleyes",sub="Genbu's Shield",ammo="Incantor Stone",head="Wivre Hairpin",
+Idle.REF = {main="Terra's Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
 	neck="Wiglen Gorget",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
 	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
 	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
@@ -113,17 +110,20 @@ Idle.DT = {ring1="Dark Ring",ring2="Dark Ring"}
 Idle.Rest = {ring1="Dark Ring",ring2="Dark Ring"}
 
 E = TP.REF
+
 I = Idle.REF
-   
+
+Stun.Mode = false
+
 windower.register_event('action', function(act)
-if act.target_count ~= 0 then 
+if Stun.Mode == true then
+if act.target_count ~= 0 then
 if act.targets[1].action_count ~= 0 then 
 if act.targets[1].actions[1].message ~= 0 then
 local mob = windower.ffxi.get_mob_by_target('bt')
 if (mob and mob.is_npc and mob.id == act.actor_id) 
-and S{7}:contains(act.category) then --{7} for TP, {8} for casting, {7,8} for TP and casting
-windower.send_command('input /ma Stun <bt>')
-windower.send_command("input /p Monster is TP'ing. Stunning!")end end end end end)end
+and S{7,8}:contains(act.category) then --{7} for TP, {8} for casting, {7,8} for TP and casting
+windower.send_command('input /ma Stun <bt>')end end end end end end)end
 
 function precast(spell)
 if FC[(spell.element)]then equip(FC[(spell.element)])
@@ -185,4 +185,8 @@ elseif command=='I'then
 elseif I==Idle.PDT then I=Idle.MDT add_to_chat(200, 'Gearswap: Idle now Magic Damage Taken -')equip(I)
 elseif I==Idle.MDT then I=Idle.DT add_to_chat(200, 'Gearswap: Idle now Damage Taken -')equip(I)
 elseif I==Idle.DT then I=Idle.REG add_to_chat(200, 'Gearswap: Idle now Regen')equip(I)
-elseif I==Idle.REG then I=Idle.REF add_to_chat(200, 'Gearswap: Idle now Refresh')equip(I)end end end
+elseif I==Idle.REG then I=Idle.REF add_to_chat(200, 'Gearswap: Idle now Refresh')equip(I)end
+
+elseif command=='S'then 
+    if Stun.Mode==false then Stun.Mode=true add_to_chat(200, 'Gearswap: Auto Stun now Active')
+elseif Stun.Mode==true then Stun.Mode=false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')end end end
