@@ -7,9 +7,9 @@ JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}
 send_command('@input /macro book 1;wait .1;input /macro set 8')
 
 ----Message to display when loading the file
-add_to_chat(200, '------Gearswap: Engaged mode Refresh (ALT + F2 to change)------')
-add_to_chat(200, '------Gearswap: Idle mode Refresh (ALT + F3 to change)------')
-add_to_chat(200, '------Gearswap: Auto Stun is Disabled (ALT + F4 to change)------')
+add_to_chat(200, 'Gearswap: Engaged mode Refresh (ALT + F2 to change)-')
+add_to_chat(200, 'Gearswap: Idle mode Refresh (ALT + F3 to change)')
+add_to_chat(200, 'Gearswap: Auto Stun is Disabled (ALT + F4 to change)')
 
 ----Key Binds
 send_command('bind !F2 gs c E')
