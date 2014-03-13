@@ -49,8 +49,18 @@ WeatherDay.Dark = {waist='Anrin Obi',back='Twilight Cape'}
 WS.Retribution = {neck="Twilight Torque"}
 WS['Spirit Taker'] = {neck="Twilight Torque"}
 
+Mid.Divine = {neck="Twilight Torque"}
 
-Mid.Nuke = {main="Eminent Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Espial Cap",
+--MND Enfeebling Magic set
+Mid.MND_Enfeeb = {neck="Twilight Torque"}
+
+--INT Enfeebling Magic set
+Mid.INT_Enfeeb = {neck="Twilight Torque"}
+
+Mid.Elemental = {neck="Twilight Torque"}
+
+--Dark Magic set
+Mid.Dark = {main="Eminent Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Espial Cap",
 neck="Orison Locket",ear1="Gifted Earring",ear2="Loquacious Earring",body="Espial Gambison",
 hands="Espial Cuffs",ring1="Prolix Ring",ring2="Veneficium Ring",back="Swith Cape",
 waist="Witful Belt",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
@@ -135,10 +145,13 @@ elseif JA[spell.english]then equip(JA[spell.english])
 elseif spell.type=='WeaponSkill'then if WS[spell.english]then equip(WS[spell.english])end end end end end
 
 function midcast(spell)
-if spell.skill=='ElementalMagic'or spell.skill=='DarkMagic'
-or spell.skill=='EnfeeblingMagic'or spell.skill=='DivineMagic'then equip(Mid.Nuke)
+    if spell.skill=='DivineMagic'then equip(Mid.Divine) 
+elseif spell.skill=='EnfeeblingMagic'and spell.english=='Blind'then equip(Mid.INT_Enfeeb) 
+elseif spell.skill=='EnfeeblingMagic'and spell.english~='Blind'then equip(Mid.MND_Enfeeb)
+elseif spell.skill=='DarkMagic'then equip(Mid.Dark)
+elseif spell.skill=='ElementalMagic'then equip(Mid.Elemental)
 if spell.element==world.weather_element or spell.element==world.day_element 
-then equip(WeatherDay[spell.element])equip(Mid.Nuke)end
+then equip(WeatherDay[spell.element])equip(Mid.Elemental)end
 elseif spell.english:startswith('Cure')or spell.english:startswith('Cura')then equip(Mid.Cure)
 if spell.element==world.weather_element or spell.element==world.day_element 
 then equip(WeatherDay[spell.element])end
@@ -151,7 +164,8 @@ elseif spell.english:startswith('Shell')then equip(Mid.Shell)
 elseif spell.english:startswith('Pro')then equip(Mid.Pro)
 elseif spell.english:startswith('na')and spell.name ~= 'Cursna'then equip(Mid.NA)
 elseif spell.english:startswith('Bar')then 
-if buffactive['Afflatus Solace'] then equip(Mid.BarSolace)else equip(Mid.BarNoSolace)end end
+if buffactive['Afflatus Solace'] then equip(Mid.BarSolace)else equip(Mid.BarNoSolace)end 
+end
 end
 
 function aftercast(spell)
