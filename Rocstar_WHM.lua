@@ -1,7 +1,7 @@
 function get_sets()
 	
 ----Values
-JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}Stun={}
+JA={}FC={}WeatherDay={}WS={}Mid={}TP={}Idle={}
 
 ----Macro Book Change
 send_command('@input /macro book 1;wait .1;input /macro set 8')
@@ -14,7 +14,7 @@ add_to_chat(200, '------Gearswap: Auto Stun is Disabled (ALT + F4 to change)----
 ----Key Binds
 send_command('bind !F2 gs c E')
 send_command('bind !F3 gs c I')
-send_command('bind !F4 gs c S')
+send_command('bind !F4 gs c A')
 
 ----Job Ability Sets
 JA.Benediction = {body="Cleric's Briault +2"}
@@ -166,19 +166,16 @@ E = TP.REF
 ----Idle is a variable
 I = Idle.REF
 
-----Stun Mode is a variable
-Stun.Mode = false
+----Auto Stun is a variable
+A = false
 
-----Register a Event when loading the file
-windower.register_event('action', function(act)
-if Stun.Mode == true then
-if act.target_count ~= 0 then
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-local mob = windower.ffxi.get_mob_by_target('bt')
-if (mob and mob.is_npc and mob.id == act.actor_id) 
-and S{7,8}:contains(act.category) then --{7} for TP, {8} for casting, {7,8} for TP and casting
-windower.send_command('input /ma Stun <bt>')end end end end end end)end ----End Of First Function
+windower.register_event('action', function(a)
+local m = windower.ffxi.get_mob_by_target('bt')
+if A ~= false then if a.target_count ~= 0 then 
+if a.targets[1].action_count ~= 0 then
+if a.targets[1].actions[1].message ~= 0 then 
+if (m and m.is_npc and m.id == a.actor_id)and A:contains(a.category) then
+windower.send_command('input /ma Stun <bt>')end end end end end end)end
 
 function precast(spell)
 if FC[(spell.element)]then equip(FC[(spell.element)])
@@ -246,6 +243,8 @@ elseif I==Idle.MDT then I=Idle.DT add_to_chat(200, 'Gearswap: Idle now Damage Ta
 elseif I==Idle.DT then I=Idle.REG add_to_chat(200, 'Gearswap: Idle now Regen')equip(I)
 elseif I==Idle.REG then I=Idle.REF add_to_chat(200, 'Gearswap: Idle now Refresh')equip(I)end
 
-elseif command=='S'then 
-    if Stun.Mode==false then Stun.Mode=true add_to_chat(200, 'Gearswap: Auto Stun now Active')
-elseif Stun.Mode==true then Stun.Mode=false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')end end end
+elseif command=='A'then 
+    if A==false then A=S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
+elseif A==S{7,8} then A=S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
+elseif A==S{7} then A=S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
+elseif A==S{8} then A=false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')end end end
