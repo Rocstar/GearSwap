@@ -27,8 +27,8 @@ ring1="Defending ring",ring2={name="Prolix Ring",order=7},back="Swith Cape +1",
 waist="Aoidos' Belt",legs={name="Gendewitha Spats",order=9},feet="Brd. Slippers +2"}
 
 FC.Normal = {head="Haruspex Hat",neck="Orunmila's Torque",ear1="Loquac. Earring",body="Marduk's Jubbah +1",
-		hands="Gendewitha Gages",ring2="Prolix Ring",back="Swith Cape",waist="Siegel Sash",legs="Orvail Pants +1",
-		feet="Chelona Boots +1"}
+hands="Gendewitha Gages",ring2="Prolix Ring",back="Swith Cape",waist="Siegel Sash",legs="Orvail Pants +1",
+feet="Chelona Boots +1"}
 		
 FC.Cure = {body="Heka's Kalasiris",legs="Nabu's Shalwar",back="Pahtli Cape"}
 	
@@ -36,13 +36,11 @@ FC.Thunder = {main='Apamajas I'}
 FC.Fire = {main='Atar I'}
 	
 WS['Mordant Rime'] = {range="Gjallarhorn",
-		head="Nahtirah Hat",neck="Aqua Gorget",ear1="Aoidos' Earring",
-		body="Bard's Justaucorps +2",hands="Brioso Cuffs +1",ring1="Veela Ring",ring2="Thundersoul Ring",
-		back="Atheling Mantle",waist="Aqua Belt",legs="Gendewitha Spats",feet="Brioso slippers"}
+head="Nahtirah Hat",neck="Aqua Gorget",ear1="Aoidos' Earring",
+body="Bard's Justaucorps +2",hands="Brioso Cuffs +1",ring1="Veela Ring",ring2="Thundersoul Ring",
+back="Atheling Mantle",waist="Aqua Belt",legs="Gendewitha Spats",feet="Brioso slippers"}
 	
 ---- Midcast Sets
-	
-		
 Mid.Haste = {main="Terra's Staff",sub="Oneiros Grip",head={name="Nahtirah Hat",order=6},
 neck="Orunmila's Torque",ear1="Loquac. Earring",ear2={name="Gifted Earring",order=7},
 body={name="Hedera Cotehardie",order=5},hands={name="Gendewitha Gages",order=11},
@@ -50,12 +48,12 @@ ring2={name="Prolix Ring",order=10},back={name="Rhapsode's Cape",order=8},
 waist="Phasmida Belt",legs="Byakko's Haidate",feet={name="Chelona Boots +1",order=9}}
 
 Mid.Debuff = {main="Carnwenhan",sub="Genbu's Shield",range="Gjallarhorn",
-		head="Kaabanax Hat",neck="Aoidos' Matinee",ear1="Psystorm Earring",ear2="Lifestorm earring",
-		body="Aoidos' Hngrln. +2",hands="Lurid Mitts",ring1="Omega Ring",ring2="Sangoma ring",
-		back="Rhapsode's Cape",waist="Aristo belt",legs="Mdk. Shalwar +1",feet="Brioso slippers"}
+head="Kaabanax Hat",neck="Aoidos' Matinee",ear1="Psystorm Earring",ear2="Lifestorm earring",
+body="Aoidos' Hngrln. +2",hands="Lurid Mitts",ring1="Omega Ring",ring2="Sangoma ring",
+back="Rhapsode's Cape",waist="Aristo belt",legs="Mdk. Shalwar +1",feet="Brioso slippers"}
 	
 Mid.Buff = {main="Legato Dagger",sub="Genbu's Shield",head="Aoidos' Calot +2",neck="Aoidos' Matinee",
-		body="Aoidos' Hngrln. +2",hands="Ad. Mnchtte. +2",legs="Mdk. Shalwar +1",feet="Brioso slippers"}
+body="Aoidos' Hngrln. +2",hands="Ad. Mnchtte. +2",legs="Mdk. Shalwar +1",feet="Brioso slippers"}
 	
 Mid.DBuff = {range="Daurdabla"}
 	
@@ -72,22 +70,22 @@ Mid.Lullaby = {hands="Brioso Cuffs +1"}
 Mid.Base = Mid.Haste
 		
 Mid.Cure = {main="Iridal Staff",head="Gendewitha Caubeen",neck="Phalaina Locket",ear2="Novia earring",
-		body="Gendewitha Bliaut",hands="Bokwus Gloves",legs="Brd. Cannions +2",feet="Bokwus Boots"}
+body="Gendewitha Bliaut",hands="Bokwus Gloves",legs="Brd. Cannions +2",feet="Bokwus Boots"}
 		
 Mid.Stoneskin = {head="Marduk's Tiara +1",body="Marduk's Jubbah +1",hands="Marduk's Dastanas +1",
-		legs="Shedir Seraweels",feet="Bokwus Boots"}
+legs="Shedir Seraweels",feet="Bokwus Boots"}
 	
 	----Engaged Damage Dealing set
-TP.DD = {main="Eminent Staff"}
+TP.DD = {main="Eminent Dagger"}
 
 ----Engaged Accuracy set
-TP.ACC = {main="Eminent Staff"}
+TP.ACC = {main="Eminent Dagger"}
 
 ----Engaged Refresh set
-TP.REF = {main="Eminent Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
-	neck="Twilight Torque",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
-	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
-	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
+TP.REF = {main="Eminent Dagger",ammo="Incantor Stone",head="Wivre Hairpin",
+neck="Twilight Torque",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
+hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
+waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
 	
 ----Engaged Magic Damage Taken - set
 TP.MDT = {neck="Twilight Torque"}
@@ -100,9 +98,9 @@ TP.DT = {neck="Twilight Torque"}
 
 ----Idle Refresh set
 Idle.REF = {main="Terra's Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
-	neck="Wiglen Gorget",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
-	hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
-	waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
+neck="Wiglen Gorget",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
+hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
+waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
 	
 ----Idle Regen set
 Idle.REG = set_combine(Idle.REF, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"})
@@ -145,13 +143,13 @@ function pretarget(spell)
 	and not buffactive.pianissimo 
 	and not spell.target.charmed 
 	and not pianissimo_cycle then
-		cancel_spell()
-		pianissimo_cycle = true
-		send_command('input /ja "Pianissimo" <me>;wait 1.5;input /ma "'..spell.name..'" '..spell.target.name..';')
-		return
+	cancel_spell()
+	pianissimo_cycle = true
+	send_command('input /ja "Pianissimo" <me>;wait 1.5;input /ma "'..spell.name..'" '..spell.target.name..';')
+	return
 	end
 	if spell.name ~= 'Pianissimo' then
-		pianissimo_cycle = false
+	pianissimo_cycle = false
 	end
 end
 
