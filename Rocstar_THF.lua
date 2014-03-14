@@ -114,6 +114,13 @@ hands="Buremte Gloves",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Iuit
 Idle.DT = {neck="Twilight Torque",ring1="Defending Ring",ring2="Dark Ring",
 back="Mollusca Mantle",waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
 
+----Idle Fishing set
+Idle.Fish = {main="empty",sub="empty",range="Ebisu Fishing Rod",
+ammo="Minnow",ammo="Sinking Minnow",ammo="Sardine Ball",ammo="Slice of Bluetail",
+head="empty",neck="Fisher's Torque",ear1="empty",ear2="empty",body="Fisherman's Smock",
+hands="Fsh. Gloves",ring1="Puffin Ring",ring2="Noddy Ring",back="Nexus Cape",
+waist="empty",legs="Fisherman's Hose",feet="Waders"}
+
 ----Engaged is a variable
 E = TP.DD
 
@@ -132,14 +139,21 @@ if (m and m.is_npc and m.id == a.actor_id)and A:contains(a.category) then
 windower.send_command('input /ja "Violent Flourish" <t>')end end end end end end)end
 
 function precast(spell)
-if JA[spell.english]then equip(JA[spell.english])
-elseif spell.type=='Step'or spell.type=='Flourish1'then equip(TP.ACC)
-elseif spell.type=='WeaponSkill'then if WS[spell.english]then equip(WS[spell.english])
-elseif buffactive['sneak attack']and buffactive['trick attack']
-and WS.SATA[spell.english]then equip(WS.SATA[spell.english])
-elseif buffactive['sneak attack'] and WS.SA[spell.english] then equip(WS.SA[spell.english])
-elseif buffactive['trick attack'] and WS.TA[spell.english] then equip(WS.TA[spell.english])
-elseif spell.english=='Spectral Jig'and buffactive.sneak then send_command('cancel 71')end end end
+if JA[spell.english]then 
+equip(JA[spell.english])
+elseif spell.type=='Step'or spell.type=='Flourish1'then 
+equip(TP.ACC)
+elseif spell.type=='WeaponSkill'then 
+if WS[spell.english]then 
+equip(WS[spell.english])
+elseif buffactive['sneak attack']and buffactive['trick attack']and WS.SATA[spell.english]then 
+equip(WS.SATA[spell.english])
+elseif buffactive['sneak attack'] and WS.SA[spell.english] then 
+equip(WS.SA[spell.english])
+elseif buffactive['trick attack'] and WS.TA[spell.english] then 
+equip(WS.TA[spell.english])
+elseif spell.english=='Spectral Jig'and buffactive.sneak then 
+send_command('cancel 71')end end end
 
 function aftercast(spell)
 if player.status=='Engaged'then equip(E)
@@ -159,7 +173,8 @@ elseif E==TP.DT then E=TP.ACC add_to_chat(200, 'Gearswap: Engaged now Accuracy')
 elseif E==TP.ACC then E=TP.DD add_to_chat(200, 'Gearswap: Engaged now DD')equip(E)end
 
 elseif command=='I'then
-    if I==Idle.REG then I=Idle.PDT add_to_chat(200, 'Gearswap: Idle now PDT -')equip(I)
+    if I==Idle.REG then I=Idle.Fish add_to_chat(200, 'Gearswap: Idle now Fishing')equip(I)
+elseif I==Idle.Fish then I=Idle.PDT add_to_chat(200, 'Gearswap: Idle now PDT -')equip(I)
 elseif I==Idle.PDT then I=Idle.MDT add_to_chat(200, 'Gearswap: Idle now MDT -')equip(I)
 elseif I==Idle.MDT then I=Idle.DT add_to_chat(200, 'Gearswap: Idle now DT -')equip(I)
 elseif I==Idle.DT then I=Idle.REG add_to_chat(200, 'Gearswap: Idle now Regen')equip(I)end 
