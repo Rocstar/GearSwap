@@ -7,8 +7,8 @@ JA={}FC={}WS={}Mid={}TP={}Idle={}
 send_command('input /macro book 18;wait .1;input /macro set 1')
 
 ----Message to display when loading the file
-add_to_chat(200, 'Gearswap: Engaged mode Refresh (ALT + F2 to change)')
-add_to_chat(200, 'Gearswap: Idle mode Refresh (ALT + F3 to change)')
+add_to_chat(200, 'Gearswap: Engaged DD (ALT + F2 to change)')
+add_to_chat(200, 'Gearswap: Idle Refresh (ALT + F3 to change)')
 
 ----Key Binds
 send_command('bind !F2 gs c E')
