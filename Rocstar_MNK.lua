@@ -95,7 +95,7 @@ ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
 waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
 
 --Idle sets
-Idle.REG = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
+Idle.REG = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",body="Mel. Cyclas +2",
 ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Anchoret's Mantle"}
 
 Idle.PDT = {main="Oatixur",head="Otronif Mask",
@@ -126,11 +126,11 @@ Auto_Stun = false
 --Auto Swaps is a Variable
 Auto_Swaps = true
  
-local mob=windower.ffxi.get_mob_by_target('t')
 
 --Auto Stun
 windower.register_event('action', function(a)
 if Auto_Stun ~= false then
+local mob=windower.ffxi.get_mob_by_target('t')
 if a.target_count ~= 0 then 
 if a.targets[1].action_count ~= 0 then 
 if a.targets[1].actions[1].message ~= 0 then 
@@ -140,33 +140,31 @@ windower.send_command('input /ja "Violent Flourish" <t>')end end end end end end
 --Auto Swaps
 windower.register_event('action', function(act)
 if Auto_Swaps ~= false then
+local mob=windower.ffxi.get_mob_by_target('t')
 if act.target_count ~= 0 then 
 if act.targets[1].action_count ~= 0 then 
 if act.targets[1].actions[1].message ~= 0 then
 if (mob and mob.is_npc and mob.id == act.actor_id)
 and S{7}:contains(act.category) then equip(TP.DT)
-add_to_chat(200, 'Gearswap: Target Reaidies TP Move Swaped to - DT')end end end
-
-elseif act.target_count ~= 0 then 
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-if (mob and mob.is_npc and mob.id == act.actor_id)
-and S{8}:contains(act.category) then equip(TP.MDT)
-add_to_chat(200, 'Gearswap: Target Starts Spellcasting Swaped to - MDT')end end end 
 
 elseif act.target_count ~= 0 then 
 if act.targets[1].action_count ~= 0 then 
 if act.targets[1].actions[1].message ~= 0 then
 if (mob and mob.is_npc and mob.id == act.actor_id)
 and S{11}:contains(act.category) then equip(E)
-add_to_chat(200, 'Target Done TP Move Swaped to Engaged')end end end
+
+elseif act.target_count ~= 0 then 
+if act.targets[1].action_count ~= 0 then 
+if act.targets[1].actions[1].message ~= 0 then
+if (mob and mob.is_npc and mob.id == act.actor_id)
+and S{8}:contains(act.category) then equip(TP.MDT)
 
 elseif act.target_count ~= 0 then 
 if act.targets[1].action_count ~= 0 then 
 if act.targets[1].actions[1].message ~= 0 then
 if (mob and mob.is_npc and mob.id == act.actor_id)
 and S{4}:contains(act.category) then equip(E)
-add_to_chat(200, 'Target Done Spellcasting Swaped to Engaged')end end end end end end)end
+end end end end end end end end end end end end end end end)end
 
 function precast(spell)
 if spell.action_type=='Magic'then equip(MA.FC)
