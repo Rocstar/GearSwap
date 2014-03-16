@@ -167,7 +167,7 @@ end
 function precast(spell)
 	if spell.type == 'BardSong' then
 		if buffactive.nightingale then
-			equip(FC[(spell.element)])equip_song_gear(spell)
+			equip_song_gear(spell)
 			return
 		else
 			equip_song_gear(spell)
