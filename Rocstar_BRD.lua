@@ -127,7 +127,7 @@ Idle.DT = {ring1="Dark Ring",ring2="Dark Ring"}
 
 ----Idle Fishing set
 Idle.Fish = {main="empty",sub="empty",range="Ebisu Fishing Rod",
-ammo="Minnow",ammo="Sinking Minnow",ammo="Sardine Ball",ammo="Slice of Bluetail",
+ammo="Minnow",
 head="Wivre Hairpin",neck="Fisher's Torque",ear1="empty",ear2="empty",body="Fisherman's Smock",
 hands="Fsh. Gloves",ring1="Puffin Ring",ring2="Noddy Ring",back="Nexus Cape",
 waist="empty",legs="Fisherman's Hose",feet="Waders"}
