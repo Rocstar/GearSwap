@@ -32,8 +32,14 @@ feet="Chelona Boots +1"}
 		
 FC.Cure = {body="Heka's Kalasiris",legs="Nabu's Shalwar",back="Pahtli Cape"}
 	
-FC.Thunder = {main='Apamajas I'}
-FC.Fire = {main='Atar I'}
+FC.Earth = {main="Vishrava I"}
+FC.Fire = {main="Atar I"}
+FC.Water = {main="Haoma I"}
+FC.Wind = {main="Vayuvata I"}
+FC.Ice = {main="Vourukasha I"}
+FC.Thunder = {main="Apamajas I"}
+FC.Light = {main="Arka I"}
+FC.Dark = {main="Xsaeta I"}
 	
 WS['Mordant Rime'] = {range="Gjallarhorn",
 head="Nahtirah Hat",neck="Aqua Gorget",ear1="Aoidos' Earring",
@@ -161,25 +167,22 @@ end
 function precast(spell)
 	if spell.type == 'BardSong' then
 		if buffactive.nightingale then
-			equip_song_gear(spell)
+			equip(FC[(spell.element)])equip_song_gear(spell)
 			return
 		else
 			equip_song_gear(spell)
-			equip(FC.Song)
+			equip(FC[(spell.element)]),FC.Song)
 		end
 	elseif spell.action_type == 'Magic' then
-		equip(FC.Normal)
+		equip(FC[(spell.element)]),FC.Normal)
 		if string.find(spell.english,'Cur') and spell.name ~= 'Cursna' then
-			equip(FC.Cure)
+			equip(FC[(spell.element)]),FC.Cure)
 		end
 	elseif spell.type == 'WeaponSkill' then
 		if WS[spell.english] then
 			equip(WS[spell.english])
 		end
 	end
-	
-	if FC[tostring(spell.element)] then equip(FC[tostring(spell.element)]) end
-	if JA[spell.english] then equip(JA[spell.english]) end
 end
 
 function midcast(spell)
