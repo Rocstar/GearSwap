@@ -83,7 +83,7 @@ body="Gendewitha Bliaut",hands="Bokwus Gloves",legs="Brd. Cannions +2",feet="Bok
 Mid.Stoneskin = {head="Marduk's Tiara +1",body="Marduk's Jubbah +1",hands="Marduk's Dastanas +1",
 legs="Shedir Seraweels",feet="Bokwus Boots"}
 	
-	----Engaged Damage Dealing set
+----Engaged DD set
 TP.DD = {main="Mandau",sub="Twashtar",ammo="Vanir Battery",head="Lithelimb Cap",neck="Asperity Necklace",
 body="Bihu Justaucorps",hands="Aetosaur Gloves +1",ring1="K'ayres Ring",ring2="Rajas Ring",
 back="Atheling Mantle",waist="Cetl Belt",legs="Aetosaur Trousers +1",feet="Vanir Boots"}
