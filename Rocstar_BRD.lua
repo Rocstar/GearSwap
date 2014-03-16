@@ -1,5 +1,5 @@
 function get_sets()
-
+--  "--" not needed. used to end a line
 ---- Values
 JA={}FC={}WS={}Mid={}TP={}Idle={}
 
@@ -20,12 +20,12 @@ JA.Nightingale = {feet="Brd. Slippers +2"}
 JA.Troubadour = {body="Bard's Justaucorps +2"}
 	
 JA['Soul Voice'] = {legs="Brd. Cannions +2"}
-
+	
 FC.Song = {head="Aoidos' Calot +2",neck="Orunmila's Torque",ear1={name="Loquac. Earring",order=5},
 ear2="Aoidos' Earring",body="Marduk's Jubbah +1",hands={name="Gendewitha Gages",order=8},
 ring1="Defending ring",ring2={name="Prolix Ring",order=7},back="Swith Cape +1",
 waist="Aoidos' Belt",legs={name="Gendewitha Spats",order=9},feet="Brd. Slippers +2"}
-
+		
 FC.Normal = {head="Haruspex Hat",neck="Orunmila's Torque",ear1="Loquac. Earring",body="Marduk's Jubbah +1",
 hands="Gendewitha Gages",ring2="Prolix Ring",back="Swith Cape",waist="Siegel Sash",legs="Orvail Pants +1",
 feet="Chelona Boots +1"}
@@ -41,6 +41,8 @@ body="Bard's Justaucorps +2",hands="Brioso Cuffs +1",ring1="Veela Ring",ring2="T
 back="Atheling Mantle",waist="Aqua Belt",legs="Gendewitha Spats",feet="Brioso slippers"}
 	
 ---- Midcast Sets
+	
+		
 Mid.Haste = {main="Terra's Staff",sub="Oneiros Grip",head={name="Nahtirah Hat",order=6},
 neck="Orunmila's Torque",ear1="Loquac. Earring",ear2={name="Gifted Earring",order=7},
 body={name="Hedera Cotehardie",order=5},hands={name="Gendewitha Gages",order=11},
@@ -76,13 +78,17 @@ Mid.Stoneskin = {head="Marduk's Tiara +1",body="Marduk's Jubbah +1",hands="Mardu
 legs="Shedir Seraweels",feet="Bokwus Boots"}
 	
 	----Engaged Damage Dealing set
-TP.DD = {main="Eminent Dagger"}
+TP.DD = {main="Mandau",sub="Twashtar",ammo="Vanir Battery",head="Lithelimb Cap",neck="Asperity Necklace",
+body="Bihu Justaucorps",hands="Aetosaur Gloves +1",ring1="K'ayres Ring",ring2="Rajas Ring",
+back="Atheling Mantle",waist="Cetl Belt",legs="Aetosaur Trousers +1",feet="Vanir Boots"}
 
 ----Engaged Accuracy set
-TP.ACC = {main="Eminent Dagger"}
+TP.ACC = {main="Mandau",sub="Twashtar",ammo="Vanir Battery",head="Lithelimb Cap",neck="Asperity Necklace",
+body="Bihu Justaucorps",hands="Aetosaur Gloves +1",ring1="K'ayres Ring",ring2="Rajas Ring",
+back="Atheling Mantle",waist="Cetl Belt",legs="Aetosaur Trousers +1",feet="Vanir Boots"}
 
 ----Engaged Refresh set
-TP.REF = {main="Eminent Dagger",ammo="Incantor Stone",head="Wivre Hairpin",
+TP.REF = {main="Eminent Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
 neck="Twilight Torque",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
 hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
 waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
@@ -97,10 +103,9 @@ TP.PDT = {neck="Twilight Torque"}
 TP.DT = {neck="Twilight Torque"}
 
 ----Idle Refresh set
-Idle.REF = {main="Terra's Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wivre Hairpin",
-neck="Wiglen Gorget",ear1="Black Earring",ear2="Darkness Earring",body="Gendewitha Bliaut",
-hands="Serpentes Cuffs",ring1="Dark Ring",ring2="Dark Ring",back="Cheviot Cape",
-waist="Slipor Sash",legs="Tatsu. Sitagoromo",feet="Serpentes Sabots"}
+Idle.REF = {main="Terra's Staff",sub="Oneiros Grip",ammo="Incantor Stone",head="Wayfarer circlet",neck="Wiglen Gorget",
+ear1="Black Earring",ear2="Darkness Earring",body="Wayfarer robe",hands="Wayfarer cuffs",ring1="Defending Ring",
+ring2="Dark Ring",back="Iximulew Cape",waist="Cetl Belt",legs="Wayfarer slops",feet="Wayfarer clogs"}
 	
 ----Idle Regen set
 Idle.REG = set_combine(Idle.REF, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"})
