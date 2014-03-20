@@ -84,8 +84,8 @@ DT = {neck="Twilight Torque",ring1="Defending Ring",ring2="Dark Ring",back="Moll
 ----Healing HP set
 Rest = {} 
 
---Aftermath level 3 set
-AM3 = set_combine(DD, {legs="Sao. Haidate +2"})
+--Aftermath set
+AM = set_combine(DD, {legs="Sao. Haidate +2"})
 
 --Fishing set
 FISH = {main="empty",sub="empty",range="Ebisu Fishing Rod",ammo="Slice of Bluetail",
@@ -149,7 +149,7 @@ function buff_change(buff, gain)
   elseif buff == 'Aftermath: Lv.1'and gain 
   or buff == 'Aftermath: Lv.2'and gain 
   or buff == 'Aftermath: Lv.3'and gain then
-     E=AM3 add_to_chat(200, 'Gearswap: Aftermath set')
+     E=AM add_to_chat(200, 'Gearswap: Aftermath set')
     equip(E)
   end 
 end
