@@ -146,7 +146,7 @@ function buff_change(buff, gain)
   if buff.gain[Aftermath: Lv.3] == true then 
     E = AM3 
 	equip(E)
-  elseif buff.loss[Aftermath: Lv.3] == false then 
+  elseif buff.gain[Aftermath: Lv.3] == false then 
     E = DD 
 	equip(E)
   end 
