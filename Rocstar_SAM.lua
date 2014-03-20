@@ -1,9 +1,15 @@
-function file_unload()send_command('unbind !-')send_command('unbind !=')send_command('unbind f10')end
+function file_unload() 
+    send_command('unbind !-')
+    send_command('unbind !=')
+    send_command('unbind f10')
+end
 
-function get_sets()pre={}
+function get_sets() pre={}
 
 ----Macro Book Change
 send_command('@input /macro book 1;wait .1;input /macro set 8')
+
+----Key Binds
 send_command('bind !- gs c -')
 send_command('bind != gs c =')
 send_command('bind f10 gs c f10')
@@ -13,17 +19,25 @@ add_to_chat(200, 'Gearswap: Engaged DD (ALT -) Idle Regen (ALT =)')
 add_to_chat(200, 'Gearswap: Auto Stun (F10) //gs c ? for Help')
 
 --Weapon Skill sets
-pre['Tachi: Fudo'] = {}
+pre['Tachi: Fudo'] = {neck="Light Gorget",waist="Light Belt"}
 
-pre['Tachi: Shoha'] = {}
+pre['Tachi: Rana'] = {neck="Shadow Gorget",waist="Shadow Belt"}
 
-pre['Tachi: Kasha'] = {}
+pre['Tachi: Kaiten'] = {neck="Light Gorget",waist="Light Belt"}
 
-pre['Tachi: Gekko'] = {}
+pre['Tachi: Shoha'] = {neck="Shadow Gorget",waist="Shadow Belt"}
 
-pre['Tachi: Kaiten'] = {}
+pre['Tachi: Kasha'] = {neck="Light Gorget",waist="Light Belt"}
 
-pre['Tachi: Rana'] = {}
+pre['Tachi: Gekko'] = {neck="Aqua Gorget",waist="Aqua Belt"}
+
+pre['Tachi: Ageha'] = {neck="Shadow Gorget",waist="Shadow Belt"}
+
+pre['Namas Arrow'] = {neck="Light Gorget",waist="Light Belt"}
+
+pre['Apex Arrow'] = {neck="Light Gorget",waist="Light Belt"}
+
+pre.Stardiver = {neck="Shadow Gorget",waist="Shadow Belt"}
 
 --Job Ability sets
 pre['Meikyo Shisui'] = {feet="Sakonji Sune-ate +1"} 
@@ -43,8 +57,12 @@ pre.Sengikori = {feet="Unkai Sune-Ate +2"}
 pre.Sekkanoki = {hands="Unkai Kote +2"}
 
 --Damage Dealing set
-DD = {}
+DD = {main="Tsurumaru",sub="Claymore Grip",ammo="Hagneia Stone",
+head="Otomi Helm",neck="Asperity Necklace",ear1="Steelflash Earring",ear2="Bladeborn Earring",
+body="Mikinaak Breastplate",hands="Mikinaak Gauntlets",ring1="Rajas Ring",ring2="Ulthalam's Ring",
+back="Atheling Mantle",waist="Cetl Belt",legs="Otronif Brais",feet="Whirlpool Boots"}
 
+--Regen set
 REG = {head="Twilight Helm",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Accuracy set
@@ -54,13 +72,14 @@ ACC = {}
 MDT = {}
 
 --Physical Damage Taken - set
-PDT = {}
+PDT = {head="Otronif Mask",neck="Wiglen Gorget",body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",
+ring2="Dark Ring",back="Mollusca Mantle",waist="Flume Belt",legs="Otronif Brais",feet="Otronif Boots"}
 
 --Breath Damage Taken - set
 BDT = {}
 
 --Damage Taken - set
-DT = {}
+DT = {neck="Twilight Torque",ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle"}
 
 ----Healing HP set
 Rest = {}
@@ -81,12 +100,20 @@ I = REG
 A = false
 
 windower.register_event('action', function(a)
-local m = windower.ffxi.get_mob_by_target('t')
-if A ~= false then if a.target_count ~= 0 then 
-if a.targets[1].action_count ~= 0 then
-if a.targets[1].actions[1].message ~= 0 then 
-if (m and m.is_npc and m.id == a.actor_id)and A:contains(a.category) then
-windower.send_command('input /ja "Violent Flourish" <t>')end end end end end end)end
+  local m = windower.ffxi.get_mob_by_target('t')
+  if A ~= false then 
+    if a.target_count ~= 0 then 
+      if a.targets[1].action_count ~= 0 then 
+        if a.targets[1].actions[1].message ~= 0 then 
+          if (m and m.is_npc and m.id == a.actor_id) and A:contains(a.category) then 
+            windower.send_command('input /ja "Violent Flourish" <t>')
+			end 
+		  end 
+		end 
+	  end 
+	end 
+  end)
+end
 
 function precast(spell)
   if pre[spell.english]and buffactive['Meikyo Shisui']then 
