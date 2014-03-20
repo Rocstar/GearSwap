@@ -88,12 +88,28 @@ if a.targets[1].actions[1].message ~= 0 then
 if (m and m.is_npc and m.id == a.actor_id)and A:contains(a.category) then
 windower.send_command('input /ja "Violent Flourish" <t>')end end end end end end)end
 
-function precast(spell)if pre[spell.english]then equip(pre[spell.english])end end
+function precast(spell)
+  if pre[spell.english]and buffactive['Meikyo Shisui']then 
+    equip(pre[spell.english],pre['Meikyo Shisui'])
+  else equip(pre[spell.english])
+	end 
+end
 
-function aftercast(spell)if player.status=='Engaged'then equip(E)else equip(I)end end
+function aftercast(spell)
+  if player.status == 'Engaged' then
+    equip(E)
+  else
+    equip(I)
+  end 
+end
 
-function status_change(new,old)if new=='Engaged'then equip(E)
-elseif T{'Idle','Resting'}:contains(new) then equip(I)end end
+function status_change(new,old)
+  if new == 'Engaged' then 
+    equip(E)
+  elseif T{'Idle','Resting'}:contains(new) then 
+    equip(I)
+  end 
+end
 
 function self_command(command)
 local mode = player.status
