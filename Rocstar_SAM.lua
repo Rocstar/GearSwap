@@ -82,7 +82,10 @@ BDT = {}
 DT = {neck="Twilight Torque",ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle"}
 
 ----Healing HP set
-Rest = {}
+Rest = {} 
+
+--Aftermath level 3 set
+AM3 = {} 
 
 --Fishing set
 FISH = {main="empty",sub="empty",range="Ebisu Fishing Rod",ammo="Slice of Bluetail",
@@ -136,6 +139,16 @@ function status_change(new,old)
     equip(E)
   elseif T{'Idle','Resting'}:contains(new) then 
     equip(I)
+  end 
+end
+
+function buff_change(buff, gain)
+  if buff.gain[Aftermath: Lv.3] == true then 
+    E = AM3 
+	equip(E)
+  elseif buff.loss[Aftermath: Lv.3] == false then 
+    E = DD 
+	equip(E)
   end 
 end
 
