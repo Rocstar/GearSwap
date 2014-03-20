@@ -7,7 +7,7 @@ end
 function get_sets() pre={}
 
 ----Macro Book Change
-send_command('@input /macro book 1;wait .1;input /macro set 8')
+send_command('@input /macro book 12;wait .1;input /macro set 1')
 
 ----Key Binds
 send_command('bind !- gs c -')
@@ -63,7 +63,7 @@ body="Mikinaak Breastplate",hands="Mikinaak Gauntlets",ring1="Rajas Ring",ring2=
 back="Atheling Mantle",waist="Cetl Belt",legs="Otronif Brais",feet="Whirlpool Boots"}
 
 --Regen set
-REG = {head="Twilight Helm",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}
+REG = {head="Twilight Helm",neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring",legs="Otronif Brais"}
 
 --Accuracy set
 ACC = {}
@@ -85,7 +85,7 @@ DT = {neck="Twilight Torque",ring1="Defending Ring",ring2="Dark Ring",back="Moll
 Rest = {} 
 
 --Aftermath level 3 set
-AM3 = {} 
+AM3 = set_combine(DD, {legs="Sao. Haidate +2"})
 
 --Fishing set
 FISH = {main="empty",sub="empty",range="Ebisu Fishing Rod",ammo="Slice of Bluetail",
@@ -119,10 +119,7 @@ windower.register_event('action', function(a)
 end
 
 function precast(spell) 
-  if pre[spell.english]and buffactive['Meikyo Shisui']then 
-    equip(pre[spell.english],pre['Meikyo Shisui']) 
-  else 
-    equip(pre[spell.english]) 
+  if pre[spell.english]then equip(pre[spell.english])
   end 
 end
 
@@ -143,12 +140,17 @@ function status_change(new,old)
 end
 
 function buff_change(buff, gain)
-  if buff.gain['Aftermath: Lv.3'] == true then 
-    E = AM3 
-	equip(E)
-  elseif buff.gain['Aftermath: Lv.3'] == false then 
-    E = DD 
-	equip(E)
+  if buff == 'Aftermath: Lv.1'and not gain 
+  or buff == 'Aftermath: Lv.2'and not gain 
+  or buff == 'Aftermath: Lv.3'and not gain then 
+    E=DD add_to_chat(200, 'Gearswap: DD set')
+  if player.status == 'Engaged' then
+    equip(E) end
+  elseif buff == 'Aftermath: Lv.1'and gain 
+  or buff == 'Aftermath: Lv.2'and gain 
+  or buff == 'Aftermath: Lv.3'and gain then
+     E=AM3 add_to_chat(200, 'Gearswap: Aftermath set')
+    equip(E)
   end 
 end
 
