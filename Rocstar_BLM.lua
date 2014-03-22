@@ -1,129 +1,501 @@
-PDEar1 = {name="Darkness Earring",augments={"Hp+3"}} --change these to own augments
-PDEar2 = {name="Darkness Earring",augments={"Hp+7"}}
-PDRing1 = {name="Dark Ring",augments={"Physical Damage Taken -6%", "Magic Damage Taken -3%"}} --these too
-MDRing1 = {name="Dark Ring",augments={"Magic Damage Taken -6%"}}
-BDRing1 = {name="Dark Ring",augments={"Breath Damage Taken -6%", "Magic Damage Taken -3%"}}
-
-function file_unload()
-send_command('unbind ^=')
-send_command('unbind ^-')end
-
 function get_sets()
-send_command('bind ^- gs disable main sub')
-send_command('bind ^= gs enable main sub')
-send_command('input /macro book 3;wait .1;input /macro set 1')
+  
+  pre = {} 
+  
+  mid = {} 
 
-sets = {}
-sets.IdleNormal = {main="Owleyes",sub="Genbu's Shield",ammo="Shadow Sachet",head="Wayfarer Circlet",
-neck="Wiglen Gorget",ear1=PDEar1,ear2=PDEar2,body="Wayfarer Robe",hands="Wayfarer Cuffs",
-ring1="Sheltered Ring",ring2="Paguroidea Ring",back="Iximulew Cape",
-waist="Cetl Belt",legs="Wayfarer Slops",feet="Wayfarer Clogs"}
+  send_command('bind !- gs c e') 
+  
+  send_command('bind != gs c i') 
+  
+  send_command('bind f10 gs c f10') 
+  
+  send_command('input /macro book 5;wait .1;input /macro set 1')
+ 
+  add_to_chat(200, 'Gearswap: Engaged DD. ALT -, Idle Refresh. ALT =,')
+  
+  add_to_chat(200, 'Auto Stun F10, //gs c ? for Help.')
 
-sets.TPNormal = {main="Baqil Staff",sub="Tzacab Grip"}
+  pre['Elemental Seal'] = {
+    main="Baqil Staff"}
 
-sets.WS = {}
-sets.WS.Retribution = {head="Buremte Hat",feet="Wayfarer Clogs"}
-sets.WS['Spirit Taker'] = {head="Buremte Hat",feet="Wayfarer Clogs"}
+  pre.Manafont = {
+    body="Sorcerer's coat +2"}
 
-sets.JA = {}
-sets.JA.Manafont = {body="Sorcerer's coat +2"}
-sets.JA['Elemental Seal'] = {main="Baqil Staff"}
+  pre.Retribution = {
+    ear1="Bladeborn Earring",ear2="Steelflash Earring"}
 
-sets.FC = {}
-sets.FC.Normal = {ammo="Impatiens",head="Haruspex Hat",ear1="Loquacious Earring",
-ring1="Prolix Ring",ring2="Veneficium Ring",back="Swith Cape",
-waist="Witful Belt",legs="Orvail Pants +1",}
+  pre['Spirit Taker'] = {
+    ear1="Friomisi Earring",ear2="Hecate's Earring"}
 
-sets.FC.Cure = set_combine(sets.FC.Light,{body="Heka's Kalasiris",back="Pahtli Cape",waist="Capricornian Rope"})
+  pre.Cast = {
+    ammo="Impatiens",
+	head="Haruspex Hat",
+	ear1="Loquacious Earring",
+	ring1="Prolix Ring",
+    ring2="Veneficium Ring",
+	back="Swith Cape",
+	waist="Witful Belt",
+	legs="Orvail Pants +1"}
 
-sets.FC.EnhancingMagic = {waist="Siegel Sash"}
+  pre.Enhancing = set_combine(pre.Cast, {
+    waist="Siegel Sash"})
 
-sets.FC.Stoneskin = set_combine(sets.FC.EnhancingMagic,{hands="Carapacho Cuffs"})
+  pre.Stoneskin = set_combine(pre.Cast, pre.Enhancing, {
+    hands="Carapacho Cuffs"})
 
-sets.FC.ElementalMagic = set_combine(sets.FC.Normal,{head="Goetia Petasos +2"})
+  pre.Elemental = set_combine(pre.Cast, {
+    head="Goetia Petasos +2",
+	feet="Spaekona's Sabots"})
 
-sets.FC.Earth = {main="Vishrava I"}
-sets.FC.Fire = {main="Atar I"}
-sets.FC.Water = {main="Haoma I"}
-sets.FC.Wind = {main="Vayuvata I"}
-sets.FC.Ice = {main="Vourukasha I"}
-sets.FC.Thunder = {main="Apamajas I"}
-sets.FC.Light = {main="Arka I"}
-sets.FC.Dark = {main="Xsaeta I"}
+  pre.Cure = set_combine(pre.Cast, {
+    body="Heka's Kalasiris",
+	back="Pahtli Cape",
+	waist="Capricornian Rope"})
 
-sets.midcast = {}
-sets.midcast.Nuke = {main="Atinian Staff",sub="Zuuxowu Grip",ammo="Memoria Sachet",head="Buremte Hat",
-neck="Quanpur Necklace",ear1="Friomisi Earring",ear2="Hecate's Earring",body="Hagondes Coat",
-hands="Otomi Gloves",back="Toro Cape",waist="Aswang Sash",
-legs="Hagondes Pants",feet="Wayfarer Clogs"}
+  pre.Earth = {main="Atinian Staff"}--{main="Vishrava I"}
+  pre.Fire = {main="Atar I"}
+  pre.Water = {main="Haoma I"}
+  pre.Wind = {main="Vayuvata I"}
+  pre.Ice = {main="Vourukasha I"}
+  pre.Thunder = {main="Apamajas I"}
+  pre.Light = {main="Arka I"}
+  pre.Dark = {main="Xsaeta I"}
+	
+  mid.Fire = {
+    waist='Karin Obi',
+	back='Twilight Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Earth = {
+    waist='Dorin Obi',
+	back='Twilight Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Water = {
+    waist='Suirin Obi',
+	back='Twilight Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Wind = {
+    waist='Furin Obi',
+	back='Twilight Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Ice = {
+    waist='Hyorin Obi',
+	back='Twilight Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Thunder = {
+    waist='Rairin Obi',
+	back='Bane Cape',
+	ring1='Zodiac Ring'} 
+	
+  mid.Light = {
+    waist='Korin Obi',
+	back='Bane Cape'} 
+	
+  mid.Dark = {
+    waist='Anrin Obi',
+	back='Twilight Cape'} 
 
-sets.midcast.Cure = {main="Tamaxchi",head="Wayfarer Circlet",hands="Bokwus Gloves",
-ring2="Sirona's Ring",legs="Wayfarer Slops"}
+  mid.Nuke = {
+    main="Atinian Staff",
+	sub="Zuuxowu Grip",
+	ammo="Memoria Sachet",
+	head="Buremte Hat",
+    neck="Quanpur Necklace",
+	ear1="Friomisi Earring",
+	ear2="Hecate's Earring",
+	body="Bokwus Robe",
+	hands="Bokwus Gloves",
+    ring1="Demon's Ring",
+	ring2="Demon's Ring",
+	back="Toro Cape",
+	waist="Othila Sash",
+	legs="Spaekona's Tonban",
+	feet="Spaekona's Sabots"} 
+	
+  mid.Dark = {} --add Dark Magic gear
 
-sets.midcast.Stoneskin = {head="Buremte Hat",feet="Wayfarer Clogs"}
-sets.midcast.Shell = {ring2="Sheltered Ring"}
-sets.midcast.Pro = {ring2="Sheltered Ring"}
+  mid.MND_Enfeeb = {
+    neck="Twilight Torque"} 
 
-sets.midcast.Recast = {head="Wayfarer Circlet",ear1="Loquacious Earring",body="Wayfarer Robe",
-hands="Wayfarer Cuffs",back="Swith Cape",waist="Cetl Belt",
-legs="Wayfarer Slops",feet="Wayfarer Clogs"}
+  mid.INT_Enfeeb = {
+    neck="Twilight Torque"} 
 
-sets.Day = {}
-sets.Day.Fire = set_combine(sets.midcast.Nuke,{waist='Karin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Earth = set_combine(sets.midcast.Nuke,{waist='Dorin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Water = set_combine(sets.midcast.Nuke,{waist='Suirin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Wind = set_combine(sets.midcast.Nuke,{waist='Furin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Ice = set_combine(sets.midcast.Nuke,{waist='Hyorin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Thunder = set_combine(sets.midcast.Nuke,{waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Lightning = set_combine(sets.midcast.Nuke,{waist='Rairin Obi',back='Twilight Cape',ring1='Zodiac Ring'})
-sets.Day.Light = set_combine(sets.midcast.Cure,{waist='Korin Obi',back='Twilight Cape'})
-sets.Day.Dark = set_combine(sets.midcast.Nuke,{waist='Anrin Obi',back='Twilight Cape'})
+  mid.Cure = {
+    main="Arka IV",
+	sub="Achaq Grip",
+	head="Buremte Hat",
+    hands="Bokwus Gloves",
+	ring2="Sirona's Ring",
+	legs="Wayfarer Slops"} 
+	
+  mid.Stoneskin = {} --add Stoneskin gear
+  
+  mid.ProShell = {ring2="Sheltered Ring"}
+  
+  mid.Recast = {} --add recast gear
 
-sets.aftercast = {}
-sets.aftercast.Idle = sets.IdleNormal
-sets.aftercast.Engaged = sets.TPNormal
-sets.aftercast.Resting = set_combine(sets.aftercast.Idle, {head="gear",feet="more gear"})
-end
+  REF = {
+    main="Terra's Staff",
+	sub="Oneiros Grip",
+	ammo="Shadow Sachet",
+    head="Wayfarer Circlet",
+	neck="Wiglen Gorget",
+	ear1="Black Earring",
+	ear2="Darkness Earring",
+    body="Wayfarer Robe",
+	hands="Wayfarer Cuffs",
+	ring1="Dark Ring",
+	ring2="Dark Ring",
+	back="Cheviot Cape",
+    waist="Slipor Sash",
+	legs="Wayfarer Slops",
+	feet="Wayfarer Clogs"} 
 
-function precast(spell)
-if spell.action_type=='Magic'then equip(sets.FC.Normal)end
-if spell.skill=='ElementalMagic'then equip(sets.FC.ElementalMagic)end 
-if sets.FC[spell.element]then equip(sets.FC[spell.element])end
-if spell.english:startswith('Cur')then equip(sets.FC.Cure)end
-if spell.type=='EnhancingMagic'then equip(sets.FC.EnhancingMagic)
-elseif spell.english=='Stoneskin'then equip(sets.FC.Stoneskin)
-elseif sets.JA[spell.english]then equip(sets.JA[spell.english])
-elseif spell.type=='WeaponSkill'then if sets.WS[spell.name]then equip(sets.WS[spell.name])end end end 
+  REG={} --add Regen gear
 
+  ACC={} --add Accuracy gear
 
-function midcast(spell)
-if spell.skill=='HealingMagic'then equip(sets.midcast.Cure)end
-if spell.element==world.weather_element or spell.element==world.day_element then equip(sets.Day[spell.element])end 
-if spell.skill=='ElementalMagic'or spell.skill=='DarkMagic'or spell.skill=='EnfeeblingMagic'
-or spell.skill=='DivineMagic'then equip(sets.midcast.Nuke)end
-if spell.element==world.weather_element or spell.element==world.day_element then equip(sets.Day[spell.element])
-elseif spell.english=='Sneak'and spell.target.name==player.name and buffactive.sneak then send_command('cancel 71')
-elseif spell.english=='Blink'and buffactive.blink then send_command('cancel 36')
-elseif spell.english=='Stoneskin'then equip(sets.midcast.Stoneskin)send_command('cancel 37')
-elseif spell.english:startswith('Regen*')then equip(sets.midcast.Regen)
-elseif spell.english:startswith('Shell')then equip(sets.midcast.Shell)
-elseif spell.english:startswith('Pro')then equip(sets.midcast.Pro)end end
+  PDT={} --add physical damage taken - gear
 
+  MDT={} --add magic damage taken - gear
 
+  BDT={} --add breath damage taken - gear
 
-function aftercast(spell)
-if player.status=='Engaged'then equip(sets.aftercast.Engaged)
-else equip(sets.aftercast.Idle)end end
+  DT={} --add damage taken - gear
 
-function status_change(new,old)
-if new=='Engaged'then equip(sets.aftercast.Engaged)
-elseif new=='Resting'then equip(sets.aftercast.Resting)
-elseif new=='Idle'then equip(sets.aftercast.Idle)end end
+  DD = set_combine(mid.Nuke, {}) --add damage dealer gear
 
-function weathercheck(spell_element,set)
-	if spell_element == world.weather_element or spell_element == world.day_element then
-		equip(set,sets['Day_'..spell_element])
-	else
-		equip(set)
-	end
-end
+  AM = set_combine(DD, {body="Hagondes Coat"}) --add Aftermath gear
+
+  E = DD
+
+  I = REF
+
+  A = false
+
+  windower.register_event('action', 
+    function(a) 
+     local m = windower.ffxi.get_mob_by_target('bt') 
+      if A ~= false then 
+	    if a.target_count ~= 0 then 
+          if a.targets[1].action_count ~= 0 then 
+            if a.targets[1].actions[1].message ~= 0 then 
+              if (m and m.is_npc and m.id == a.actor_id) and A:contains(a.category) then 
+                windower.send_command('input /ma Stun <bt>') 
+			  end 
+		    end 
+		  end 
+	    end 
+	  end 
+    end) 
+end 
+
+function precast(spell) 
+  if pre[spell.english] then 
+    equip(pre[spell.english], pre[spell.element]) 
+  elseif spell.skill == 'ElementalMagic' then 
+    equip(pre.Elemental, pre[spell.element]) 
+  elseif spell.type == 'EnhancingMagic' then 
+    equip(pre.Enhancing, pre[spell.element]) 
+  elseif spell.english:startswith('Cur') then 
+    equip(pre.Cure, pre[spell.element]) 
+  else 
+    equip(pre.Cast) 
+  end 
+end 
+
+function midcast(spell) 
+  if spell.skill == 'ElementalMagic' then 
+	equip(mid.Nuke) 
+  elseif spell.english:startswith('Cur') then 
+    equip(mid.Cure)
+  elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
+    equip(mid.INT_Enfeeb) 
+  elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
+    equip(mid.MND_Enfeeb) 
+  elseif spell.skill == 'DarkMagic' then 
+    equip(mid.Dark) 
+  elseif spell.english:startswith('Shell') or 
+    spell.english:startswith('Pro') then 
+    equip(mid.ProShell) 
+  elseif spell.english == 'Blink' and buffactive.blink then 
+    send_command('cancel 36') 
+  elseif spell.english == 'Stoneskin' and buffactive.stoneskin then 
+    send_command('cancel 37') 
+    equip(mid[spell.english]) 
+  elseif spell.english == 'Sneak' and spell.target.name == player.name and buffactive.sneak then 
+    send_command('cancel 71') 
+  else 
+    equip(mid.Recast) 
+  end 
+end 
+
+function aftercast(spell) 
+  if player.status == 'Engaged' then 
+    equip(E) 
+  else 
+    equip(I) 
+  end 
+end 
+
+function status_change(new,old) 
+  if new == 'Engaged' then 
+    equip(E) 
+  elseif new == 'Resting' then 
+    equip(I) 
+  elseif new == 'Idle' then 
+    equip(I) 
+  end 
+end 
+
+function buff_change(buff, gain) 
+  if buff == 'Aftermath: Lv.1'and not gain 
+  or buff == 'Aftermath: Lv.2'and not gain 
+  or buff == 'Aftermath: Lv.3'and not gain then 
+    E=DD 
+      if player.status == 'Engaged' then 
+        equip(E) 
+	  end 
+  elseif buff == 'Aftermath: Lv.1'and gain 
+  or buff == 'Aftermath: Lv.2'and gain 
+  or buff == 'Aftermath: Lv.3'and gain then 
+    E=AM 
+    equip(E) 
+  end 
+end 
+
+function weathercheck(spell_element) 
+  if spell_element == world.weather_element or 
+    spell_element==world.day_element then 
+    equip(mid[spell.element]) 
+  end 
+end 
+
+function self_command(command) 
+ local stat = player.status 
+  if command=='?'then 
+    add_to_chat(200, 'Gearswap: Engaged Modes:') 
+    add_to_chat(200, '//gs c e ref, //gs c e reg, //gs c e acc, //gs c e pdt') 
+    add_to_chat(200, '//gs c e mdt, //gs c e bdt, //gs c e dt, //gs c e dd') 
+    add_to_chat(200, 'Gearswap: Idle Modes:') 
+    add_to_chat(200, '//gs c i fish, //gs c i ref, //gs c i reg, //gs c i acc, ') 
+    add_to_chat(200, '//gs c i pdt, //gs c i mdt, //gs c i bdt, //gs c i dt, //gs c i dd') 
+    add_to_chat(200, 'Gearswap: Stun Modes:') 
+    add_to_chat(200, '//gs c yes stun, //gs c no stun, //gs c tp stun, //gs c ma stun') 
+  elseif command == 'e reg' then 
+    E = REG 
+	add_to_chat(200, 'Gearswap: Engaged now Regen') 
+      if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'e acc' then 
+    E = ACC 
+	add_to_chat(200, 'Gearswap: Engaged now Accuracy') 
+	  if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'e pdt' then 
+    E = PDT 
+	add_to_chat(200, 'Gearswap: Engaged now PDT -') 
+	  if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'e mdt' then 
+    E = MDT 
+    add_to_chat(200, 'Gearswap: Engaged now MDT -') 
+      if stat == 'Engaged' then 
+	    equip(E)
+	  end 
+  elseif command == 'e bdt' then 
+    E = BDT 
+	add_to_chat(200, 'Gearswap: Engaged now BDT -') 
+	  if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'e dt' then 
+    E = DT 
+	add_to_chat(200, 'Gearswap: Engaged now DT -') 
+	  if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'e dd' then 
+    E = DD 
+	add_to_chat(200, 'Gearswap: Engaged now DD') 
+	  if stat == 'Engaged' then 
+	    equip(E) 
+	  end 
+  elseif command == 'i fish'then 
+    I = FISH 
+	add_to_chat(200, 'Gearswap: Idle now Fishing') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i reg' then 
+    I = REG 
+	add_to_chat(200, 'Gearswap: Idle now Regen') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i acc' then 
+    I = ACC 
+    add_to_chat(200, 'Gearswap: Idle now Accuracy') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i pdt' then 
+    I = PDT 
+	add_to_chat(200, 'Gearswap: Idle now PDT -') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i mdt' then 
+    I = MDT 
+	add_to_chat(200, 'Gearswap: Idle now MDT -') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i bdt' then 
+    I = BDT 
+	add_to_chat(200, 'Gearswap: Idle now BDT -') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i dt' then 
+    I = DT 
+	add_to_chat(200, 'Gearswap: Idle now DT -') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'i dd' then 
+    I = DD 
+	add_to_chat(200, 'Gearswap: Idle now DD') 
+	  if stat ~= 'Engaged' then 
+	    equip(I) 
+	  end 
+  elseif command == 'tp stun' then 
+    A=S{7} 
+	add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+  elseif command == 'ma stun' then 
+    A=S{8} 
+	add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+  elseif command == 'yes stun' then 
+    A=S{7,8} 
+	add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting') 
+  elseif command == 'no stun' then 
+    A=false 
+	add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
+  elseif command == 'e' then 
+    if E == DD then 
+	  E = ACC 
+	  add_to_chat(200, 'Gearswap: Engaged now Accuracy') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+    elseif E == ACC then 
+	  E = REG 
+	  add_to_chat(200, 'Gearswap: Engaged now Regen') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	elseif E == REG then 
+	  E = PDT 
+	  add_to_chat(200, 'Gearswap: Engaged now PDT -') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	elseif E == PDT then 
+	  E = MDT 
+	  add_to_chat(200, 'Gearswap: Engaged now MDT -') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	elseif E == MDT then 
+	  E = BDT 
+	  add_to_chat(200, 'Gearswap: Engaged now BDT -') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	elseif E == BDT then 
+	  E = DT 
+	  add_to_chat(200, 'Gearswap: Engaged now DT -') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	elseif E == DT then 
+	  E = DD 
+	  add_to_chat(200, 'Gearswap: Engaged now DD') 
+	    if stat == 'Engaged' then 
+		  equip(E) 
+		end 
+	end 
+  elseif command=='i'then
+    if I == DD then 
+	  I = ACC 
+	  add_to_chat(200, 'Gearswap: Idle now Accuracy') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == ACC then 
+	  I = REG 
+	  add_to_chat(200, 'Gearswap: Idle now Regen') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == REG then 
+	  I = PDT 
+	  add_to_chat(200, 'Gearswap: Idle now PDT -') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == PDT then 
+	  I = MDT 
+	  add_to_chat(200, 'Gearswap: Idle now MDT -') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == MDT then 
+	  I = BDT 
+	  add_to_chat(200, 'Gearswap: Idle now BDT -') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == BDT then 
+	  I = DT 
+	  add_to_chat(200, 'Gearswap: Idle now DT -') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	elseif I == DT then 
+	  I = DD 
+	  add_to_chat(200, 'Gearswap: Idle now DD') 
+	    if stat ~= 'Engaged' then 
+		  equip(I) 
+		end 
+	end 
+    elseif command == 'f10' then 
+      if A == false then 
+	    A = S{7,8} 
+		add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting') 
+    elseif A == S{7,8} then 
+	  A = S{7} 
+	  add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+    elseif A == S{7} then 
+	  A = S{8} 
+	  add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+    elseif A == S{8} then 
+	  A = false 
+	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
+	end 
+  end 
+end 
+
+function file_unload() 
+  send_command('unbind !-') 
+  send_command('unbind !=') 
+  send_command('unbind f10') 
+end 
