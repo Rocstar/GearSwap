@@ -1,20 +1,18 @@
 function get_sets()
-  
+
   pre = {} 
   
   mid = {} 
 
+  send_command('input /macro book 5;wait .1;input /macro set 9')
+ 
   send_command('bind !- gs c e') 
   
   send_command('bind != gs c i') 
   
   send_command('bind f10 gs c f10') 
   
-  send_command('input /macro book 5;wait .1;input /macro set 1')
- 
-  add_to_chat(200, 'Gearswap: Engaged DD. ALT -, Idle Refresh. ALT =,')
-  
-  add_to_chat(200, 'Auto Stun F10, //gs c ? for Help.')
+  add_to_chat(200, 'Engaged DD ALT -, Idle Refresh ALT =, Auto Stun F10, //gs c help')
 
   pre['Elemental Seal'] = {
     main="Baqil Staff"}
@@ -53,7 +51,7 @@ function get_sets()
 	back="Pahtli Cape",
 	waist="Capricornian Rope"})
 
-  pre.Earth = {main="Atinian Staff"}--{main="Vishrava I"}
+  pre.Earth = {main="Kubera's Staff +3"}
   pre.Fire = {main="Atar I"}
   pre.Water = {main="Haoma I"}
   pre.Wind = {main="Vayuvata I"}
@@ -69,7 +67,7 @@ function get_sets()
 	
   mid.Earth = {
     waist='Dorin Obi',
-	back='Twilight Cape',
+	back='Nexus Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Water = {
@@ -79,22 +77,22 @@ function get_sets()
 	
   mid.Wind = {
     waist='Furin Obi',
-	back='Twilight Cape',
+	back='Nexus Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Ice = {
     waist='Hyorin Obi',
-	back='Twilight Cape',
+	back='Nexus Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Thunder = {
     waist='Rairin Obi',
-	back='Bane Cape',
+	back='Nexus Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Light = {
     waist='Korin Obi',
-	back='Bane Cape'} 
+	back='Nexus Cape'} 
 	
   mid.Dark = {
     waist='Anrin Obi',
@@ -103,18 +101,18 @@ function get_sets()
   mid.Nuke = {
     main="Atinian Staff",
 	sub="Zuuxowu Grip",
-	ammo="Memoria Sachet",
+	ammo="Witchstone",
 	head="Buremte Hat",
     neck="Quanpur Necklace",
 	ear1="Friomisi Earring",
 	ear2="Hecate's Earring",
 	body="Bokwus Robe",
-	hands="Bokwus Gloves",
+	hands="Otomi Gloves",
     ring1="Demon's Ring",
 	ring2="Demon's Ring",
 	back="Toro Cape",
 	waist="Othila Sash",
-	legs="Spaekona's Tonban",
+	legs="Hagondes Pants",
 	feet="Spaekona's Sabots"} 
 	
   mid.Dark = {} --add Dark Magic gear
@@ -144,7 +142,7 @@ function get_sets()
 	sub="Oneiros Grip",
 	ammo="Shadow Sachet",
     head="Wayfarer Circlet",
-	neck="Wiglen Gorget",
+	neck="Twilight Torque",
 	ear1="Black Earring",
 	ear2="Darkness Earring",
     body="Wayfarer Robe",
@@ -176,8 +174,8 @@ function get_sets()
 
   I = REF
 
-  A = false
-
+  A = false 
+  
   windower.register_event('action', 
     function(a) 
      local m = windower.ffxi.get_mob_by_target('bt') 
@@ -196,8 +194,10 @@ function get_sets()
 end 
 
 function precast(spell) 
-  if pre[spell.english] then 
-    equip(pre[spell.english], pre[spell.element]) 
+  if spell.type == 'WeaponSkill' then  
+    equip(pre[spell.english]) 
+  elseif spell.type ~= 'WeaponSkill' and pre[spell.english] then 
+	equip(pre[spell.english], pre[spell.element])
   elseif spell.skill == 'ElementalMagic' then 
     equip(pre.Elemental, pre[spell.element]) 
   elseif spell.type == 'EnhancingMagic' then 
@@ -209,17 +209,23 @@ function precast(spell)
   end 
 end 
 
-function midcast(spell) 
+function midcast(spell)
   if spell.skill == 'ElementalMagic' then 
-	equip(mid.Nuke) 
-  elseif spell.english:startswith('Cur') then 
-    equip(mid.Cure)
+    equip(mid.Nuke) 
+	  if spell.element == world.day_element or spell.element == world.weather_element then 
+        equip(mid[spell.element]) 
+	  end
+  elseif spell.english:startswith('Cure') or spell.english:startswith('Curaga') then 
+    equip(mid.Cure) 
+	  if spell.element == world.day_element or spell.element == world.weather_element then 
+        equip(mid[spell.element]) 
+	  end
+  elseif spell.skill == 'DarkMagic' then 
+    equip(mid.Dark)	
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
     equip(mid.INT_Enfeeb) 
   elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
     equip(mid.MND_Enfeeb) 
-  elseif spell.skill == 'DarkMagic' then 
-    equip(mid.Dark) 
   elseif spell.english:startswith('Shell') or 
     spell.english:startswith('Pro') then 
     equip(mid.ProShell) 
@@ -232,8 +238,9 @@ function midcast(spell)
     send_command('cancel 71') 
   else 
     equip(mid.Recast) 
-  end 
+  end
 end 
+
 
 function aftercast(spell) 
   if player.status == 'Engaged' then 
@@ -269,16 +276,9 @@ function buff_change(buff, gain)
   end 
 end 
 
-function weathercheck(spell_element) 
-  if spell_element == world.weather_element or 
-    spell_element==world.day_element then 
-    equip(mid[spell.element]) 
-  end 
-end 
-
 function self_command(command) 
  local stat = player.status 
-  if command=='?'then 
+  if command=='help'then 
     add_to_chat(200, 'Gearswap: Engaged Modes:') 
     add_to_chat(200, '//gs c e ref, //gs c e reg, //gs c e acc, //gs c e pdt') 
     add_to_chat(200, '//gs c e mdt, //gs c e bdt, //gs c e dt, //gs c e dd') 
@@ -287,6 +287,10 @@ function self_command(command)
     add_to_chat(200, '//gs c i pdt, //gs c i mdt, //gs c i bdt, //gs c i dt, //gs c i dd') 
     add_to_chat(200, 'Gearswap: Stun Modes:') 
     add_to_chat(200, '//gs c yes stun, //gs c no stun, //gs c tp stun, //gs c ma stun') 
+  elseif command == 'weather' then 
+    print(world.weather) 
+  elseif command == 'day' then 
+    print(world.day)
   elseif command == 'e reg' then 
     E = REG 
 	add_to_chat(200, 'Gearswap: Engaged now Regen') 
