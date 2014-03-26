@@ -15,100 +15,115 @@ function get_sets()
   add_to_chat(200, 'Engaged DD ALT -, Idle Refresh ALT =, Auto Stun F10, //gs c help')
 
   pre['Elemental Seal'] = {
-    main="Baqil Staff"}
+        main="Baqil Staff"}
 
   pre.Manafont = {
-    body="Sorcerer's coat +2"}
+        body="Sorcerer's coat +2"}
 
   pre.Retribution = {
-    ear1="Bladeborn Earring",ear2="Steelflash Earring"}
+        ear1="Bladeborn Earring",ear2="Steelflash Earring"}
 
   pre['Spirit Taker'] = {
-    ear1="Friomisi Earring",ear2="Hecate's Earring"}
+        ear1="Friomisi Earring",ear2="Hecate's Earring"}
 
   pre.Cast = {
-    ammo="Impatiens",
+        ammo="Impatiens",
 	head="Haruspex Hat",
 	ear1="Loquacious Earring",
 	ring1="Prolix Ring",
-    ring2="Veneficium Ring",
+        ring2="Veneficium Ring",
 	back="Swith Cape",
 	waist="Witful Belt",
 	legs="Orvail Pants +1"}
 
   pre.Enhancing = set_combine(pre.Cast, {
-    waist="Siegel Sash"})
+        waist="Siegel Sash"})
 
   pre.Stoneskin = set_combine(pre.Cast, pre.Enhancing, {
-    hands="Carapacho Cuffs"})
+        hands="Carapacho Cuffs"})
 
   pre.Elemental = set_combine(pre.Cast, {
-    head="Goetia Petasos +2",
+        head="Goetia Petasos +2",
 	feet="Spaekona's Sabots"})
 
   pre.Cure = set_combine(pre.Cast, {
-    body="Heka's Kalasiris",
+        body="Heka's Kalasiris",
 	back="Pahtli Cape",
 	waist="Capricornian Rope"})
 
-  pre.Earth = {main="Kubera's Staff +3"}
-  pre.Fire = {main="Atar I"}
-  pre.Water = {main="Haoma I"}
-  pre.Wind = {main="Vayuvata I"}
-  pre.Ice = {main="Vourukasha I"}
-  pre.Thunder = {main="Apamajas I"}
-  pre.Light = {main="Arka I"}
-  pre.Dark = {main="Xsaeta I"}
+  pre.Earth = {
+  	main="Kubera's Staff +3"}
+  
+  pre.Fire = {
+  	main="Atar I"}
+  
+  pre.Water = {
+  	main="Haoma I"}
+  
+  pre.Wind = {
+  	main="Vayuvata I"}
+  
+  pre.Ice = {
+  	main="Vourukasha I"}
+  
+  pre.Thunder = {
+  	main="Apamajas I"}
+  
+  pre.Light = {
+  	main="Arka I"}
+  
+  pre.Dark = {
+  	main="Xsaeta I"}
 	
   mid.Fire = {
-    waist='Karin Obi',
+        waist='Karin Obi',
 	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Earth = {
-    waist='Dorin Obi',
-	back='Nexus Cape',
+        waist='Dorin Obi',
+	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Water = {
-    waist='Suirin Obi',
+        waist='Suirin Obi',
 	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Wind = {
-    waist='Furin Obi',
-	back='Nexus Cape',
+        waist='Furin Obi',
+	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Ice = {
-    waist='Hyorin Obi',
-	back='Nexus Cape',
+        waist='Hyorin Obi',
+	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Thunder = {
-    waist='Rairin Obi',
-	back='Nexus Cape',
+        waist='Rairin Obi',
+	back='Twilight Cape',
 	ring1='Zodiac Ring'} 
 	
   mid.Light = {
-    waist='Korin Obi',
-	back='Nexus Cape'} 
+        waist='Korin Obi',
+	back='Twilight Cape'} 
 	
   mid.Dark = {
-    waist='Anrin Obi',
+        waist='Anrin Obi',
 	back='Twilight Cape'} 
 
   mid.Nuke = {
-    main="Atinian Staff",
+        main="Atinian Staff",
 	sub="Zuuxowu Grip",
 	ammo="Witchstone",
 	head="Buremte Hat",
-    neck="Quanpur Necklace",
+        neck="Quanpur Necklace",
 	ear1="Friomisi Earring",
 	ear2="Hecate's Earring",
 	body="Bokwus Robe",
 	hands="Otomi Gloves",
-    ring1="Demon's Ring",
+        ring1="Demon's Ring",
 	ring2="Demon's Ring",
 	back="Toro Cape",
 	waist="Othila Sash",
@@ -118,39 +133,40 @@ function get_sets()
   mid.Dark = {} --add Dark Magic gear
 
   mid.MND_Enfeeb = {
-    neck="Twilight Torque"} 
+        neck="Twilight Torque"} 
 
   mid.INT_Enfeeb = {
-    neck="Twilight Torque"} 
+        neck="Twilight Torque"} 
 
   mid.Cure = {
-    main="Arka IV",
+        main="Arka IV",
 	sub="Achaq Grip",
 	head="Buremte Hat",
-    hands="Bokwus Gloves",
+        hands="Bokwus Gloves",
 	ring2="Sirona's Ring",
 	legs="Wayfarer Slops"} 
 	
   mid.Stoneskin = {} --add Stoneskin gear
   
-  mid.ProShell = {ring2="Sheltered Ring"}
+  mid.ProShell = {
+  	ring2="Sheltered Ring"}
   
   mid.Recast = {} --add recast gear
 
   REF = {
-    main="Terra's Staff",
+        main="Terra's Staff",
 	sub="Oneiros Grip",
 	ammo="Shadow Sachet",
-    head="Wayfarer Circlet",
+        head="Wayfarer Circlet",
 	neck="Twilight Torque",
 	ear1="Black Earring",
 	ear2="Darkness Earring",
-    body="Wayfarer Robe",
+        body="Wayfarer Robe",
 	hands="Wayfarer Cuffs",
 	ring1="Dark Ring",
 	ring2="Dark Ring",
 	back="Cheviot Cape",
-    waist="Slipor Sash",
+        waist="Slipor Sash",
 	legs="Wayfarer Slops",
 	feet="Wayfarer Clogs"} 
 
@@ -168,7 +184,8 @@ function get_sets()
 
   DD = set_combine(mid.Nuke, {}) --add damage dealer gear
 
-  AM = set_combine(DD, {body="Hagondes Coat"}) --add Aftermath gear
+  AM = set_combine(DD, {
+  	body="Hagondes Coat"}) --add Aftermath gear
 
   E = DD
 
@@ -197,7 +214,7 @@ function precast(spell)
   if spell.type == 'WeaponSkill' then  
     equip(pre[spell.english]) 
   elseif spell.type ~= 'WeaponSkill' and pre[spell.english] then 
-	equip(pre[spell.english], pre[spell.element])
+    equip(pre[spell.english], pre[spell.element])
   elseif spell.skill == 'ElementalMagic' then 
     equip(pre.Elemental, pre[spell.element]) 
   elseif spell.type == 'EnhancingMagic' then 
@@ -212,14 +229,14 @@ end
 function midcast(spell)
   if spell.skill == 'ElementalMagic' then 
     equip(mid.Nuke) 
-	  if spell.element == world.day_element or spell.element == world.weather_element then 
+      if spell.element == world.day_element or spell.element == world.weather_element then 
         equip(mid[spell.element]) 
-	  end
+      end
   elseif spell.english:startswith('Cure') or spell.english:startswith('Curaga') then 
     equip(mid.Cure) 
-	  if spell.element == world.day_element or spell.element == world.weather_element then 
+      if spell.element == world.day_element or spell.element == world.weather_element then 
         equip(mid[spell.element]) 
-	  end
+      end
   elseif spell.skill == 'DarkMagic' then 
     equip(mid.Dark)	
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
@@ -267,7 +284,7 @@ function buff_change(buff, gain)
     E=DD 
       if player.status == 'Engaged' then 
         equip(E) 
-	  end 
+      end 
   elseif buff == 'Aftermath: Lv.1'and gain 
   or buff == 'Aftermath: Lv.2'and gain 
   or buff == 'Aftermath: Lv.3'and gain then 
