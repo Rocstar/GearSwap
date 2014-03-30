@@ -9,9 +9,10 @@ function get_sets()
   send_command('input /macro book 5;wait .1;input /macro set 9')
  
   --Message at start
-  add_to_chat(200, 'Gearswap: Auto Stun now Disabled F10 to change')
+  add_to_chat(200, 'Gearswap: Nuke Mode (Magic Damage) F9, Auto Stun (Disabled) F10')
 
   --Key binds
+  send_command('bind f9 gs c Nuke_Mode') 
   send_command('bind f10 gs c Auto_Stun_Mode') 
   
   --Precast sets
@@ -138,8 +139,10 @@ function get_sets()
 	waist="Othila Sash",legs="Hagondes Pants",
 	feet="Spaekona's Sabots"} 
 	
-  High_Tier_Nuke  = set_combine(Low_Tier, {}) 
-	
+  High_Tier_Nuke = set_combine(Low_Tier_Nuke, {}) 
+  
+  Magic_Accuracy_Nuke = set_combine(Low_Tier_Nuke, {}) 
+  
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
 	ammo="Shadow Sachet",head="Wayfarer Circlet",
@@ -171,7 +174,7 @@ function get_sets()
 
   Idle_Mode = Regen 
 
-  Nuke_Mode = Magic_Damage 
+  Nuke_Mode = Low_Tier_Nuke 
   
   Auto_Stun_Mode = false 
 
@@ -208,18 +211,22 @@ function precast(spell)
 end 
 
 function midcast(spell)
-  if spell.skill == 'ElementalMagic' and not mid[spell.english] then 
-    Nuke_Mode = Low_Tier_Nuke 
-    equip(Nuke_Mode) 
-      if spell.element == world.day_element or spell.element == world.weather_element then 
-        equip(mid[spell.element]) 
-      end 
+  if spell.skill ~= 'ElementalMagic' and not mid[spell.english] then 
+    if Nuke_Mode == High_Tier_Nuke then 
+	  Nuke_Mode = Low_Tier_Nuke 
+	end 
+      equip(Nuke_Mode) 
+        if spell.element == world.day_element or spell.element == world.weather_element then 
+          equip(mid[spell.element]) 
+        end 
   elseif spell.skill == 'ElementalMagic' and mid[spell.english] then 
-    Nuke_Mode = High_Tier_Nuke 
-    equip(Nuke_Mode, pre[spell.element]) 
-      if spell.element == world.day_element or spell.element == world.weather_element then 
-        equip(mid[spell.element]) 
-      end 
+    if Nuke_Mode == Low_Tier_Nuke then 
+	  Nuke_Mode = High_Tier_Nuke 
+	end 
+	  equip(Nuke_Mode, pre[spell.element]) 
+        if spell.element == world.day_element or spell.element == world.weather_element then 
+          equip(mid[spell.element]) 
+        end 
   elseif spell.english:startswith('Cure') or spell.english:startswith('Curaga') then 
     equip(mid.Cure) 
       if spell.element == world.day_element or spell.element == world.weather_element then 
@@ -264,7 +271,7 @@ function status_change(new,old)
 end 
 
 function self_command(command) 
-if command == 'Auto_Stun_Mode' then 
+  if command == 'Auto_Stun_Mode' then 
     if Auto_Stun_Mode == false then 
 	  Auto_Stun_Mode = S{7} 
 	  add_to_chat(200, 'Gearswap: Auto Stun now TP') 
@@ -277,10 +284,20 @@ if command == 'Auto_Stun_Mode' then
 	elseif Auto_Stun_Mode == S{7,8} then 
 	  Auto_Stun_Mode = false 
 	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
-	end
-  end 
+	end 
+	
+	elseif command == 'Nuke_Mode' then 
+	  if Nuke_Mode ~= Magic_Accuracy_Nuke then  
+	    Nuke_Mode = Magic_Accuracy_Nuke 
+	    add_to_chat(200, 'Gearswap: Nuke Mode now Magic Accuracy') 
+	  elseif Nuke_Mode == Magic_Accuracy_Nuke then 
+	    Nuke_Mode = Low_Tier_Nuke 
+		add_to_chat(200, 'Gearswap: Nuke Mode now Normal') 
+	  end
+    end 
 end
   
 function file_unload() 
+  send_command('unbind f9') 
   send_command('unbind f10') 
 end 
