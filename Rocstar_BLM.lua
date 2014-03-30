@@ -211,7 +211,7 @@ function precast(spell)
 end 
 
 function midcast(spell)
-  if spell.skill ~= 'ElementalMagic' and not mid[spell.english] then 
+  if spell.skill == 'ElementalMagic' and not mid[spell.english] then 
     if Nuke_Mode == High_Tier_Nuke then 
 	  Nuke_Mode = Low_Tier_Nuke 
 	end 
