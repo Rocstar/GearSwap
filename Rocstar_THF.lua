@@ -1,4 +1,4 @@
-function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {} None = {} Full_Time = {} 
+function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {} Disabled = {} Full_Time = {} 
 
   add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT F9) TH Mode Tag (F9)') 
 
@@ -124,8 +124,8 @@ function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {} None = {}
         if Action_Stun.targets[1].action_count ~= 0 then 
           if Action_Stun.targets[1].actions[1].message ~= 0 then 
             if (mob and mob.is_npc and mob.id == Action_Stun.actor_id) and 
-		Auto_Stun:contains(Action_Stun.category) then 
-		windower.send_command('input /ja "Violent Flourish" <t>') 
+		      Auto_Stun:contains(Action_Stun.category) then 
+		      windower.send_command('input /ja "Violent Flourish" <t>') 
             end 
           end 
         end 
@@ -169,11 +169,11 @@ end
 
 function status_change(new,old) 
   if new == 'Engaged' then 
-    if TH_Mode ~= S{Full_Time, None} then 
+    if TH_Mode ~= Full_Time and TH_Mode ~= Disabled then 
       TH_Mode = tag 
       equip(TH) 
       windower.register_event('tp change', function(new, old) 
-        if new and TH_Mode == tag then 
+       if new and TH_Mode == tag then 
           equip(E) 
           TH_Mode = false 
         end 
@@ -212,7 +212,7 @@ function self_command(command)
 	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
     end 
   elseif command == 'TH_Mode' then 
-    if TH_Mode == false or TH_Mode == None  then 
+    if TH_Mode == false or TH_Mode == Disabled  then 
 	  TH_Mode = tag 
 	  add_to_chat(200, 'Gearswap: TH now Tag') 
 	elseif TH_Mode == tag then 
@@ -220,7 +220,7 @@ function self_command(command)
 	  E = TH 
 	  add_to_chat(200, 'Gearswap: TH now Full Time') 
 	elseif TH_Mode == Full_Time then 
-	  TH_Mode = None 
+	  TH_Mode = Disabled 
 	  E = DD 
 	  add_to_chat(200, 'Gearswap: TH now Disabled') 
 	end 
