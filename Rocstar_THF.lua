@@ -105,7 +105,7 @@ function get_sets() full_time = {} none = {} pre = {} pre.SA = {} pre.TA = {} pr
     waist="Black Belt",legs="Otronif Brais",
     feet="Otronif Boots"} 
 
-  TH7 = set_combine(DD, {hands="Plunderer's Armlets",waist="Chaac Belt",
+  TH8 = set_combine(DD, {hands="Plunderer's Armlets",waist="Chaac Belt",
     feet="Raider's Poulaines +2"}) 
  	
   TH10 = set_combine(DD, {main="Sandung",sub="Thief's Knife",
@@ -172,7 +172,7 @@ function status_change(new,old)
   if new == 'Engaged' then 
     if TH_mode ~= full_time and TH_mode ~= none then 
       TH_mode = tag 
-      equip(TH7) 
+      equip(TH8) 
         windower.register_event('tp change', function(new, old) 
           if new and TH_mode == tag then 
             equip(E) 
