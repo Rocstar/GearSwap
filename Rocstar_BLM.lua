@@ -61,12 +61,19 @@ function get_sets()
   --Midcast sets
   mid.Darkmagic = {} --add Dark Magic gear
 
-  mid.MND_Enfeeb = {neck="Twilight Torque"} 
+  mid.MND_Enfeeb = {main="Atinian Staff",sub="Achaq Grip",
+	ammo="Memoria Sachet",head="Wayfarer circlet",
+	ear1="Gifted Earring",ear2="Loquacious Earring",
+	body="Hagondes Coat",hands="Otomi Gloves",
+	ring1="Prolix Ring",ring2="Sirona's Ring",
+	back="Bane Cape",waist="Cetl Belt",
+	legs="Wayfarer Slops",feet="Spaekona's Sabots"} 
 
-  mid.INT_Enfeeb = {neck="Twilight Torque"} 
+  mid.INT_Enfeeb = set_combine(mid.MND_Enfeeb, {}) 
 
   mid.Cure = {main="Arka IV",sub="Achaq Grip",
-	head="Buremte Hat",hands="Bokwus Gloves",
+	head="Buremte Hat",ear1="Gifted Earring",
+	ear2="Loquacious Earring",hands="Bokwus Gloves",
 	ring2="Sirona's Ring",legs="Wayfarer Slops"} 
 	
   mid.Stoneskin = {} --add Stoneskin gear
@@ -92,7 +99,17 @@ function get_sets()
 	
   mid.Dark = {waist='Anrin Obi',back='Twilight Cape'} 
   
-  --High Tier Nuke sets (stays empty)
+  mid.Stun = {main="Atinian Staff",sub="Zuuxowu Grip",
+	ammo="Memoria Sachet",head="Haruspex Hat",
+	ear1="Loquacious Earring",ring1="Prolix Ring",
+    neck="Quanpur Necklace",body="Hagondes Coat",
+	hands="Otomi Gloves",back="Swith Cape",
+	waist="Witful Belt",legs="Wayfarer Slops",
+	feet="Spaekona's Sabots"} 
+  
+  --High Tier Nuke values (stays empty)
+  mid.Comet = {}
+  
   mid.Stoneja = {} 
   mid['Stone V'] = {} 
   mid['Stone IV'] = {} 
@@ -131,7 +148,7 @@ function get_sets()
   
   --Low Tier Nuke set
   Low_Tier_Nuke  = {main="Atinian Staff",sub="Zuuxowu Grip",
-	ammo="Witchstone",head="Buremte Hat",
+	ammo="Memoria Sachet",head="Buremte Hat",
     neck="Quanpur Necklace",ear1="Friomisi Earring",
 	ear2="Hecate's Earring",body="Bokwus Robe",
 	hands="Otomi Gloves",ring1="Demon's Ring",
@@ -139,22 +156,22 @@ function get_sets()
 	waist="Othila Sash",legs="Hagondes Pants",
 	feet="Spaekona's Sabots"} 
 	
-  High_Tier_Nuke = set_combine(Low_Tier_Nuke, {}) 
+  High_Tier_Nuke = set_combine(Low_Tier_Nuke, {body="Goetia Coat +2"}) 
   
   Magic_Accuracy_Nuke = set_combine(Low_Tier_Nuke, {}) 
   
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
-	ammo="Shadow Sachet",head="Wayfarer Circlet",
-	neck="Twilight Torque",ear1="Black Earring",
-	ear2="Darkness Earring",body="Wayfarer Robe",
-	hands="Wayfarer Cuffs",ring1="Dark Ring",
-	ring2="Dark Ring",back="Cheviot Cape",
-    waist="Slipor Sash",legs="Wayfarer Slops",
-	feet="Wayfarer Clogs"} 
+	ammo="Shadow Sachet",head="Wivre Hairpin",
+	neck="Wiglen Gorget",ear1="Black Earring",
+	ear2="Darkness Earring",body="Hagondes Coat",
+	hands="Serpentes Cuffs",ring1="Paguroidea Ring",
+	ring2="Sheltered Ring",back="Cheviot Cape",
+    waist="Slipor Sash",legs="Tatsumaki Sitagoromo",
+	feet="Serpentes Sabots"} 
 
   --Regen and Refresh set
-  Regen = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
+  REG = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 
   Physical_Damage_Taken = {} --add physical damage taken - gear
 
@@ -172,12 +189,14 @@ function get_sets()
 
   Engaged_Mode = Attack 
 
-  Idle_Mode = Regen 
+  Idle_Mode = REG 
 
   Nuke_Mode = Low_Tier_Nuke 
   
   Auto_Stun_Mode = false 
-
+  
+  WEAK = {} 
+  
   windower.register_event('action', 
     function(a) 
      local m = windower.ffxi.get_mob_by_target('bt') 
@@ -224,6 +243,11 @@ function midcast(spell)
 	  Nuke_Mode = High_Tier_Nuke 
 	end 
 	  equip(Nuke_Mode, pre[spell.element]) 
+        if spell.element == world.day_element or spell.element == world.weather_element then 
+          equip(mid[spell.element]) 
+        end 
+  elseif spell.skill == 'DarkMagic' and mid[spell.english] then 
+	  equip(mid[spell.english]) 
         if spell.element == world.day_element or spell.element == world.weather_element then 
           equip(mid[spell.element]) 
         end 
