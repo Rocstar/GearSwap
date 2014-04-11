@@ -1,12 +1,12 @@
-function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {} 
+function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {} None = {} Full_Time = {} 
 
-  add_to_chat(200, 'Gearswap: Auto Stun Disabled (F10) TH Mode Tag (F9)') 
+  add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT F9) TH Mode Tag (F9)') 
 
   send_command('@input /macro book 4;wait .1;input /macro set 1') 
 
 --Key Binds
   send_command('bind f9 gs c TH_Mode') 
-  send_command('bind f10 gs c Auto_Stun') 
+  send_command('bind !f9 gs c Auto_Stun') 
   
 --Job Ability
   JA.Mug = {head="Assassin's Bonnet +2"} 
@@ -72,7 +72,7 @@ function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {}
   WS.SATA['Mercy Stroke'] = WS.TA['Mercy Stroke'] 
   
 -- Variables for Engaged Idle TH and Auto Stun Modes
-  DD = {main="Eminent Dagger",sub="Atoyac",
+  DD = {main="Sandung",sub="Eminent Dagger",
     range="Raider's Boomerang",head="Uk'uxkaj Cap",
 	neck="Love Torque",ear1="Bladeborn Earring",
 	ear2="Steelflash Earring",body="Manibozho Jerkin",
@@ -107,18 +107,14 @@ function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {}
     ring2="Dark Ring",back="Mollusca Mantle",
 	waist="Black Belt",legs="Otronif Brais",
 	feet="Otronif Boots"} 
-
-  Full_Time = {} 
-
-  None = {} 
-
+	
   E = DD 
 
   I = REG 
 
   Auto_Stun = false 
 
-  TH_Mode = tag 
+  TH_Mode = false 
 
 --Auto Stun Mob Actions
   windower.register_event('action', function(Action_Stun) 
@@ -128,8 +124,8 @@ function get_sets() JA = {} WS = {} WS.SA = {} WS.TA = {} WS.SATA = {}
         if Action_Stun.targets[1].action_count ~= 0 then 
           if Action_Stun.targets[1].actions[1].message ~= 0 then 
             if (mob and mob.is_npc and mob.id == Action_Stun.actor_id) and 
-		      Auto_Stun:contains(Action_Stun.category) then 
-		      windower.send_command('input /ja "Violent Flourish" <t>') 
+		Auto_Stun:contains(Action_Stun.category) then 
+		windower.send_command('input /ja "Violent Flourish" <t>') 
             end 
           end 
         end 
@@ -140,7 +136,7 @@ end
 
 function file_unload() 
   send_command('unbind f9')
-  send_command('unbind f10') 
+  send_command('unbind !f9') 
 end 
 
 function precast(spell) 
@@ -172,18 +168,22 @@ function aftercast(spell)
 end 
 
 function status_change(new,old) 
-  if new == 'Engaged' and TH_Mode == tag then 
-    equip(TH) 
-	windower.register_event('tp change', function(new, old) 
-	  if new then 
-	    equip(E) 
-	  end 
-	end) 
-  elseif new == 'Engaged' then 
-    equip(E)
-  else 
+  if new == 'Engaged' then 
+    if TH_Mode ~= S{Full_Time, None} then 
+      TH_Mode = tag 
+      equip(TH) 
+      windower.register_event('tp change', function(new, old) 
+        if new and TH_Mode == tag then 
+          equip(E) 
+          TH_Mode = false 
+        end 
+	  end) 
+    else 
+      equip(E) 
+    end
+  else
     equip(I) 
-  end 
+  end
 end 
 
 function buff_change(buff, gain)
@@ -212,17 +212,17 @@ function self_command(command)
 	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
     end 
   elseif command == 'TH_Mode' then 
-    if TH_Mode == tag then 
+    if TH_Mode == false or TH_Mode == None  then 
+	  TH_Mode = tag 
+	  add_to_chat(200, 'Gearswap: TH now Tag') 
+	elseif TH_Mode == tag then 
 	  TH_Mode = Full_Time 
 	  E = TH 
-	  add_to_chat(200, 'Gearswap: TH Mode now Full Time') 
+	  add_to_chat(200, 'Gearswap: TH now Full Time') 
 	elseif TH_Mode == Full_Time then 
 	  TH_Mode = None 
 	  E = DD 
-	  add_to_chat(200, 'Gearswap: TH Mode now None') 
-	elseif TH_Mode == None then 
-	  TH_Mode = tag 
-	  add_to_chat(200, 'Gearswap: TH Mode now Tag') 
-	end
+	  add_to_chat(200, 'Gearswap: TH now Disabled') 
+	end 
   end 
-end
+end 
