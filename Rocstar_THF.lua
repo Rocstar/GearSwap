@@ -82,7 +82,7 @@ function get_sets() pre = {}
     ring2="Dark Ring",back="Mollusca Mantle",
     waist="Flume Belt"}) 
 	
-  TH_tag ={hands="Plunderer's Armlets",feet="Raider's Poulaines +2"} 
+  TH_tag = set_combine(ACC, {hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) 
  	
   TH_full = set_combine(DD, {main="Sandung",sub="Thief's Knife",
     hands="Plunderer's Armlets",waist="Chaac Belt",feet="Raider's Poulaines +2"}) 
