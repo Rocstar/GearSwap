@@ -204,7 +204,7 @@ function self_command(command)
   elseif command == 'TH_mode' then 
     if S{false, nil}:contains(TH_mode) then 
       TH_mode = TH_tag
-      add_to_chat(200, 'Gearswap: TH Tag with Steps and Violent Flourish') 
+      add_to_chat(200, 'Gearswap: TH now Tag with Steps and Violent Flourish') 
     elseif TH_mode == TH_tag then 
       TH_mode = full
       Engaged = TH_full 
