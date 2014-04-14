@@ -19,12 +19,12 @@ function get_sets() pre = {}
   pre.Despoil = {legs="Raider's Culottes +2",feet="Raider's Poulaines +2"} 
   pre.Hide = {body="Pillager's Vest +1"} 
   pre.Flee = {feet="Pillager's Poulaines +1"} 
-  pre['Curing Waltz III'] = set_combine(pre['Curing Waltz']) 
-  pre['Curing Waltz II'] = set_combine(pre['Curing Waltz']) 
   pre['Curing Waltz'] = {head="Uk'uxkaj Cap",body="Iuitl Vest",
     hands="Buremte Gloves",back="Iximulew Cape",
     waist="Chuq'aba Belt",legs="Kaabnax Trousers",
     feet="Iuitl Gaiters"} 
+  pre['Curing Waltz II'] = set_combine(pre['Curing Waltz']) 
+  pre['Curing Waltz III'] = set_combine(pre['Curing Waltz']) 
   pre.Steal = {head="Assassin's Bonnet +2",hands="Pillager's Armlets +1",
     legs="Pillager's Culottes +1",feet="Pillager's Poulaines +1"} 
   	
@@ -51,21 +51,22 @@ function get_sets() pre = {}
     neck="Asperity Necklace",ear1="Bladeborn Earring",
     ear2="Steelflash Earring",body="Manibozho Jerkin",
     hands="Buremte Gloves",ring1="Rajas Ring",
-    ring2="Epona's Ring",back="Atheling Mantle",
+	ring2="Epona's Ring",back="Atheling Mantle",
     waist="Cetl Belt",legs="Manibozho Brais",
     feet="Manibozho Boots"} 
 
   ACC = {head="Manibozho Beret",neck="Love Torque",
     body="Manibozho Jerkin",hands="Buremte Gloves",
-    back="Canny Cape",waist="Dynamic Belt",
-    legs="Manibozho Brais",feet="Manibozho Boots"} 
+	back="Canny Cape",waist="Dynamic Belt",
+	legs="Manibozho Brais",feet="Manibozho Boots"} 
  
   REG = {neck="Wiglen Gorget",ring1="Paguroidea Ring",
-    ring2="Sheltered Ring",back="Iximulew Cape"} 
+    ring2="Sheltered Ring",back="Iximulew Cape",
+	feet="Skadi's Jambeaux"} 
 
   Extra_Regen = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
     ring1="Paguroidea Ring",ring2="Sheltered Ring",
-    back="Iximulew Cape"} 
+	back="Iximulew Cape",feet="Skadi's Jambeaux"} 
 
   PDT = {head="Ejekamal Mask",neck="Wiglen Gorget",
     body="Iuitl Vest",hands="Buremte Gloves",
@@ -77,10 +78,9 @@ function get_sets() pre = {}
     back="Mollusca Mantle",legs="Kaabnax Trousers",
     feet="Iuitl Gaiters"} 
 
-  DT = {neck="Twilight Torque",ring1="Defending Ring",
+  DT = set_combine(DD, {neck="Twilight Torque",ring1="Defending Ring",
     ring2="Dark Ring",back="Mollusca Mantle",
-    waist="Black Belt",legs="Otronif Brais",
-    feet="Otronif Boots"} 
+    waist="Flume Belt"}) 
 	
   TH_tag ={hands="Plunderer's Armlets",feet="Raider's Poulaines +2"} 
  	
@@ -124,8 +124,8 @@ function precast(spell)
     if TH_mode == TH_tag then 
       equip(TH_tag) 
     else 
-      equip(ACC) 
-    end
+	  equip(ACC) 
+	end
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
   end 
@@ -166,23 +166,23 @@ local b = player.status
   elseif buff == 'Feint' and not gain then 
     if b == 'Engaged' then 
       equip(Engaged) 
-    else 
-      equip(Idle)
-    end
+	else 
+	  equip(Idle)
+	end
   elseif buff == 'Sneak Attack' and not gain then 
     Weaponskill = DD 
     if b == 'Engaged' then 
       equip(Engaged) 
-    else 
-      equip(Idle)
-    end
+	else 
+	  equip(Idle)
+	end
   elseif buff == 'Trick Attack' and not gain then 
     Weaponskill = DD 
     if b == 'Engaged' then 
       equip(Engaged) 
-    else 
-      equip(Idle)
-    end
+	else 
+	  equip(Idle)
+	end
   end 
 end 
 
@@ -204,7 +204,7 @@ function self_command(command)
   elseif command == 'TH_mode' then 
     if S{false, nil}:contains(TH_mode) then 
       TH_mode = TH_tag
-      add_to_chat(200, 'Gearswap: TH now Tag with Steps and Violent Flourish') 
+      add_to_chat(200, 'Gearswap: TH Tag with Steps and Violent Flourish') 
     elseif TH_mode == TH_tag then 
       TH_mode = full
       Engaged = TH_full 
@@ -218,10 +218,15 @@ function self_command(command)
 end 
 
 windower.register_event('hpp change', function(new, old) 
-  if new <= 96 then 
+  if new <= 70 then 
     Idle = Extra_Regen 
+	Engaged = DT 
+	if player.status == 'Engaged' then 
+	  equip(Engaged) 
+	end
   else 
     Idle = REG 
+	Engaged = DD 
   end 
 end) 
 
