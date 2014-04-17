@@ -4,7 +4,9 @@ function get_sets()
   pre = {} 
   
   mid = {} 
-
+  
+  mid.Ancient = {}
+  
   --Change Macros 
   send_command('input /macro book 5;wait .1;input /macro set 9')
  
@@ -120,7 +122,20 @@ function get_sets()
 	waist="Witful Belt",legs="Wayfarer Slops",
 	feet="Spaekona's Sabots"} 
   
-  --High Tier Nuke values (stays empty)
+  --Ancient Magic II values
+  mid.Ancient['Quake II'] = {} 
+  
+  mid.Ancient['Flood II'] = {} 
+  
+  mid.Ancient['Tornado II'] = {} 
+  
+  mid.Ancient['Flare II'] = {} 
+  
+  mid.Ancient['Freeze II'] = {} 
+  
+  mid.Ancient['Burst II'] = {} 
+  
+  --High Tier Nuke values
   mid.Comet = {}
   
   mid.Stoneja = {} 
@@ -160,7 +175,7 @@ function get_sets()
   mid['Thundaga III'] = {} 
   
   --Low Tier Nuke set
-  Low_Tier_Nuke  = {main="Atinian Staff",sub="Zuuxowu Grip",
+  Low_Tier_Nuke = {main="Atinian Staff",sub="Zuuxowu Grip",
 	ammo="Memoria Sachet",head="Buremte Hat",
     neck="Quanpur Necklace",ear1="Friomisi Earring",
 	ear2="Hecate's Earring",body="Bokwus Robe",
@@ -170,6 +185,9 @@ function get_sets()
 	feet="Spaekona's Sabots"} 
 	
   High_Tier_Nuke = set_combine(Low_Tier_Nuke, {body="Goetia Coat +2"}) 
+  
+  Ancient_Magic_Nuke = set_combine(Low_Tier_Nuke, {head="Sorcerer's Petasos +2",body="Goetia Coat +2",
+    feet="Sorcerer's Sabots +2"}) 
   
   Magic_Accuracy_Nuke = set_combine(Low_Tier_Nuke, {}) 
   
@@ -247,23 +265,23 @@ function precast(spell)
   end 
 end 
 
-function midcast(spell)
-  if spell.skill == 'ElementalMagic' and not mid[spell.english] then 
-    if S{High_Tier_Nuke, Dark_Nuke}:contains(Nuke_Mode) then 
-	  Nuke_Mode = Low_Tier_Nuke 
+function midcast(spell) 
+  if spell.skill == 'ElementalMagic' then 
+    if not S{mid, mid.Ancient}:contains(spell.english) then 
+      Nuke_Mode = Low_Tier_Nuke 
 	end 
-      equip(Nuke_Mode) 
-        if S{world.day_element, world.weather_element}:contains(spell.element) then 
-          equip(mid[spell.element]) 
-        end 
-  elseif spell.skill == 'ElementalMagic' and mid[spell.english] then 
-    if S{Low_Tier_Nuke, Dark_Nuke}:contains(Nuke_Mode) then 
-	  Nuke_Mode = High_Tier_Nuke 
-	end 
-	  equip(Nuke_Mode, pre[spell.element]) 
-        if S{world.day_element, world.weather_element}:contains(spell.element) then 
-          equip(mid[spell.element]) 
-        end 
+	  equip(Nuke_Mode) 
+        if mid[spell.english] then 
+	      Nuke_Mode = High_Tier_Nuke 
+	    end 
+	      equip(Nuke_Mode, pre[spell.element])
+		    if mid.Ancient[spell.english] then 
+	          Nuke_Mode = Ancient_Magic_Nuke 
+	        end 
+			  equip(Nuke_Mode, pre[spell.element]) 
+                if S{world.day_element, world.weather_element}:contains(spell.element) then 
+                  equip(mid[spell.element]) 
+                end 
   elseif spell.skill == 'DarkMagic' then 
     if S{High_Tier_Nuke, Low_Tier_Nuke}:contains(Nuke_Mode) then 
 	  Nuke_Mode = Dark_Nuke 
