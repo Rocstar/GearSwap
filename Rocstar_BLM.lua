@@ -46,15 +46,15 @@ function get_sets()
   --Ancient Magic II Casting time - sets
   pre['Quake II'] = {hands="Sorcerer's Gloves +2"} 
   
-  pre['Flood II'] = {hands="Sorcerer's Gloves +2"} 
+  pre['Flood II'] = pre['Quake II'] 
   
-  pre['Tornado II'] = {hands="Sorcerer's Gloves +2"} 
+  pre['Tornado II'] = pre['Quake II'] 
   
-  pre['Flare II'] = {hands="Sorcerer's Gloves +2"} 
+  pre['Flare II'] = pre['Quake II'] 
   
-  pre['Freeze II'] = {hands="Sorcerer's Gloves +2"} 
+  pre['Freeze II'] = pre['Quake II'] 
   
-  pre['Burst II'] = {hands="Sorcerer's Gloves +2"} 
+  pre['Burst II'] = pre['Quake II'] 
 
   --Affinity: Casting time - sets
   pre.Earth = {main="Vishrava I"} 
