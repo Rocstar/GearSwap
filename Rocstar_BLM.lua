@@ -32,14 +32,27 @@ function get_sets()
   --Enhancing Magic Casting time - set
   pre.Enhancing = set_combine(pre.Cast, {waist="Siegel Sash"})
 
-  --Elemental Magic Casting time - set
-  pre.Elemental = set_combine(pre.Cast, {head="Goetia Petasos +2",neck="Stoicheion Medal",feet="Spaekona's Sabots"})
-
   --Stoneskin Casting time - set
   pre.Stoneskin = set_combine(pre.Cast, pre.Enhancing, {hands="Carapacho Cuffs"})
 
   --Cure Casting time - set
   pre.Cure = set_combine(pre.Cast, {body="Heka's Kalasiris",back="Pahtli Cape",waist="Capricornian Rope"})
+
+  --Elemental Magic Casting time - set
+  pre.Elemental = {head="Goetia Petasos +2",neck="Stoicheion Medal",feet="Spaekona's Sabots"}
+  
+  --Ancient Magic II Casting time - sets
+  pre['Quake II'] = {hands="Sorcerer's Gloves +2"} 
+  
+  pre['Flood II'] = {hands="Sorcerer's Gloves +2"} 
+  
+  pre['Tornado II'] = {hands="Sorcerer's Gloves +2"} 
+  
+  pre['Flare II'] = {hands="Sorcerer's Gloves +2"} 
+  
+  pre['Freeze II'] = {hands="Sorcerer's Gloves +2"} 
+  
+  pre['Burst II'] = {hands="Sorcerer's Gloves +2"} 
 
   --Affinity: Casting time - sets
   pre.Earth = {main="Vishrava I"} 
@@ -160,15 +173,17 @@ function get_sets()
   
   Magic_Accuracy_Nuke = set_combine(Low_Tier_Nuke, {}) 
   
+  Dark_Nuke = set_combine(Low_Tier_Nuke, {}) 
+  
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
-	ammo="Shadow Sachet",head="Wivre Hairpin",
+	ammo="Shadow Sachet",head="Wayfarer Circlet",
 	neck="Wiglen Gorget",ear1="Black Earring",
-	ear2="Darkness Earring",body="Hagondes Coat",
-	hands="Serpentes Cuffs",ring1="Paguroidea Ring",
+	ear2="Darkness Earring",body="Wayfarer Robe",
+	hands="Wayfarer Cuffs",ring1="Paguroidea Ring",
 	ring2="Sheltered Ring",back="Cheviot Cape",
-    waist="Slipor Sash",legs="Tatsumaki Sitagoromo",
-	feet="Serpentes Sabots"} 
+    waist="Slipor Sash",legs="Wayfarer slops",
+	feet="Wayfarer Clogs"} 
 
   --Regen and Refresh set
   REG = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
@@ -215,49 +230,53 @@ function get_sets()
 end 
 
 function precast(spell) 
-  if spell.type == 'WeaponSkill' then  
-    equip(pre[spell.english]) 
-  elseif spell.type ~= 'WeaponSkill' and pre[spell.english] then 
-	equip(pre[spell.english], pre[spell.element])
-  elseif spell.skill == 'ElementalMagic' then 
-    equip(pre.Elemental, pre[spell.element]) 
+  if spell.skill == 'ElementalMagic' then 
+    if pre[spell.english] then 
+	  equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
+	else 
+    equip(pre.Cast, pre.Elemental, pre[spell.element]) 
+	end 
   elseif spell.type == 'EnhancingMagic' then 
     equip(pre.Enhancing, pre[spell.element]) 
   elseif spell.english:startswith('Cur') then 
     equip(pre.Cure, pre[spell.element]) 
-	else equip(pre.Cast, pre[spell.element]) 
+  elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
+    equip(pre[spell.english]) 
+  else 
+	equip(pre.Cast, pre[spell.element]) 
   end 
 end 
 
 function midcast(spell)
   if spell.skill == 'ElementalMagic' and not mid[spell.english] then 
-    if Nuke_Mode == High_Tier_Nuke then 
+    if S{High_Tier_Nuke, Dark_Nuke}:contains(Nuke_Mode) then 
 	  Nuke_Mode = Low_Tier_Nuke 
 	end 
       equip(Nuke_Mode) 
-        if spell.element == world.day_element or spell.element == world.weather_element then 
+        if S{world.day_element, world.weather_element}:contains(spell.element) then 
           equip(mid[spell.element]) 
         end 
   elseif spell.skill == 'ElementalMagic' and mid[spell.english] then 
-    if Nuke_Mode == Low_Tier_Nuke then 
+    if S{Low_Tier_Nuke, Dark_Nuke}:contains(Nuke_Mode) then 
 	  Nuke_Mode = High_Tier_Nuke 
 	end 
 	  equip(Nuke_Mode, pre[spell.element]) 
-        if spell.element == world.day_element or spell.element == world.weather_element then 
+        if S{world.day_element, world.weather_element}:contains(spell.element) then 
           equip(mid[spell.element]) 
         end 
-  elseif spell.skill == 'DarkMagic' and mid[spell.english] then 
-	  equip(mid[spell.english]) 
-        if spell.element == world.day_element or spell.element == world.weather_element then 
-          equip(mid[spell.element]) 
-        end 
-  elseif spell.english:startswith('Cure') or spell.english:startswith('Curaga') then 
-    equip(mid.Cure) 
-      if spell.element == world.day_element or spell.element == world.weather_element then 
-        equip(mid[spell.element]) 
-      end
   elseif spell.skill == 'DarkMagic' then 
-    equip(mid.Darkmagic)	
+    if S{High_Tier_Nuke, Low_Tier_Nuke}:contains(Nuke_Mode) then 
+	  Nuke_Mode = Dark_Nuke 
+	end
+      equip(Nuke_Mode)  
+        if S{world.day_element, world.weather_element}:contains(spell.element) then 
+          equip(mid[spell.element]) 
+        end 
+  elseif spell.english:startswith('Cur') then 
+    equip(mid.Cure) 
+       if S{world.day_element, world.weather_element}:containes(spell.element) then  
+        equip(mid[spell.element]) 
+      end 	
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
     equip(mid.INT_Enfeeb) 
   elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
@@ -272,7 +291,6 @@ function midcast(spell)
     equip(mid[spell.english]) 
   elseif spell.english == 'Sneak' and spell.target.name == player.name and buffactive.sneak then 
     send_command('cancel 71') 
-  else equip(mid.Recast) 
   end
 end 
 
