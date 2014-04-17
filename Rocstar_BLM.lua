@@ -274,7 +274,7 @@ function midcast(spell)
         end 
   elseif spell.english:startswith('Cur') then 
     equip(mid.Cure) 
-       if S{world.day_element, world.weather_element}:containes(spell.element) then  
+       if S{world.day_element, world.weather_element}:contains(spell.element) then  
         equip(mid[spell.element]) 
       end 	
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
