@@ -142,9 +142,21 @@ function get_sets() pre = {} mid = {}
 --Auto Swaps Variable
   Auto_Swaps = true 
 
- -- windower.register_event('hpp change', function(new_hpp, old_hpp) 
- -- add_to_chat(200, '--HP '..new_hpp..' %--') 
- -- end)
+--Auto HP % swaps
+  windower.register_event('hpp change', function(new_hpp, old_hpp) 
+  --add_to_chat(200, '--HP '..new_hpp..' %--') 
+	if new then 
+      if player.status == 'Engaged' then 
+	    if hpp < 75 then 
+		  E = PDT 
+		  equip(E) 
+		else 
+		  E = DD 
+		  equip(E) 
+		end
+	  end 
+	end 
+  end)
 
 --Auto Stun
   windower.register_event('action', function(Action_Stun) 
