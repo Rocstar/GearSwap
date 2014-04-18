@@ -145,9 +145,9 @@ function get_sets() pre = {} mid = {}
 --Auto HP % swaps
   windower.register_event('hpp change', function(new_hpp, old_hpp) 
   --add_to_chat(200, '--HP '..new_hpp..' %--') 
-	if new then 
+	if hpp < 75 then 
       if player.status == 'Engaged' then 
-	    if hpp < 75 then 
+	    if new then 
 		  E = PDT 
 		  equip(E) 
 		else 
