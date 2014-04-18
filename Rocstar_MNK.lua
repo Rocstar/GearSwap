@@ -80,6 +80,11 @@ function get_sets() pre = {} mid = {}
     legs="Manibozho Brais",feet="Manibozho Boots"} 
 	
 --Engaged / Idle sets
+	
+  Impetus_Up = set_combine(DD, {body="Tantra Cyclas +2"}) 
+  
+  Aftermath = set_combine(DD, {}) -- add Aftermath gear
+  
   DD = {main="Oatixur",
     ammo="Honed Tathlum",head="Uk'uxkaj Cap",
 	neck="Asperity Necklace",ear1="Bladeborn Earring",
@@ -89,8 +94,6 @@ function get_sets() pre = {} mid = {}
 	waist="Cetl Belt",legs="Manibozho Brais",
 	feet="Manibozho Boots"} 
 	
-  Impetus_Up = set_combine(DD, {body="Tantra Cyclas +2"}) 
-  
   ACC = {head="Manibozho Beret",
     ammo="Honed Tathlum",body="Manibozho Jerkin",
 	hands="Manibozho Gloves",ring1="Ulthalam's Ring",
@@ -117,9 +120,12 @@ function get_sets() pre = {} mid = {}
 	back="Mollusca Mantle",waist="Black Belt",
 	legs="Otronif Brais",feet="Otronif Boots"} 
 
-  REG = {head="Ocelomeh Headpiece +1",
+  max_REG = {head="Ocelomeh Headpiece +1",
     neck="Wiglen Gorget",body="Mel. Cyclas +2",
     ring1="Paguroidea Ring",ring2="Sheltered Ring"} 
+	
+  REG = {neck="Wiglen Gorget",body="Mel. Cyclas +2",
+    ring1="Paguroidea Ring",ring2="Sheltered Ring"}
 
 --Weapon Skill Variable
   W = High_Attack
@@ -236,21 +242,31 @@ function status_change(new,old)
     equip(E) 
   elseif new == 'Idle' then 
     if player.hpp <= 90 then
+	  I = max_REG 
+	else
 	  I = REG 
-	elseif player.hpp >= 91 then 
-	  I = DD 
 	end 
     equip(I) 
   end 
 end 
 
 function buff_change(buff, gain)
-  if buff == 'Impetus' and gain then 
-    E = Impetus_Up 
-	equip(E) 
-  elseif buff == 'Impetus' and not gain then 
-    E = DD 
-	equip(E) 
+  if buff == 'Impetus' then 
+    if gain then 
+      E = Impetus_Up 
+	  equip(E) 
+    else
+      E = DD 
+	  equip(E) 
+	end
+  elseif S{"aftermath: lv.3", "aftermath: lv.2", "aftermath: lv.1"}:contains(buff) then 
+    if gain then 
+	  E = Aftermath 
+	  equip(E) 
+	else 
+	  E = DD 
+	  equip(E)
+	end
   end 
 end 
 
