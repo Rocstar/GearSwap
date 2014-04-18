@@ -1,217 +1,339 @@
-function get_sets()
 
---Values
-JA={}WS={}MA={}TP={}Idle={}
-
---Macro book change
-send_command('input /macro book 2;wait .1;input /macro set 1')
-
---File load Message
-add_to_chat(200, 'Gearswap: Weapon Skill DD mode (ALT + F1 to change)')
-add_to_chat(200, 'Gearswap: Engaged DD mode (ALT + F2 to change)')
-add_to_chat(200, 'Gearswap: Idle Regen (ALT + F3 to change)')
-add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT + F4 to change)')
-add_to_chat(200, 'Gearswap: Auto Swaps Enabled (ALT + F5 to change)')
+--Called when job change / load / reload file
+function get_sets() pre = {} mid = {} 
 
 --Key Binds
-send_command('bind !F1 gs c W')
-send_command('bind !F2 gs c E')
-send_command('bind !F3 gs c I')
-send_command('bind !F4 gs c Auto_Stun')
-send_command('bind !F5 gs c Auto_Swaps')
+  send_command('bind !F1 gs c W') 
+  send_command('bind !F2 gs c E') 
+  send_command('bind !F3 gs c I') 
+  send_command('bind !F4 gs c Auto_Stun') 
+  send_command('bind !F5 gs c Auto_Swaps') 
+  
+--Macro Book set  
+  send_command('input /macro book 2;wait .1;input /macro set 1') 
 
+--Add to chat  
+  add_to_chat(200, 'Gearswap: Weapon Skill DD ALT F1)') 
+  add_to_chat(200, 'Gearswap: Auto Stun Disabled ALT F4 ') 
+  add_to_chat(200, 'Gearswap: Auto Swaps Disabled ALT F5') 
+  
 --Job Ability sets
-JA['Hundred Fists'] = {legs="Melee hose +2"}
+  pre['Hundred Fists'] = {legs="Melee hose +2"} 
 
-JA['Formless Strikes'] = {body="Melee Cyclas +2"}
+  pre['Formless Strikes'] = {body="Melee Cyclas +2"} 
 
-JA['Chi Blast'] = {body="Melee crown +2"}
+  pre['Chi Blast'] = {body="Melee crown +2"} 
 
-JA.Footwork = {feet="Tantra Gaiters +2"}
+  pre.Footwork = {feet="Tantra Gaiters +2"} 
 
-JA.Counterstance = {feet="Melee Gaiters +2"}
+  pre.Counterstance = {feet="Melee Gaiters +2"} 
 
-JA.Mantra = {feet="Melee Gaiters +2"}
+  pre.Mantra = {feet="Melee Gaiters +2"} 
 
-JA['Curing Waltz III'] = {head="Uk'uxkaj Cap",body="Otronif Harness",hands="Otronif Gloves",
-ring1="Defending Ring",ring2="Dark Ring",back="Iximulew Cape",waist="Chuq'aba Belt",
-legs="Kaabnax Trousers",feet="Otronif Boots"}
+  pre['Curing Waltz III'] = {head="Uk'uxkaj Cap",
+    body="Otronif Harness",hands="Otronif Gloves",
+    ring1="Defending Ring",ring2="Dark Ring",
+	back="Iximulew Cape",waist="Chuq'aba Belt",
+    legs="Kaabnax Trousers",feet="Otronif Boots"} 
 
-JA['Curing Waltz II'] = set_combine(JA['Curing Waltz III'])
+  pre['Curing Waltz II'] = set_combine(pre['Curing Waltz III']) 
 
-JA['Curing Waltz'] = set_combine(JA['Curing Waltz III'])
+  pre['Curing Waltz'] = set_combine(pre['Curing Waltz III']) 
 
-JA.Chakra = set_combine(JA['Curing Waltz III'], {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"})
+  pre.Chakra = set_combine(pre['Curing Waltz III'], 
+    {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"}) 
 
+--Spellcasting set
+  pre.cast = {head="Haruspex Hat",neck="Orunmila's Torque",
+    ear2="Loquacious Earring",hands="Thaumas Gloves"} 
+	
 --Weapon Skill sets
+  pre["Victory Smite"] = {neck="Light Gorget",waist="Light Belt"} 
 
-WS.Critical_Hit_Damage = {head="Espial Cap",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-body="Espial Gambison",hands="Espial Bracers",ring1="Epona's Ring",ring2="Rajas Ring",
-back="Atheling Mantle",waist="Cetl Belt",legs="Espial Hose",feet="Espial Socks"} 
+  pre["Final Heaven"] = {neck="Light Gorget",waist="Light Belt"} 
 
-WS.High_Attack = {ammo="Hagneia Stone",head="Uk'uxkaj Cap",neck="Asperity Necklace",
-ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Manibozho Gloves",
-ring1="Epona's Ring",ring2="Rajas Ring",back="Atheling Mantle",waist="Cetl Belt",
-legs="Quiahuiz Leggings",feet="Manibozho Boots"} 
+  pre["Ascetic's Fury"] = {neck="Light Gorget",waist="Light Belt"} 
 
-WS.High_ACC = {ammo="Honed Tathlum",head="Manibozho Beret",neck="Asperity Necklace",
-ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Manibozho Gloves",
-ring1="Epona's Ring",ring2="Rajas Ring",back="Anchoret's Mantle",waist="Cetl Belt",
-legs="Manibozho Brais",feet="Manibozho Boots"}
+  pre["Shijin Spiral"] = {neck="Light Gorget",waist="Light Belt"} 
+  
+  Critical_Hit_Damage = {head="Espial Cap",
+    ear1="Bladeborn Earring",ear2="Steelflash Earring",
+	body="Espial Gambison",hands="Espial Bracers",
+	ring1="Epona's Ring",ring2="Rajas Ring",
+	back="Atheling Mantle",waist="Cetl Belt",
+	legs="Espial Hose",feet="Espial Socks"} 
 
-WS["Victory Smite"] = {neck="Light Gorget",waist="Light Belt"} 
+  High_Attack = {ammo="Hagneia Stone",
+    head="Uk'uxkaj Cap",neck="Asperity Necklace",
+    ear1="Bladeborn Earring",ear2="Steelflash Earring",
+	body="Manibozho Jerkin",hands="Manibozho Gloves",
+    ring1="Epona's Ring",ring2="Rajas Ring",
+	back="Atheling Mantle",waist="Cetl Belt",
+    legs="Quiahuiz Leggings",feet="Manibozho Boots"} 
 
-WS["Final Heaven"] = {neck="Light Gorget",waist="Light Belt"} 
+  High_ACC = {ammo="Honed Tathlum",
+    head="Manibozho Beret",neck="Asperity Necklace",
+    ear1="Bladeborn Earring",ear2="Steelflash Earring",
+	body="Manibozho Jerkin",hands="Manibozho Gloves",
+    ring1="Epona's Ring",ring2="Rajas Ring",
+	back="Anchoret's Mantle",waist="Cetl Belt",
+    legs="Manibozho Brais",feet="Manibozho Boots"} 
+	
+--Engaged / Idle sets
+  DD = {main="Oatixur",
+    ammo="Honed Tathlum",head="Uk'uxkaj Cap",
+	neck="Asperity Necklace",ear1="Bladeborn Earring",
+	ear2="Steelflash Earring",body="Manibozho Jerkin",
+	hands="Manibozho Gloves",ring1="Epona's Ring",
+	ring2="Rajas Ring",back="Atheling Mantle",
+	waist="Cetl Belt",legs="Manibozho Brais",
+	feet="Manibozho Boots"} 
+	
+  Impetus_Up = set_combine(DD, {body="Tantra Cyclas +2"}) 
+  
+  ACC = {head="Manibozho Beret",
+    ammo="Honed Tathlum",body="Manibozho Jerkin",
+	hands="Manibozho Gloves",ring1="Ulthalam's Ring",
+	back="Anchoret's Mantle",legs="Manibozho Brais",
+	feet="Manibozho Boots"} 
 
-WS["Ascetic's Fury"] = {neck="Light Gorget",waist="Light Belt"}
+  MDT = {head="Ejekamal Mask",
+    neck="Twilight Torque",body="Otronif Harness",
+	hands="Otronif Gloves",ring1="Defending Ring",
+    ring2="Dark Ring",back="Mollusca Mantle",
+	legs="Kaabnax Trousers",feet="Otronif Boots"} 
 
-WS["Shijin Spiral"] = {neck="Light Gorget",waist="Light Belt"} 
+  PDT = {main="Oatixur",
+    head="Otronif Mask",neck="Twilight Torque",
+    body="Otronif Harness",hands="Otronif Gloves",
+	ring1="Defending Ring",ring2="Dark Ring",
+    back="Iximulew Cape",waist="Black Belt",
+	legs="Otronif Brais",feet="Otronif Boots"} 
 
---Spellcasting sets
-MA.FC = {head="Haruspex Hat",neck="Orunmila's Torque",ear2="Loquacious Earring",hands="Thaumas Gloves"}
+  DT = {main="Oatixur",
+    head="Otronif Mask",neck="Twilight Torque",
+	body="Otronif Harness",hands="Otronif Gloves",
+    ring1="Defending Ring",ring2="Dark Ring",
+	back="Mollusca Mantle",waist="Black Belt",
+	legs="Otronif Brais",feet="Otronif Boots"} 
 
-MA.Recast = {head="Haruspex Hat",neck="Orunmila's Torque",ear2="Loquacious Earring",hands="Thaumas Gloves"}
+  REG = {head="Ocelomeh Headpiece +1",
+    neck="Wiglen Gorget",body="Mel. Cyclas +2",
+    ring1="Paguroidea Ring",ring2="Sheltered Ring"} 
 
---Engaged sets
-TP.DD = {main="Oatixur",ammo="Honed Tathlum",head="Uk'uxkaj Cap",neck="Asperity Necklace",
-ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Manibozho Gloves",
-ring1="Epona's Ring",ring2="Rajas Ring",back="Atheling Mantle",waist="Cetl Belt",
-legs="Quiahuiz Leggings",feet="Manibozho Boots"}
+--Weapon Skill Variable
+  W = High_Attack
 
-TP.ACC = {head="Manibozho Beret",ammo="Honed Tathlum",
-body="Manibozho Jerkin",hands="Manibozho Gloves",ring1="Ulthalam's Ring",
-back="Anchoret's Mantle",legs="Manibozho Brais",feet="Manibozho Boots"}
+--Engaged Variable
+  E = DD
 
-TP.MDT = {head="Ejekamal Mask",neck="Twilight Torque",
-body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",
-ring2="Dark Ring",back="Mollusca Mantle",legs="Kaabnax Trousers",feet="Otronif Boots"}
+--Idle Variable
+  I = PDT
 
-TP.PDT = {main="Oatixur",head="Otronif Mask",neck="Wiglen Gorget",
-body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
-back="Anchoret's Mantle",waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
+--Auto Stun Variable
+  Auto_Stun = false
 
-TP.DT = {main="Oatixur",head="Otronif Mask",neck="Twilight Torque",body="Otronif Harness",hands="Otronif Gloves",
-ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
-waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
+--Auto Swaps Variable
+  Auto_Swaps = true 
 
---Idle sets
-Idle.REG = {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",body="Mel. Cyclas +2",
-ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Anchoret's Mantle"}
-
-Idle.PDT = {main="Oatixur",head="Otronif Mask",
-neck="Wiglen Gorget",body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",
-ring2="Dark Ring",back="Anchoret's Mantle",waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
-
-Idle.DT = {main="Oatixur",head="Otronif Mask",head="Otronif Mask",
-neck="Twilight Torque",body="Otronif Harness",hands="Otronif Gloves",
-ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
-waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
-
-Idle.MDT = {head="Ejekamal Mask",neck="Twilight Torque",
-body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
-back="Tuilha Cape",legs="Kaabnax Trousers",feet="Otronif Boots"}
-
---Weapon Skill is a Variable
-W = WS.High_Attack
-
---Engaged is a Variable
-E = TP.DD
-
---Idle is a Variable
-I = Idle.REG
-
---Auto Stun is a Variable
-Auto_Stun = false
-
---Auto Swaps is a Variable
-Auto_Swaps = true
- 
+ -- windower.register_event('hpp change', function(new_hpp, old_hpp) 
+ -- add_to_chat(200, '--HP '..new_hpp..' %--') 
+ -- end)
 
 --Auto Stun
-windower.register_event('action', function(a)
-if Auto_Stun ~= false then
-local mob=windower.ffxi.get_mob_by_target('t')
-if a.target_count ~= 0 then 
-if a.targets[1].action_count ~= 0 then 
-if a.targets[1].actions[1].message ~= 0 then 
-if (mob and mob.is_npc and mob.id == a.actor_id)and Auto_Stun:contains(a.category) then
-windower.send_command('input /ja "Violent Flourish" <t>')end end end end end end)
+  windower.register_event('action', function(Action_Stun) 
+    if Auto_Stun ~= false then 
+     local mob=windower.ffxi.get_mob_by_target('t')
+      if Action_Stun.target_count ~= 0 then 
+        if Action_Stun.targets[1].action_count ~= 0 then 
+          if Action_Stun.targets[1].actions[1].message ~= 0 then 
+            if (mob and mob.is_npc and mob.id == Action_Stun.actor_id) and 
+		      Auto_Stun:contains(Action_Stun.category) then 
+		      windower.send_command('input /ja "Violent Flourish" <t>') 
+            end 
+          end 
+        end 
+      end 
+    end 
+  end) 
 
 --Auto Swaps
-windower.register_event('action', function(act)
-if Auto_Swaps ~= false then
-local mob=windower.ffxi.get_mob_by_target('t')
-if act.target_count ~= 0 then 
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-if (mob and mob.is_npc and mob.id == act.actor_id)
-and S{7}:contains(act.category) then equip(TP.DT)
+  windower.register_event('action', function(Action_Swap) 
+    local mob=windower.ffxi.get_mob_by_target('t') 
+    if Auto_Swaps ~= false then 
+      if Action_Swap.target_count ~= 0 then 
+        if Action_Swap.targets[1].action_count ~= 0 then 
+          if Action_Swap.targets[1].actions[1].message ~= 0 then 
+            if (mob and mob.is_npc and mob.id == Action_Swap.actor_id) and 
+              S{7}:contains(Action_Swap.category) then 
+	    	  equip(DT) 
+		    end 
+          end 
+	    end 
+      end 
+    elseif Action_Swap.target_count ~= 0 then 
+      if Action_Swap.targets[1].action_count ~= 0 then 
+        if Action_Swap.targets[1].actions[1].message ~= 0 then 
+          if (mob and mob.is_npc and mob.id == Action_Swap.actor_id) and 
+            S{11}:contains(Action_Swap.category) then 
+            equip(E) 
+		  end 
+	    end 
+	  end 
+    elseif Action_Swap.target_count ~= 0 then 
+      if Action_Swap.targets[1].action_count ~= 0 then 
+        if Action_Swap.targets[1].actions[1].message ~= 0 then 
+          if (mob and mob.is_npc and mob.id == Action_Swap.actor_id) and 
+            S{8}:contains(Action_Swap.category) then 
+            equip(MDT) 
+		  end 
+	    end 
+	  end 
+    elseif Action_Swap.target_count ~= 0 then 
+      if Action_Swap.targets[1].action_count ~= 0 then 
+        if Action_Swap.targets[1].actions[1].message ~= 0 then 
+          if (mob and mob.is_npc and mob.id == Action_Swap.actor_id) and 
+            S{4}:contains(Action_Swap.category) then 
+            equip(E) 
+          end 
+        end 
+      end
+    end 
+  end)
+end 
 
-elseif act.target_count ~= 0 then 
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-if (mob and mob.is_npc and mob.id == act.actor_id)
-and S{11}:contains(act.category) then equip(E)
+--Called when job change / unload / reload file
+function file_unload() 
+  send_command('unbind !F1') 
+  send_command('unbind !F2') 
+  send_command('unbind !F3') 
+  send_command('unbind !F4') 
+  send_command('unbind !F5') 
+end 
 
-elseif act.target_count ~= 0 then 
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-if (mob and mob.is_npc and mob.id == act.actor_id)
-and S{8}:contains(act.category) then equip(TP.MDT)
+function precast(spell) 
+  if spell.type == 'WeaponSkill' then  
+    equip(W, pre[spell.english]) 
+  elseif pre[spell.english] then 
+	equip(pre[spell.english]) 
+  elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
+    send_command('cancel 71') 
+  elseif spell.type == 'Step' or spell.type == 'Flourish1' then 
+    equip(ACC) 
+  end 
+end 
 
-elseif act.target_count ~= 0 then 
-if act.targets[1].action_count ~= 0 then 
-if act.targets[1].actions[1].message ~= 0 then
-if (mob and mob.is_npc and mob.id == act.actor_id)
-and S{4}:contains(act.category) then equip(E)
-end end end end end end end end end end end end end end end)end
+function aftercast(spell) 
+  if player.status == 'Engaged' then 
+    equip(E)
+  else 
+    equip(I) 
+  end 
+end
 
-function precast(spell)
-if spell.action_type=='Magic'then equip(MA.FC)
-elseif JA[spell.english]then equip(JA[spell.english])
-elseif WS[spell.english]then equip(W,WS[spell.english])
-elseif spell.english == 'Spectral Jig'and buffactive.sneak then send_command('cancel 71')
-elseif spell.type=='Step'or spell.type=='Flourish1'then equip(TP.ACC)end end 
+function status_change(new,old) 
+  if new == 'Engaged' then 
+    equip(E) 
+  elseif new == 'Idle' then 
+    if player.hpp <= 90 then
+	  I = REG 
+	elseif player.hpp >= 91 then 
+	  I = DD 
+	end 
+    equip(I) 
+  end 
+end 
 
-function midcast(spell)
-if spell.action_type=='Magic'then equip(MA.Recast)end end
+function buff_change(buff, gain)
+  if buff == 'Impetus' and gain then 
+    E = Impetus_Up 
+	equip(E) 
+  elseif buff == 'Impetus' and not gain then 
+    E = DD 
+	equip(E) 
+  end 
+end 
 
-function aftercast(spell)
-if player.status=='Engaged'then equip(E)
-else equip(I)end end
+function self_command(command) 
+  if command == 'E'then 
+    if E == DD then 
+	  E = PDT 
+	  add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') 
+	  equip(E)
+    elseif E == PDT then 
+      E = MDT 
+	  add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') 
+	  equip(E)
+    elseif E == MDT then 
+      E = DT 
+	  add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') 
+	  equip(E)
+    elseif E == DT then 
+      E = ACC 
+	  add_to_chat(200, 'Gearswap: Engaged now Accuracy') 
+	  equip(E)
+    elseif E == ACC then 
+      E = DD 
+	  add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') 
+	  equip(E) 
+    end 
 
-function status_change(new,old)
-    if new=='Engaged'then equip(E)
-elseif new=='Idle'then equip(I)end end
+  elseif command == 'W' then 
+    if W == Critical_Hit_Damage then 
+	  W = High_ACC
+      add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') 
+	  equip(W)
+    elseif W == High_ACC then 
+	  W = High_Attack
+      add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer') 
+	  equip(W)
+    elseif W == High_Attack then 
+	  W = Critical_Hit_Damage
+      add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') 
+	  equip(W) 
+	end 
 
-function self_command(command)
-    if command=='E'then 
-    if E==TP.DD then E=TP.PDT add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -')equip(E)
-elseif E==TP.PDT then E=TP.MDT add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -')equip(E)
-elseif E==TP.MDT then E=TP.DT add_to_chat(200, 'Gearswap: Engaged now Damage Taken -')equip(E)
-elseif E==TP.DT then E=TP.ACC add_to_chat(200, 'Gearswap: Engaged now Accuracy')equip(E)
-elseif E==TP.ACC then E=TP.DD add_to_chat(200, 'Gearswap: Engaged now Damage Dealer')equip(E)end 
-
-elseif command=='W'then
-    if W==WS.Critical_Hit_Damage then W=WS.High_ACC
-add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy')equip(W)
-elseif W==WS.High_ACC then W=WS.High_Attack
-add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer')equip(W)
-elseif W==WS.High_Attack then W=WS.Critical_Hit_Damage
-add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage')equip(W)end 
-
-elseif command=='I'then 
-    if I==Idle.REG then I=Idle.PDT add_to_chat(200, 'Gearswap: Idle now Physical Damage Taken -')equip(I)
-elseif I==Idle.PDT then I=Idle.MDT add_to_chat(200, 'Gearswap: Idle now Magic Damage Taken -')equip(I)
-elseif I==Idle.MDT then I=Idle.DT add_to_chat(200, 'Gearswap: Idle now Damage Taken -')equip(I)
-elseif I==Idle.DT then I=Idle.REG add_to_chat(200, 'Gearswap: Idle now Regen')equip(I)end
+  elseif command == 'I' then 
+    if I == REG then 
+	  I = PDT 
+	  add_to_chat(200, 'Gearswap: Idle now Physical Damage Taken -') 
+	  equip(I)
+    elseif I == PDT then 
+	  I = MDT 
+	  add_to_chat(200, 'Gearswap: Idle now Magic Damage Taken -') 
+	  equip(I)
+    elseif I == MDT then 
+	  I = DT 
+	  add_to_chat(200, 'Gearswap: Idle now Damage Taken -') 
+	  equip(I)
+    elseif I == DT then 
+	  I = REG 
+	  add_to_chat(200, 'Gearswap: Idle now Regen') 
+	  equip(I) 
+	end
  
-elseif command=='Auto_Swaps'then 
-    if Auto_Swaps==true then Auto_Swaps=false add_to_chat(200, 'Gearswap: Auto Swaps now Disabled')
-elseif Auto_Swaps==false then Auto_Swaps=true add_to_chat(200, 'Gearswap: Auto Swaps now Enabled')end
+  elseif command == 'Auto_Swaps' then 
+    if Auto_Swaps == true then 
+	  Auto_Swaps = false 
+	  add_to_chat(200, 'Gearswap: Auto Swaps now Disabled')
+    elseif Auto_Swaps == false then 
+	  Auto_Swaps = true 
+	  add_to_chat(200, 'Gearswap: Auto Swaps now Enabled') 
+	end
 
-elseif command=='Auto_Stun'then 
-    if Auto_Stun==false then Auto_Stun=S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
-elseif Auto_Stun==S{7,8} then Auto_Stun=S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
-elseif Auto_Stun==S{7} then Auto_Stun=S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
-elseif Auto_Stun==S{8} then Auto_Stun=false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')end end end
+  elseif command == 'Auto_Stun' then 
+    if Auto_Stun == false then 
+	  Auto_Stun = S{7,8} 
+	  add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
+    elseif Auto_Stun == S{7,8} then 
+	  Auto_Stun = S{7} 
+	  add_to_chat(200, 'Gearswap: Auto Stun now TP')
+    elseif Auto_Stun == S{7} then 
+	  Auto_Stun = S{8} 
+	  add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
+    elseif Auto_Stun == S{8} then 
+	  Auto_Stun = false 
+	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
+	end 
+  end 
+end
