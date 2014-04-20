@@ -8,14 +8,14 @@ function get_sets()
   mid.Ancient = {}
   
   --Change Macros 
-  send_command('input /macro book 5;wait .1;input /macro set 9')
+  send_command('input /macro book 5;wait .1;input /macro set 4')
  
   --Message at start
-  add_to_chat(200, 'Gearswap: Nuke Mode (Magic Damage) F9, Auto Stun (Disabled) F10')
+  add_to_chat(200, 'Gearswap: Nukes Magic Damage (F9), Auto Stun Disabled (ALT F9)')
 
   --Key binds
-  send_command('bind f9 gs c Nuke_Mode') 
-  send_command('bind f10 gs c Auto_Stun_Mode') 
+  send_command('bind f9 gs c Nuke') 
+  send_command('bind !f9 gs c Stun') 
   
   --Precast sets
   --Job Ability set
@@ -28,7 +28,7 @@ function get_sets()
 
   --Fast Cast set
   pre.Cast = {ammo="Impatiens",head="Haruspex Hat",ear1="Loquacious Earring",
-	ring1="Prolix Ring",ring2="Veneficium Ring",back="Swith Cape",
+	ring1="Prolix Ring",ring2="Veneficium Ring",back="Ogapepo Cape",
 	waist="Witful Belt",legs="Orvail Pants +1"}
 
   --Enhancing Magic Casting time - set
@@ -114,14 +114,6 @@ function get_sets()
 	
   mid.Dark = {waist='Anrin Obi',back='Twilight Cape'} 
   
-  mid.Stun = {main="Atinian Staff",sub="Zuuxowu Grip",
-	ammo="Memoria Sachet",head="Haruspex Hat",
-	ear1="Loquacious Earring",ring1="Prolix Ring",
-    neck="Quanpur Necklace",body="Hagondes Coat",
-	hands="Otomi Gloves",back="Swith Cape",
-	waist="Witful Belt",legs="Wayfarer Slops",
-	feet="Spaekona's Sabots"} 
-  
   --Ancient Magic II values
   mid.Ancient['Quake II'] = {} 
   
@@ -173,9 +165,18 @@ function get_sets()
   mid['Thunder IV'] = {} 
   mid['Thunder III'] = {} 
   mid['Thundaga III'] = {} 
+
+  --Stun recast set	
+  mid.Stun = {main="Apamajas II",sub="Zuuxowu Grip",
+	ammo="Memoria Sachet",head="Haruspex Hat",
+	ear1="Loquacious Earring",ring1="Prolix Ring",
+    neck="Quanpur Necklace",body="Hagondes Coat",
+	hands="Otomi Gloves",back="Swith Cape",
+	waist="Witful Belt",legs="Wayfarer Slops",
+	feet="Spaekona's Sabots"} 
   
   --Low Tier Nuke set
-  Low_Tier_Nuke = {main="Atinian Staff",sub="Zuuxowu Grip",
+  Low_Tier = {main="Atinian Staff",sub="Zuuxowu Grip",
 	ammo="Memoria Sachet",head="Buremte Hat",
     neck="Quanpur Necklace",ear1="Friomisi Earring",
 	ear2="Hecate's Earring",body="Bokwus Robe",
@@ -184,14 +185,12 @@ function get_sets()
 	waist="Othila Sash",legs="Hagondes Pants",
 	feet="Spaekona's Sabots"} 
 	
-  High_Tier_Nuke = set_combine(Low_Tier_Nuke, {body="Goetia Coat +2"}) 
+  High_Tier = set_combine(Low_Tier, {body="Goetia Coat +2"}) 
   
-  Ancient_Magic_Nuke = set_combine(Low_Tier_Nuke, {head="Sorcerer's Petasos +2",body="Goetia Coat +2",
+  Ancient_Magic = set_combine(Low_Tier, {head="Sorcerer's Petasos +2",body="Goetia Coat +2",
     feet="Sorcerer's Sabots +2"}) 
   
-  Magic_Accuracy_Nuke = set_combine(Low_Tier_Nuke, {}) 
-  
-  Dark_Nuke = set_combine(Low_Tier_Nuke, {}) 
+  Magic_Accuracy = set_combine(Low_Tier, {}) 
   
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
@@ -204,7 +203,7 @@ function get_sets()
 	feet="Wayfarer Clogs"} 
 
   --Regen and Refresh set
-  REG = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
+  Regen = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 
   Physical_Damage_Taken = {} --add physical damage taken - gear
 
@@ -220,76 +219,59 @@ function get_sets()
 
   Aftermath = set_combine(Attack, {}) --add Aftermath gear
 
-  Engaged_Mode = Attack 
+  Engaged = Attack 
 
-  Idle_Mode = REG 
+  Idle = Regen 
 
-  Nuke_Mode = Low_Tier_Nuke 
+  Nuke = false 
   
-  Auto_Stun_Mode = false 
+  Stun = false 
   
-  WEAK = {} 
-  
-  windower.register_event('action', 
-    function(a) 
-     local m = windower.ffxi.get_mob_by_target('bt') 
-      if Auto_Stun_Mode ~= false then 
-	    if a.target_count ~= 0 then 
-          if a.targets[1].action_count ~= 0 then 
-            if a.targets[1].actions[1].message ~= 0 then 
-              if (m and m.is_npc and m.id == a.actor_id) and Auto_Stun_Mode:contains(a.category) then 
-                windower.send_command('input /ma Stun <bt>') 
-			  end 
-		    end 
-		  end 
-	    end 
-	  end 
-    end) 
 end 
 
 function precast(spell) 
-  if spell.skill == 'ElementalMagic' then 
-    if pre[spell.english] then 
-	  equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
-	else 
-    equip(pre.Cast, pre.Elemental, pre[spell.element]) 
-	end 
-  elseif spell.type == 'EnhancingMagic' then 
-    equip(pre.Enhancing, pre[spell.element]) 
-  elseif spell.english:startswith('Cur') then 
-    equip(pre.Cure, pre[spell.element]) 
-  elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
-    equip(pre[spell.english]) 
-  else 
-	equip(pre.Cast, pre[spell.element]) 
-  end 
+    if spell.skill == 'ElementalMagic' then 
+      if pre[spell.english] then 
+	    equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
+	  else 
+      equip(pre.Cast, pre.Elemental, pre[spell.element]) 
+	  end 
+    elseif spell.type == 'EnhancingMagic' then 
+      equip(pre.Enhancing, pre[spell.element]) 
+    elseif spell.english:startswith('Cur') then 
+      equip(pre.Cure, pre[spell.element]) 
+    elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
+      equip(pre[spell.english]) 
+    else 
+	  equip(pre.Cast, pre[spell.element]) 
+    end 
 end 
 
 function midcast(spell) 
   if spell.skill == 'ElementalMagic' then 
-    if not S{mid, mid.Ancient}:contains(spell.english) then 
-      Nuke_Mode = Low_Tier_Nuke 
+    if mid[spell.english] then 
+	  if Nuke ~= Magic_Accuracy then 
+	    Nuke = High_Tier 
+	  end
+	    equip(Nuke, pre[spell.element]) 
+    elseif mid.Ancient[spell.english] then 
+	  if Nuke ~= Magic_Accuracy then 
+	    Nuke = Ancient_Magic 
+	  end
+	    equip(Nuke, pre[spell.element]) 
+    elseif Nuke ~= Magic_Accuracy then 
+      Nuke = Low_Tier 
 	end 
-	  equip(Nuke_Mode) 
-        if mid[spell.english] then 
-	      Nuke_Mode = High_Tier_Nuke 
-	    end 
-	      equip(Nuke_Mode, pre[spell.element])
-		    if mid.Ancient[spell.english] then 
-	          Nuke_Mode = Ancient_Magic_Nuke 
-	        end 
-			  equip(Nuke_Mode, pre[spell.element]) 
-                if S{world.day_element, world.weather_element}:contains(spell.element) then 
-                  equip(mid[spell.element]) 
-                end 
+	  equip(Nuke) 
+	  if S{world.day_element, world.weather_element}:contains(spell.element) then 
+	    equip(mid[spell.element]) 
+      end 
   elseif spell.skill == 'DarkMagic' then 
-    if S{High_Tier_Nuke, Low_Tier_Nuke}:contains(Nuke_Mode) then 
-	  Nuke_Mode = Dark_Nuke 
+    if mid[spell.english] then 
+	  equip(mid[spell.english]) 
+	else 
+	  equip(Nuke) 
 	end
-      equip(Nuke_Mode)  
-        if S{world.day_element, world.weather_element}:contains(spell.element) then 
-          equip(mid[spell.element]) 
-        end 
   elseif spell.english:startswith('Cur') then 
     equip(mid.Cure) 
        if S{world.day_element, world.weather_element}:contains(spell.element) then  
@@ -314,50 +296,63 @@ end
 
 function aftercast(spell) 
   if player.status == 'Engaged' then 
-    equip(Engaged_Mode) 
+    equip(Engaged) 
   else 
-    equip(Idle_Mode) 
+    equip(Idle) 
   end 
 end 
 
 function status_change(new,old) 
   if new == 'Engaged' then 
-    equip(Engaged_Mode) 
-  elseif new == 'Resting' then 
-    equip(Idle_Mode) 
-  elseif new == 'Idle' then 
-    equip(Idle_Mode) 
+    equip(Engaged) 
+  else
+    equip(Idle) 
   end 
 end 
 
 function self_command(command) 
-  if command == 'Auto_Stun_Mode' then 
-    if Auto_Stun_Mode == false then 
-	  Auto_Stun_Mode = S{7} 
+  if command == 'Stun' then 
+    if Stun == false then 
+	  Stun = S{7} 
 	  add_to_chat(200, 'Gearswap: Auto Stun now TP') 
-	elseif Auto_Stun_Mode == S{7} then 
-	  Auto_Stun_Mode = S{8} 
+	elseif Stun == S{7} then 
+	  Stun = S{8} 
 	  add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
-	elseif Auto_Stun_Mode == S{8} then 
-	  Auto_Stun_Mode = S{7,8} 
+	elseif Stun == S{8} then 
+	  Stun = S{7,8} 
 	  add_to_chat(200, 'Gearswap: Auto Stun now All') 
-	elseif Auto_Stun_Mode == S{7,8} then 
-	  Auto_Stun_Mode = false 
+	elseif Stun == S{7,8} then 
+	  Stun = false 
 	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
 	end 
-	
-	elseif command == 'Nuke_Mode' then 
-	  if Nuke_Mode ~= Magic_Accuracy_Nuke then  
-	    Nuke_Mode = Magic_Accuracy_Nuke 
-	    add_to_chat(200, 'Gearswap: Nuke Mode now Magic Accuracy') 
-	  elseif Nuke_Mode == Magic_Accuracy_Nuke then 
-	    Nuke_Mode = Low_Tier_Nuke 
-		add_to_chat(200, 'Gearswap: Nuke Mode now Normal') 
-	  end
-    end 
+  elseif command == 'Nuke' then 
+    if Nuke ~= Magic_Accuracy then  
+      Nuke = Magic_Accuracy 
+      add_to_chat(200, 'Gearswap: Nuke Mode now Magic Accuracy') 
+    elseif Nuke == Magic_Accuracy then 
+      Nuke = Low_Tier 
+      add_to_chat(200, 'Gearswap: Nuke Mode now Magic Damage') 
+    end
+  end 
 end
   
 function file_unload() 
   send_command('unbind f9') 
   send_command('unbind f10') 
 end 
+
+windower.register_event('action', function(Auto_Stun) 
+local mob = windower.ffxi.get_mob_by_target('bt') 
+  if Stun ~= false then 
+    if Auto_Stun.target_count ~= 0 then 
+      if Auto_Stun.targets[1].action_count ~= 0 then 
+        if Auto_Stun.targets[1].actions[1].message ~= 0 then 
+          if (mob and mob.is_npc and mob.id == Auto_Stun.actor_id) 
+		  and Stun:contains(Auto_Stun.category) then 
+            windower.send_command('input /ma Stun <bt>') 
+		  end 
+		end 
+	  end 
+	end 
+  end 
+end) 
