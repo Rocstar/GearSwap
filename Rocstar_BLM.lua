@@ -28,8 +28,8 @@ function get_sets()
 
   --Fast Cast set
   pre.Cast = {ammo="Impatiens",head="Haruspex Hat",ear1="Loquacious Earring",
-	ring1="Prolix Ring",ring2="Veneficium Ring",back="Ogapepo Cape",
-	waist="Witful Belt",legs="Orvail Pants +1"}
+    ring1="Prolix Ring",ring2="Veneficium Ring",back="Ogapepo Cape",
+    waist="Witful Belt",legs="Orvail Pants +1"}
 
   --Enhancing Magic Casting time - set
   pre.Enhancing = set_combine(pre.Cast, {waist="Siegel Sash"})
@@ -77,19 +77,19 @@ function get_sets()
   mid.Darkmagic = {} --add Dark Magic gear
 
   mid.MND_Enfeeb = {main="Atinian Staff",sub="Achaq Grip",
-	ammo="Memoria Sachet",head="Wayfarer circlet",
-	ear1="Gifted Earring",ear2="Loquacious Earring",
-	body="Hagondes Coat",hands="Otomi Gloves",
-	ring1="Prolix Ring",ring2="Sirona's Ring",
-	back="Bane Cape",waist="Cetl Belt",
-	legs="Wayfarer Slops",feet="Spaekona's Sabots"} 
+    ammo="Memoria Sachet",head="Wayfarer circlet",
+    ear1="Gifted Earring",ear2="Loquacious Earring",
+    body="Hagondes Coat",hands="Otomi Gloves",
+    ring1="Prolix Ring",ring2="Sirona's Ring",
+    back="Bane Cape",waist="Cetl Belt",
+    legs="Wayfarer Slops",feet="Spaekona's Sabots"} 
 
   mid.INT_Enfeeb = set_combine(mid.MND_Enfeeb, {}) 
 
   mid.Cure = {main="Arka IV",sub="Achaq Grip",
-	head="Buremte Hat",ear1="Gifted Earring",
-	ear2="Loquacious Earring",hands="Bokwus Gloves",
-	ring2="Sirona's Ring",legs="Wayfarer Slops"} 
+    head="Buremte Hat",ear1="Gifted Earring",
+    ear2="Loquacious Earring",hands="Bokwus Gloves",
+    ring2="Sirona's Ring",legs="Wayfarer Slops"} 
 	
   mid.Stoneskin = {} --add Stoneskin gear
   
@@ -168,22 +168,22 @@ function get_sets()
 
   --Stun recast set	
   mid.Stun = {main="Apamajas II",sub="Zuuxowu Grip",
-	ammo="Memoria Sachet",head="Haruspex Hat",
-	ear1="Loquacious Earring",ring1="Prolix Ring",
+    ammo="Memoria Sachet",head="Haruspex Hat",
+    ear1="Loquacious Earring",ring1="Prolix Ring",
     neck="Quanpur Necklace",body="Hagondes Coat",
-	hands="Otomi Gloves",back="Swith Cape",
-	waist="Witful Belt",legs="Wayfarer Slops",
-	feet="Spaekona's Sabots"} 
+    hands="Otomi Gloves",back="Swith Cape",
+    waist="Witful Belt",legs="Wayfarer Slops",
+    feet="Spaekona's Sabots"} 
   
   --Low Tier Nuke set
   Low_Tier = {main="Atinian Staff",sub="Zuuxowu Grip",
-	ammo="Memoria Sachet",head="Buremte Hat",
+    ammo="Memoria Sachet",head="Buremte Hat",
     neck="Quanpur Necklace",ear1="Friomisi Earring",
-	ear2="Hecate's Earring",body="Bokwus Robe",
-	hands="Otomi Gloves",ring1="Demon's Ring",
-	ring2="Demon's Ring",back="Toro Cape",
-	waist="Othila Sash",legs="Hagondes Pants",
-	feet="Spaekona's Sabots"} 
+    ear2="Hecate's Earring",body="Bokwus Robe",
+    hands="Otomi Gloves",ring1="Demon's Ring",
+    ring2="Demon's Ring",back="Toro Cape",
+    waist="Othila Sash",legs="Hagondes Pants",
+    feet="Spaekona's Sabots"} 
 	
   High_Tier = {head="Spaekona's Petasos",body="Goetia Coat +2"} 
   
@@ -193,13 +193,13 @@ function get_sets()
   
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
-	ammo="Shadow Sachet",head="Wayfarer Circlet",
-	neck="Wiglen Gorget",ear1="Black Earring",
-	ear2="Darkness Earring",body="Wayfarer Robe",
-	hands="Wayfarer Cuffs",ring1="Paguroidea Ring",
-	ring2="Sheltered Ring",back="Cheviot Cape",
+    ammo="Shadow Sachet",head="Wayfarer Circlet",
+    neck="Wiglen Gorget",ear1="Black Earring",
+    ear2="Darkness Earring",body="Wayfarer Robe",
+    hands="Wayfarer Cuffs",ring1="Paguroidea Ring",
+    ring2="Sheltered Ring",back="Cheviot Cape",
     waist="Slipor Sash",legs="Wayfarer slops",
-	feet="Wayfarer Clogs"} 
+    feet="Wayfarer Clogs"} 
 
   --Regen and Refresh set
   Regen = set_combine(Refresh, {}) 
@@ -227,59 +227,53 @@ function get_sets()
 end 
 
 function precast(spell) 
-    if spell.skill == 'ElementalMagic' then 
-      if pre[spell.english] then 
-	    equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
-	  else 
-      equip(pre.Cast, pre.Elemental, pre[spell.element]) 
-	  end 
-    elseif spell.type == 'EnhancingMagic' then 
-      equip(pre.Enhancing, pre[spell.element]) 
-    elseif spell.english:startswith('Cur') then 
-      equip(pre.Cure, pre[spell.element]) 
-    elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
-      equip(pre[spell.english]) 
+  if spell.skill == 'ElementalMagic' then 
+    if pre[spell.english] then 
+      equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
     else 
-	  equip(pre.Cast, pre[spell.element]) 
+      equip(pre.Cast, pre.Elemental, pre[spell.element]) 
     end 
+  elseif spell.type == 'EnhancingMagic' then 
+    equip(pre.Enhancing, pre[spell.element]) 
+  elseif spell.english:startswith('Cur') then 
+    equip(pre.Cure, pre[spell.element]) 
+  elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
+    equip(pre[spell.english]) 
+  else 
+    equip(pre.Cast, pre[spell.element]) 
+  end 
 end 
 
 function midcast(spell) 
   if spell.skill == 'ElementalMagic' then 
     if mid[spell.english] then 
-	  if Nuke ~= Magic_Accuracy then 
-	    Nuke = High_Tier 
-	    equip(Low_Tier, Nuke, pre[spell.element]) 
-	  else 
-	    equip(Nuke) 
-	  end 
+      if Nuke ~= Magic_Accuracy then 
+        Nuke = High_Tier 
+        equip(Low_Tier, Nuke, pre[spell.element]) 
+      else 
+        equip(Nuke) 
+      end 
     elseif mid.Ancient[spell.english] then 
-	  if Nuke ~= Magic_Accuracy then 
-	    Nuke = Ancient_Magic 
-	    equip(Low_Tier, Nuke, pre[spell.element]) 
-	  else 
-	    equip(Nuke) 
-	  end 
+      if Nuke ~= Magic_Accuracy then 
+        Nuke = Ancient_Magic 
+        equip(Low_Tier, Nuke, pre[spell.element]) 
+      else 
+        equip(Nuke) 
+      end 
     elseif Nuke ~= Magic_Accuracy then 
       Nuke = Low_Tier 
-	  equip(Nuke) 
-	else 
-	  equip(Nuke) 
-	end --[[
-	  if S{world.day_element, world.weather_element}:contains(spell.element) then 
-	    equip(mid[spell.element]) 
-      end ]]
+      equip(Nuke) 
+    else 
+      equip(Nuke) 
+    end 
   elseif spell.skill == 'DarkMagic' then 
     if mid[spell.english] then 
-	  equip(mid[spell.english]) 
-	else 
-	  equip(Nuke) 
-	end
+      equip(mid[spell.english]) 
+    else 
+      equip(Nuke) 
+    end
   elseif spell.english:startswith('Cur') then 
-    equip(mid.Cure) --[[
-       if S{world.day_element, world.weather_element}:contains(spell.element) then  
-        equip(mid[spell.element]) 
-      end ]]
+    equip(mid.Cure) 
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
     equip(mid.INT_Enfeeb) 
   elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
@@ -316,18 +310,18 @@ end
 function self_command(command) 
   if command == 'Stun' then 
     if Stun == false then 
-	  Stun = S{7} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now TP') 
-	elseif Stun == S{7} then 
-	  Stun = S{8} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
-	elseif Stun == S{8} then 
-	  Stun = S{7,8} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now All') 
-	elseif Stun == S{7,8} then 
-	  Stun = false 
-	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
-	end 
+      Stun = S{7} 
+      add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+    elseif Stun == S{7} then 
+      Stun = S{8} 
+      add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+    elseif Stun == S{8} then 
+      Stun = S{7,8} 
+      add_to_chat(200, 'Gearswap: Auto Stun now All') 
+    elseif Stun == S{7,8} then 
+      Stun = false 
+      add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
+    end 
   elseif command == 'Nuke' then 
     if Nuke ~= Magic_Accuracy then  
       Nuke = Magic_Accuracy 
@@ -351,11 +345,11 @@ local mob = windower.ffxi.get_mob_by_target('bt')
       if Auto_Stun.targets[1].action_count ~= 0 then 
         if Auto_Stun.targets[1].actions[1].message ~= 0 then 
           if (mob and mob.is_npc and mob.id == Auto_Stun.actor_id) 
-		  and Stun:contains(Auto_Stun.category) then 
+            and Stun:contains(Auto_Stun.category) then 
             windower.send_command('input /ma Stun <bt>') 
-		  end 
-		end 
 	  end 
-	end 
+        end 
+      end 
+    end 
   end 
 end) 
