@@ -263,8 +263,8 @@ function midcast(spell)
       equip(Nuke) 
     end 
       --[[if S{world.day_element, world.weather_element}:contains(spell.element) then 
-        equip(mid[spell.element]) ]]-- uncomment for day weather
-      end 
+        equip(mid[spell.element]) 
+      end ]]-- uncomment for day weather
   elseif spell.skill == 'DarkMagic' then 
     if mid[spell.english] then 
       equip(mid[spell.english]) 
