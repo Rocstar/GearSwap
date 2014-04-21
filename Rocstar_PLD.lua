@@ -1,5 +1,11 @@
 function get_sets() pre = {} 
 
+--[[ Start Message ]]--
+
+  add_to_chat(200, 'Gearswap: Engaged PDT ( F9 )') 
+  add_to_chat(200, 'Gearswap: Idle PDT ( ALT F9 )') 
+  add_to_chat(200, 'Gearswap: Weapon Skill ACC ( CTRL F9 )') 
+  
 --[[ Change Macros ]]--
 
   send_command('input /macro book 2;wait .1;input /macro set 1') 
@@ -189,19 +195,23 @@ function self_command(command)
   if command == 'w' then 
     if weapon_skill == ACC then 
       weapon_skill = DD 
+	  add_to_chat(200, 'Gearswap: weapon skill now DD') 
     elseif weapon_skill == DD then 
       weapon_skill = ACC 
+	  add_to_chat(200, 'Gearswap: weapon skill now ACC') 
     end 
 	
 --[[ Toggle Idle ( ALT F9 ) or ( //gs c i ) ]]--		
   elseif command == 'i' then 
     if idle == PDT then 
       idle = MDT 
+	  add_to_chat(200, 'Gearswap: idle now MDT') 
         if player.status ~= 'Engaged' then 
           equip(idle) 
 	end 
     elseif idle == MDT then 
       idle = PDT 
+	  add_to_chat(200, 'Gearswap: idle now PDT') 
         if player.status ~= 'Engaged' then 
           equip(idle) 
         end 
@@ -211,26 +221,31 @@ function self_command(command)
   elseif command == 'e' then 
     if engaged == PDT then 
       engaged = MDT 
+	  add_to_chat(200, 'Gearswap: engaged now MDT') 
         if player.status == 'Engaged' then 
           equip(engaged) 
 	end 
     elseif engaged == MDT then 
       engaged = BDT 
+	  add_to_chat(200, 'Gearswap: engaged now BDT') 
         if player.status == 'Engaged' then 
           equip(engaged) 
 	end 
     elseif engaged == BDT then 
       engaged = DT 
+	  add_to_chat(200, 'Gearswap: engaged now DT') 
         if player.status == 'Engaged' then 
 	  equip(engaged) 
 	end 
     elseif engaged == DT then 
       engaged = DD 
+	  add_to_chat(200, 'Gearswap: engaged now DD') 
         if player.status == 'Engaged' then 
 	  equip(engaged) 
 	end 
     elseif engaged == DD then 
       engaged = PDT 
+	  add_to_chat(200, 'Gearswap: engaged now PDT') 
         if player.status == 'Engaged' then 
 	  equip(engaged) 
 	end 
