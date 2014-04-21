@@ -185,12 +185,11 @@ function get_sets()
 	waist="Othila Sash",legs="Hagondes Pants",
 	feet="Spaekona's Sabots"} 
 	
-  High_Tier = set_combine(Low_Tier, {body="Goetia Coat +2"}) 
+  High_Tier = {head="Spaekona's Petasos",body="Goetia Coat +2"} 
   
-  Ancient_Magic = set_combine(Low_Tier, {head="Sorcerer's Petasos +2",body="Goetia Coat +2",
-    feet="Sorcerer's Sabots +2"}) 
+  Ancient_Magic = {head="Sorcerer's Petasos +2",feet="Sorcerer's Sabots +2"}
   
-  Magic_Accuracy = set_combine(Low_Tier, {}) 
+  Magic_Accuracy = set_combine(Low_Tier, {body="Sorcerer's coat +2"}) 
   
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
@@ -203,27 +202,25 @@ function get_sets()
 	feet="Wayfarer Clogs"} 
 
   --Regen and Refresh set
-  Regen = set_combine(Refresh, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
+  Regen = set_combine(Refresh, {}) 
 
-  Physical_Damage_Taken = {} --add physical damage taken - gear
+  Physical_Damage_Taken = {} 
 
-  Magic_Damage_Taken = {} --add magic damage taken - gear
+  Magic_Damage_Taken = {} 
 
-  Breath_Damage_Taken = {} --add breath damage taken - gear
+  Breath_Damage_Taken = {} 
 
-  Damage_Taken = {} --add damage taken - gear
+  Damage_Taken = {} 
 
   Attack = {main="Atinian Staff"} 
 
-  Accuracy = {} --add Accuracy gear
-
-  Aftermath = set_combine(Attack, {}) --add Aftermath gear
+  Accuracy = {} 
 
   Engaged = Attack 
 
   Idle = Regen 
 
-  Nuke = false 
+  Nuke = Low_Tier 
   
   Stun = false 
   
@@ -252,20 +249,26 @@ function midcast(spell)
     if mid[spell.english] then 
 	  if Nuke ~= Magic_Accuracy then 
 	    Nuke = High_Tier 
-	  end
-	    equip(Nuke, pre[spell.element]) 
+	    equip(Low_Tier, Nuke, pre[spell.element]) 
+	  else 
+	    equip(Nuke) 
+	  end 
     elseif mid.Ancient[spell.english] then 
 	  if Nuke ~= Magic_Accuracy then 
 	    Nuke = Ancient_Magic 
-	  end
-	    equip(Nuke, pre[spell.element]) 
+	    equip(Low_Tier, Nuke, pre[spell.element]) 
+	  else 
+	    equip(Nuke) 
+	  end 
     elseif Nuke ~= Magic_Accuracy then 
       Nuke = Low_Tier 
-	end 
 	  equip(Nuke) 
+	else 
+	  equip(Nuke) 
+	end --[[
 	  if S{world.day_element, world.weather_element}:contains(spell.element) then 
 	    equip(mid[spell.element]) 
-      end 
+      end ]]
   elseif spell.skill == 'DarkMagic' then 
     if mid[spell.english] then 
 	  equip(mid[spell.english]) 
@@ -273,10 +276,10 @@ function midcast(spell)
 	  equip(Nuke) 
 	end
   elseif spell.english:startswith('Cur') then 
-    equip(mid.Cure) 
+    equip(mid.Cure) --[[
        if S{world.day_element, world.weather_element}:contains(spell.element) then  
         equip(mid[spell.element]) 
-      end 	
+      end ]]
   elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
     equip(mid.INT_Enfeeb) 
   elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
