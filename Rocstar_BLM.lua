@@ -11,11 +11,10 @@ function get_sets()
   send_command('input /macro book 5;wait .1;input /macro set 4')
  
   --Message at start
-  add_to_chat(200, 'Gearswap: Nukes Magic Damage (F9), Auto Stun Disabled (ALT F9)')
+  add_to_chat(200, 'Gearswap: Nukes Magic Damage (F9)')
 
   --Key binds
   send_command('bind f9 gs c Nuke') 
-  send_command('bind !f9 gs c Stun') 
   
   --Precast sets
   --Job Ability set
@@ -221,9 +220,6 @@ function get_sets()
   Idle = Regen 
 
   Nuke = Low_Tier 
-  
-  Stun = false 
-  
 end 
 
 function precast(spell) 
@@ -308,21 +304,7 @@ function status_change(new,old)
 end 
 
 function self_command(command) 
-  if command == 'Stun' then 
-    if Stun == false then 
-      Stun = S{7} 
-      add_to_chat(200, 'Gearswap: Auto Stun now TP') 
-    elseif Stun == S{7} then 
-      Stun = S{8} 
-      add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
-    elseif Stun == S{8} then 
-      Stun = S{7,8} 
-      add_to_chat(200, 'Gearswap: Auto Stun now All') 
-    elseif Stun == S{7,8} then 
-      Stun = false 
-      add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
-    end 
-  elseif command == 'Nuke' then 
+  if command == 'Nuke' then 
     if Nuke ~= Magic_Accuracy then  
       Nuke = Magic_Accuracy 
       add_to_chat(200, 'Gearswap: Nuke Mode now Magic Accuracy') 
@@ -335,21 +317,4 @@ end
   
 function file_unload() 
   send_command('unbind f9') 
-  send_command('unbind f10') 
 end 
-
-windower.register_event('action', function(Auto_Stun) 
-local mob = windower.ffxi.get_mob_by_target('bt') 
-  if Stun ~= false then 
-    if Auto_Stun.target_count ~= 0 then 
-      if Auto_Stun.targets[1].action_count ~= 0 then 
-        if Auto_Stun.targets[1].actions[1].message ~= 0 then 
-          if (mob and mob.is_npc and mob.id == Auto_Stun.actor_id) 
-            and Stun:contains(Auto_Stun.category) then 
-            windower.send_command('input /ma Stun <bt>') 
-	  end 
-        end 
-      end 
-    end 
-  end 
-end) 
