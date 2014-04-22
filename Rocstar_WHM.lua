@@ -233,16 +233,16 @@ function midcast(spell)
       equip(mid.NA) 
     elseif spell.english == 'Cursna' then 
       equip(mid.Cursna)
+    end 
+  elseif spell.skill == 'EnhancingMagic' then
+    if not windower.wc_match(spell.english, 'Bar*|Regen*|Protect*|Shell*|Stoneskin') then 
+      equip(mid.enhancing) 
     elseif spell.english:startswith('Bar')then 
       if buffactive['Afflatus Solace'] then 
         equip(mid.BarSolace) 
       else 
         equip(mid.BarNoSolace) 
       end 
-    end 
-  elseif spell.skill == 'EnhancingMagic' then
-    if not windower.wc_match(spell.english, 'Regen*|Protect*|Shell*|Stoneskin') then 
-      equip(mid.enhancing) 
     elseif spell.english:startswith('Reg') then 
       equip(mid.Regen) 
     elseif spell.english:startswith('Pro') then 
