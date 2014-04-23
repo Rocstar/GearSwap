@@ -9,9 +9,6 @@ function get_sets()
   
   --Change Macros 
   send_command('input /macro book 5;wait .1;input /macro set 4')
- 
-  --Message at start
-  add_to_chat(200, 'Gearswap: Nukes Magic Damage (F9)')
 
   --Key binds
   send_command('bind f9 gs c Nuke') 
@@ -26,21 +23,21 @@ function get_sets()
   pre['Spirit Taker'] = {ear1="Friomisi Earring",ear2="Hecate's Earring"}
 
   --Fast Cast set
-  pre.Cast = {ammo="Impatiens",head="Haruspex Hat",ear1="Loquacious Earring",
+  pre.cast = {ammo="Impatiens",head="Haruspex Hat",ear1="Loquacious Earring",
     ring1="Prolix Ring",ring2="Veneficium Ring",back="Ogapepo Cape",
     waist="Witful Belt",legs="Orvail Pants +1"}
 
   --Enhancing Magic Casting time - set
-  pre.Enhancing = set_combine(pre.Cast, {waist="Siegel Sash"})
+  pre.enhancing = {waist="Siegel Sash"} 
 
   --Stoneskin Casting time - set
-  pre.Stoneskin = set_combine(pre.Cast, pre.Enhancing, {hands="Carapacho Cuffs"})
+  pre.Stoneskin = set_combine(pre.enhancing, {hands="Carapacho Cuffs"})
 
   --Cure Casting time - set
-  pre.Cure = set_combine(pre.Cast, {body="Heka's Kalasiris",back="Pahtli Cape",waist="Capricornian Rope"})
+  pre.cure = {body="Heka's Kalasiris",back="Pahtli Cape",waist="Capricornian Rope"} 
 
   --Elemental Magic Casting time - set
-  pre.Elemental = {head="Goetia Petasos +2",neck="Stoicheion Medal",feet="Spaekona's Sabots"}
+  pre.elemental = {head="Goetia Petasos +2",neck="Stoicheion Medal",feet="Spaekona's Sabots +1"}
   
   --Ancient Magic II Casting time - sets
   pre['Quake II'] = {hands="Sorcerer's Gloves +2"} 
@@ -81,7 +78,7 @@ function get_sets()
     body="Hagondes Coat",hands="Otomi Gloves",
     ring1="Prolix Ring",ring2="Sirona's Ring",
     back="Bane Cape",waist="Cetl Belt",
-    legs="Wayfarer Slops",feet="Spaekona's Sabots"} 
+    legs="Wayfarer Slops",feet="Spaekona's Sabots +1"} 
 
   mid.INT_Enfeeb = set_combine(mid.MND_Enfeeb, {}) 
 
@@ -172,7 +169,7 @@ function get_sets()
     neck="Quanpur Necklace",body="Hagondes Coat",
     hands="Otomi Gloves",back="Swith Cape",
     waist="Witful Belt",legs="Wayfarer Slops",
-    feet="Spaekona's Sabots"} 
+    feet="Spaekona's Sabots +1"} 
   
   --Low Tier Nuke set
   Low_Tier = {main="Atinian Staff",sub="Zuuxowu Grip",
@@ -182,13 +179,13 @@ function get_sets()
     hands="Otomi Gloves",ring1="Demon's Ring",
     ring2="Demon's Ring",back="Toro Cape",
     waist="Othila Sash",legs="Hagondes Pants",
-    feet="Spaekona's Sabots"} 
+    feet="Spaekona's Sabots +1"} 
 	
   High_Tier = {head="Spaekona's Petasos",body="Goetia Coat +2"} 
   
   Ancient_Magic = {head="Sorcerer's Petasos +2",feet="Sorcerer's Sabots +2"}
   
-  Magic_Accuracy = set_combine(Low_Tier, {body="Sorcerer's coat +2"}) 
+  Magic_Accuracy = {} 
   
   --Refresh set
   Refresh = {main="Terra's Staff",sub="Oneiros Grip",
@@ -225,22 +222,32 @@ end
 function precast(spell) 
   if spell.skill == 'ElementalMagic' then 
     if pre[spell.english] then 
-      equip(pre.Cast, pre.Elemental, pre[spell.english], pre[spell.element]) 
+      equip(pre.cast, pre.elemental, pre[spell.english], pre[spell.element]) 
     else 
-      equip(pre.Cast, pre.Elemental, pre[spell.element]) 
+      equip(pre.cast, pre.elemental, pre[spell.element]) 
     end 
-  elseif spell.type == 'EnhancingMagic' then 
-    equip(pre.Enhancing, pre[spell.element]) 
-  elseif spell.english:startswith('Cur') then 
-    equip(pre.Cure, pre[spell.element]) 
+  elseif spell.skill == 'HealingMagic' then 
+    if windower.wc_match(spell.english, 'Cura*|Cure*') then  
+      equip(pre.cast, pre.cure, pre[spell.element])  
+	end
+  elseif spell.skill == 'EnhancingMagic' then 
+    if spell.english == 'Stoneskin' then 
+      equip(pre.cast, pre[spell.english], pre[spell.element]) 
+    else 
+      equip(pre.cast, pre.enhancing, pre[spell.element]) 
+    end 
   elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
-    equip(pre[spell.english]) 
+    if pre[spell.english] then 
+      equip(pre[spell.english]) 
+	end
   else 
-    equip(pre.Cast, pre[spell.element]) 
+    equip(pre.cast, pre[spell.element]) 
   end 
 end 
 
 function midcast(spell) 
+
+--[[ Elemental Magic ]]-- 
   if spell.skill == 'ElementalMagic' then 
     if mid[spell.english] then 
       if Nuke ~= Magic_Accuracy then 
@@ -262,24 +269,31 @@ function midcast(spell)
     else 
       equip(Nuke) 
     end 
-      --[[if S{world.day_element, world.weather_element}:contains(spell.element) then 
+     --[[if S{world.day_element, world.weather_element}:contains(spell.element) then 
         equip(mid[spell.element]) 
-      end ]]-- uncomment for day weather
+      end]]-- uncomment for day weather nukes 
+	  
+--[[ Dark Magic ]]--
   elseif spell.skill == 'DarkMagic' then 
     if mid[spell.english] then 
       equip(mid[spell.english]) 
     else 
-      equip(Nuke) 
-    end
-  elseif spell.english:startswith('Cur') then 
-    equip(mid.Cure) 
-  elseif spell.skill == 'EnfeeblingMagic' and spell.english == 'Blind' then 
-    equip(mid.INT_Enfeeb) 
-  elseif spell.skill == 'EnfeeblingMagic' and spell.english ~= 'Blind' then 
-    equip(mid.MND_Enfeeb) 
+      equip(Low_Tier) 
+    end 
+	
+--[[ Enfeebling Magic ]]--
+  elseif spell.skill == 'EnfeeblingMagic' then
+    if spell.english == 'Blind' then 
+      equip(mid.INT_Enfeeb) 
+    else 
+      equip(mid.MND_Enfeeb) 
+	end 
+	
   elseif spell.english:startswith('Shell') or 
     spell.english:startswith('Pro') then 
     equip(mid.ProShell) 
+  elseif spell.english:startswith('Cur') then 
+    equip(mid.Cure) 
   elseif spell.english == 'Blink' and buffactive.blink then 
     send_command('cancel 36') 
   elseif spell.english == 'Stoneskin' and buffactive.stoneskin then 
