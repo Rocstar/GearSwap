@@ -16,7 +16,9 @@ function get_sets() pre = {} mid = {}
 --[[ Job Abilities ]]--
 
   pre.Benediction = {body="Cleric's Briault +2"} 
-
+  
+  pre['Afflatus Solace'] = {body="Orison Bliaud +2"} 
+  
   pre.Devotion = {head="Cleric's Cap +2"} 
 
   pre.Martyr = {hands="Cleric's Mitts +2"} 
@@ -46,7 +48,7 @@ function get_sets() pre = {} mid = {}
   pre.cure = set_combine(pre.healing, {head="Cleric's Cap +2",neck="Aceso's Choker",
     body="Heka's Kalasiris",ring1="Prolix Ring",
     ring2="Veneficium Ring",back="Pahtli Cape",
-    waist="Capricornian Rope",feet="Cure Clogs"}) 
+	feet="Cure Clogs"}) 
 
 --[[ Weapon Skills ]]--
 
@@ -113,7 +115,7 @@ function get_sets() pre = {} mid = {}
     feet="Wayfarer Clogs"} 
 
 --[[ Status Removal ]]--
-  mid.NA = {head="Orison Cap +2",legs="Orison Pantaloons +2"} 
+  mid.removal = {main="Yagrush",head="Orison Cap +2",legs="Orison Pantaloons +2"} 
 
 --[[ Midcast Regen ]]--
   mid.Regen = set_combine(mid.enhancing, {body="Cleric's Briault +2",hands="Orison Mitts +2",
@@ -130,12 +132,12 @@ function get_sets() pre = {} mid = {}
   mid.Stoneskin = set_combine(mid.enhancing, {feet="Wayfarer Clogs"}) 
 
 --[[ Bar Element ]]--
-  mid.BarSolace = {main="Beneficus",head="Orison Cap +2",
+  mid.bar = {main="Beneficus",head="Orison Cap +2",
     body="Orison Bliaud +2",hands="Orison Mitts +2",
     legs="Cleric's Pantaloons +2",feet="Orison Duckbills +2"} 
 
 --[[ No Solace ]]--
-  mid.BarNoSolace = set_combine(mid.BarSolace,{body="Blessed Briault"}) 
+  mid.bar_no_Solace = set_combine(mid.bar, {body="Blessed Briault"}) 
 
 --[[ Midcast Shell ]]--
   mid.Shell = set_combine(mid.enhancing, {ring2="Sheltered Ring",legs="Cleric's pantaloons +2"}) 
@@ -144,7 +146,6 @@ function get_sets() pre = {} mid = {}
   mid.Pro = set_combine(mid.enhancing, {ring2="Sheltered Ring",feet="Cleric's duckbills +2"}) 
 
 --[[ Refresh ]]--
-
   REF = {main="Terra's Staff",sub="Oneiros Grip",
     ammo="Shadow Sachet",head="Wivre Hairpin",
     neck="Wiglen Gorget",ear1="Black Earring",
@@ -216,7 +217,7 @@ function precast(spell)
     else 
       equip(pre.cast, pre.enhancing, pre[spell.element]) 
     end 
-  elseif S{'WeaponSkill', 'JobAbility'}:contains(spell.type) then 
+  elseif windower.wc_match(spell.type, 'WeaponSkill|JobAbility') then 
     if pre[spell.english] then 
       equip(pre[spell.english]) 
 	end
@@ -229,19 +230,21 @@ function midcast(spell)
   if spell.skill == 'HealingMagic' then 
     if windower.wc_match(spell.english, 'Cura*|Cure*') then 
       equip(mid.Cure)  
-    elseif spell.english:endswith('na') and spell.name ~= 'Cursna' then 
-      equip(mid.NA) 
+    elseif spell.english:endswith('na') and spell.english ~= 'Cursna' then 
+      equip(mid.removal) 
     elseif spell.english == 'Cursna' then 
       equip(mid.Cursna)
     end 
   elseif spell.skill == 'EnhancingMagic' then
-    if not windower.wc_match(spell.english, 'Bar*|Regen*|Protect*|Shell*|Stoneskin') then 
+    if not windower.wc_match(spell.english, 'Erase|Bar*|Regen*|Protect*|Shell*|Stoneskin') then 
       equip(mid.enhancing) 
+    elseif spell.english == 'Erase' then 
+      equip(mid.removal) 
     elseif spell.english:startswith('Bar')then 
       if buffactive['Afflatus Solace'] then 
-        equip(mid.BarSolace) 
+        equip(mid.bar) 
       else 
-        equip(mid.BarNoSolace) 
+        equip(mid.bar_no_Solace) 
       end 
     elseif spell.english:startswith('Reg') then 
       equip(mid.Regen) 
@@ -262,8 +265,8 @@ function midcast(spell)
     else 
       equip(mid.MND_Enfeeb) 
     end 
-  elseif S{'DivineMagic', 'ElementalMagic', 'DarkMagic'}:contains(spell.skill) then 
-    equip(mid.nuke) 
+  elseif windower.wc_match(spell.skill, 'DivineMagic', 'ElementalMagic', 'DarkMagic') then 
+    equip(mid.nuke, pre[spell.element]) 
   end
 end
 
