@@ -265,7 +265,7 @@ function midcast(spell)
     else 
       equip(mid.MND_Enfeeb) 
     end 
-  elseif windower.wc_match(spell.skill, 'DivineMagic', 'ElementalMagic', 'DarkMagic') then 
+  elseif windower.wc_match(spell.skill, 'DivineMagic|ElementalMagic|DarkMagic') then 
     equip(mid.nuke, pre[spell.element]) 
   end
 end
