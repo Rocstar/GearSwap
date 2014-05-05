@@ -64,19 +64,19 @@ function get_sets()
 
   ACC = {head="Manibozho Beret",neck="Love Torque",
     body="Manibozho Jerkin",hands="Buremte Gloves",
-	back="Canny Cape",waist="Dynamic Belt",
-	legs="Manibozho Brais",feet="Manibozho Boots"}
+    back="Canny Cape",waist="Dynamic Belt",
+    legs="Manibozho Brais",feet="Manibozho Boots"}
  
   REG = {neck="Wiglen Gorget",ring1="Paguroidea Ring",
     ring2="Sheltered Ring",back="Iximulew Cape",
-	feet="Pillager's Poulaines"} 
+    feet="Pillager's Poulaines"} 
 
   PDT = {head="Iuitl Headgear",neck="Twilight Torque",
     ear1="Dudgeon Earring",ear2="Heartseeker Earring",
     body="Iuitl Vest",hands="Iuitl Wristbands",
-	ring1="Dark Ring",ring2="Defending Ring",
+    ring1="Dark Ring",ring2="Defending Ring",
     back="Mollusca Mantle",waist="Flume Belt",
-	legs="Iuitl Tights",feet="Iuitl Gaiters"} 
+    legs="Iuitl Tights",feet="Iuitl Gaiters"} 
 
   MDT = {head="Ejekamal Mask",neck="Twilight Torque",
     body="Iuitl Vest",hands="Buremte Gloves",
@@ -134,25 +134,25 @@ function precast(spell)
   if spell.type == "JobAbility" then 
     if pre[spell.english] then 
       equip(pre[spell.english]) 
-	end
+    end
   elseif spell.type == "WeaponSkill" then 
     if buffactive[S{'Trick Attack','Sneak Attack'}] then 
       if use_belts == true then 
-	    equip(SA_TA_WS, pre[spell.english]) 
-	  else
+        equip(SA_TA_WS, pre[spell.english]) 
+      else
         equip(SA_TA_WS) 
-	  end 
+      end 
     else 
       equip(SA_TA_WS) 
-	end 
+    end 
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
   elseif windower.wc_match(spell.type, 'Step|Flourish1') then 
     if TH == step then 
       equip(TH) 
-	else 
-	  equip(ACC) 
-	end
+    else 
+      equip(ACC) 
+    end
   end 
 end 
 
@@ -177,61 +177,60 @@ function buff_change(buff, gain)
 --[[ Feint ]]-- 
   if buff == 'Feint' then 
     if not gain then 
-	  aftercast_engaged = E
+      aftercast_engaged = E
         if player.status == 'Engaged' then 
           equip(E) 
-	    else 
-	      equip(I) 
-	    end 
-      else 
-	    aftercast_engaged = pre.Feint
-        equip(pre.Feint) 
-	  end 
+        else 
+          equip(I) 
+        end 
+    else 
+      aftercast_engaged = pre.Feint
+      equip(pre.Feint) 
+    end 
 	
 --[[ Sneak Attack ]]-- 	
   elseif buff == 'Sneak Attack' then 
     if gain then 
-	  if buffactive['Trick Attack'] then 
-		SA_TA_WS = SATA 
-	    aftercast_engaged = SATA 
+      if buffactive['Trick Attack'] then 
+        SA_TA_WS = SATA 
+        aftercast_engaged = SATA 
         equip(SA_TA_WS) 
-	  else 
-		SA_TA_WS = SA 
-	    aftercast_engaged = SA
-		equip(SA_TA_WS) 
-	  end
-	elseif not gain then 
-	  aftercast_engaged = E
-	  SA_TA_WS = WS
+      else 
+        SA_TA_WS = SA 
+        aftercast_engaged = SA
+        equip(SA_TA_WS) 
+      end
+    elseif not gain then 
+      aftercast_engaged = E
+      SA_TA_WS = WS
         if player.status == 'Engaged' then 
           equip(E) 
-	    else 
-	      equip(I) 
-	    end 
+	else 
+	  equip(I) 
 	end 
+    end 
 	
 --[[ Trick Attack ]]--	
   elseif buff == 'Trick Attack' then 
     if gain then 
-	  if buffactive['Sneak Attack'] then 
-		SA_TA_WS = SATA 
-	    aftercast_engaged = SATA
+      if buffactive['Sneak Attack'] then 
+        SA_TA_WS = SATA 
+        aftercast_engaged = SATA
         equip(SA_TA_WS) 
-	  else 
-		SA_TA_WS = TA 
-	    aftercast_engaged = TA
-		equip(SA_TA_WS) 
-	  end
-	elseif not gain then 
+      else 
+        SA_TA_WS = TA 
+        aftercast_engaged = TA
+        equip(SA_TA_WS) 
+      end
+    elseif not gain then 
       aftercast_engaged = E
-	  SA_TA_WS = WS
-	    if player.status == 'Engaged' then 
+      SA_TA_WS = WS
+        if player.status == 'Engaged' then 
           equip(E) 
-	    else 
-	      equip(I) 
-	    end 
+	else 
+	  equip(I) 
 	end 
-	
+    end 
   end
 end 
 
@@ -249,22 +248,22 @@ function self_command(command)
     elseif Auto_Stun == S{8} then 
       Auto_Stun = false 
       add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
-	end 
+    end 
 	
   elseif command == 'TH' then 
     if S{false, full}:contains(TH) then 
       TH = step
       aftercast_engaged = DD
-	  E = DD
-	  equip(E) 
+      E = DD
+      equip(E) 
       add_to_chat(200, 'Gearswap: engaged now DD, TH Tag with Steps/Flourish') 
     elseif TH == step then 
       TH = full
       aftercast_engaged = full
-	  E = full
-	  equip(E) 
-	  add_to_chat(200, 'Gearswap: engaged now Full Time TH') 
-	end 
+      E = full
+      equip(E) 
+      add_to_chat(200, 'Gearswap: engaged now Full Time TH') 
+    end 
 	
   elseif command == 'WS' then 
     if use_belts == false then 
@@ -273,20 +272,20 @@ function self_command(command)
     elseif use_belts == true then 
       use_belts = false
       add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
-	end 
+    end 
 	
   elseif command == 'PDT' then 
     TH = false
     aftercast_engaged = PDT
     E = PDT 
-	equip(E) 
+    equip(E) 
     add_to_chat(200, 'Gearswap: engaged now PDT') 
 	
   elseif command == 'MDT' then 
     TH = false
     aftercast_engaged = MDT
     E = MDT 
-	equip(E) 
+    equip(E) 
     add_to_chat(200, 'Gearswap: engaged now MDT') 
 	
   end 
