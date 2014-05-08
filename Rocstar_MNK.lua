@@ -313,15 +313,6 @@ function self_command(command)
 	end 
 	
 --[[ Typed commands //gs c e pdt, //gs c e dd (ect...) ]]-- 	
---[[ hpp_event ]]-- 	
-  elseif command == 'hp' then 
-    if hpp_event == true then 
-	  hpp_event = false 
-	  add_to_chat(200, 'Gearswap: hpp_event now Disabled')
-	elseif hpp_event == false then 
-	  hpp_event = true 
-	  add_to_chat(200, 'Gearswap: hpp_event now enabled')
-	end 
 
   elseif command == 'e dd' then 
     E = DD 
