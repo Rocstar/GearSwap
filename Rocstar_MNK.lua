@@ -15,13 +15,13 @@ function get_sets()
   
   send_command('bind !F3 gs c i') 
   
-  send_command('bind !F4 gs c s') 
+  send_command('bind !F4 gs c a') 
   
   send_command('input /macro book 2;wait .1;input /macro set 1') 
   
   add_to_chat(200, 'Gearswap: Loaded your MNK Lua file!') 
   
-  add_to_chat(200, 'Gearswap: Engaged PDT. ALT F2, //gs c e pdt, //gs c e dd (ect..)') 
+  add_to_chat(200, 'Gearswap: Engaged PDT. ALT F2, //gs c e pdt') 
   
   add_to_chat(200, 'Gearswap: Auto Stun Disabled. ALT F4, //gs c s') 
 
