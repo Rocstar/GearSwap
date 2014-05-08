@@ -172,7 +172,7 @@ function precast(spell)
     end	  
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
-  elseif spell.type == 'Step' or spell.type == 'Flourish1' then 
+  elseif windower.wc_match(spell.type, 'Step|Flourish1') then 
     equip(ACC) 
   end 
 end 
