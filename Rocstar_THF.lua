@@ -1,19 +1,17 @@
-function get_sets() 
-
-  pre = {} 
-  
+function get_sets()   
   --[[ 
   add_to_chat(200, 'Gearswap: Th Tag with Steps/Flourish (ALT F8)') 
   add_to_chat(200, 'Gearswap: WS Belt/Gorget Disabled (ALT F9)') 
-  add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT F10)') 
-  ]]--
+  add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT F10)') ]]
   
-  send_command('@input /macro book 6;wait .1;input /macro set 1') 
+  send_command('@input /macro book 4;wait .1;input /macro set 1') 
 
 --Key Binds
-  send_command('bind !f8 gs c TH') 
-  send_command('bind !f9 gs c WS') 
-  send_command('bind !f10 gs c auto stun') 
+  send_command('bind !f8 gs c th') 
+  send_command('bind !f9 gs c b') 
+  send_command('bind !f10 gs c a') 
+  
+  pre = {} 
   
 --Job Ability
   pre.Mug = {head="Assassin's Bonnet +2"} 
@@ -53,23 +51,26 @@ function get_sets()
   pre['Mercy Stroke'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
   
 -- Variables 
-  DD = {main="Izhiikoh",sub="Sandung",
-    range="Raider's Bmrng.",head="Uk'uxkaj Cap",
-    neck="Asperity Necklace",ear1="Bladeborn Earring",
-    ear2="Steelflash Earring",body="Manibozho Jerkin",
-    hands="Manibozho Gloves",ring1="Epona's Ring",
-    ring2="Rajas Ring",back="Atheling Mantle",
+  DD = {main="Sandung",sub="Eminent Dagger",
+    range="Raider's Boomerang",head="Lithelimb Cap",
+    neck="Love Torque",ear1="Bladeborn Earring",
+    ear2="Steelflash Earring",body="Homam Corazza",
+    hands="Buremte Gloves",ring1="Epona's Ring",
+    ring2="Cho'j Band",back="Atheling Mantle",
     waist="Cetl Belt",legs="Manibozho Brais",
     feet="Manibozho Boots"} 
-
+	
   ACC = {head="Manibozho Beret",neck="Love Torque",
     body="Manibozho Jerkin",hands="Buremte Gloves",
     back="Canny Cape",waist="Dynamic Belt",
     legs="Manibozho Brais",feet="Manibozho Boots"}
  
-  REG = {neck="Wiglen Gorget",ring1="Paguroidea Ring",
-    ring2="Sheltered Ring",back="Iximulew Cape",
-    feet="Pillager's Poulaines"} 
+  REG = set_combine(E, {neck="Wiglen Gorget",ring1="Paguroidea Ring",
+    ring2="Sheltered Ring",back="Iximulew Cape"}) 
+	
+  max_REG = set_combine(E, {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
+    ring1="Paguroidea Ring",ring2="Sheltered Ring",
+	back="Iximulew Cape"}) 
 
   PDT = {head="Iuitl Headgear",neck="Twilight Torque",
     ear1="Dudgeon Earring",ear2="Heartseeker Earring",
@@ -90,7 +91,7 @@ function get_sets()
   step = set_combine(ACC, {hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) 
  	
   full = set_combine(DD, {main="Sandung",sub="Thief's Knife",
-    hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) 
+    hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) -- //gs c th
 	
   WS = {head="Uk'uxkaj Cap",
     neck="Asperity Necklace",ear1="Bladeborn Earring",
@@ -100,11 +101,12 @@ function get_sets()
     waist="Cetl Belt",legs="Manibozho Brais",
     feet="Manibozho Boots"} 
   
-  SA = {head="Uk'uxkaj Cap",hands="Raider's Armlets +2",
-    feet="Iuitl Gaiters"}
+  SA = {head="Uk'uxkaj Cap",body="Pillager's Vest +1",
+    hands="Raider's Armlets +2",feet="Iuitl Gaiters"}
 	
-  TA = {hands="Pillager's Armlets +1",back="Canny Cape",
-    legs="Kaabnax Trousers",feet="Iuitl Gaiters"}
+  TA = {head="Lithelimb Cap",hands="Pillager's Armlets +1",
+    back="Canny Cape",legs="Kaabnax Trousers",
+    feet="Iuitl Gaiters"}
 	
   SATA = set_combine(TA, {}) 
   
@@ -118,9 +120,11 @@ function get_sets()
   
   SA_TA_WS = WS 
   
-  use_belts = false 
+  use_belts = false -- //gs c b
   
-  Auto_Stun = false 
+  Auto_Stun = false -- //gs c a
+  
+  use_movment_speed_feet = true -- //gs c m
   
 end
 
@@ -167,8 +171,17 @@ end
 function status_change(new,old) 
   if new == 'Engaged' then 
     equip(E) 
-  else 
-    equip(I) 
+  elseif new == 'Idle' then 
+    if player.hpp <= 75 then
+	  I = max_REG 
+	else
+	  I = REG 
+	end 
+	  if use_movment_speed_feet ~= false then
+	    equip(I,({feet="Skadi's Jambeaux"})) 
+	  else 
+        equip(I) 
+	  end
   end 
 end 
 
@@ -205,9 +218,9 @@ function buff_change(buff, gain)
       SA_TA_WS = WS
         if player.status == 'Engaged' then 
           equip(E) 
-	else 
-	  equip(I) 
-	end 
+	    else 
+	      equip(I) 
+	    end 
     end 
 	
 --[[ Trick Attack ]]--	
@@ -227,15 +240,15 @@ function buff_change(buff, gain)
       SA_TA_WS = WS
         if player.status == 'Engaged' then 
           equip(E) 
-	else 
-	  equip(I) 
-	end 
+	    else 
+	      equip(I) 
+	    end 
     end 
   end
 end 
 
 function self_command(command) 
-  if command == 'auto stun' then 
+  if command == 'a' then 
     if Auto_Stun == false then 
       Auto_Stun = S{7,8} 
       add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting') 
@@ -250,7 +263,7 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
     end 
 	
-  elseif command == 'TH' then 
+  elseif command == 'th' then 
     if S{false, full}:contains(TH) then 
       TH = step
       aftercast_engaged = DD
@@ -265,7 +278,16 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: engaged now Full Time TH') 
     end 
 	
-  elseif command == 'WS' then 
+  elseif command == 'm' then 
+    if use_movment_speed_feet == false then 
+      use_movment_speed_feet = true
+      add_to_chat(200, 'Gearswap: Using Movment Speed Feet') 
+    elseif use_movment_speed_feet == true then 
+      use_movment_speed_feet = false
+      add_to_chat(200, 'Gearswap: Disabled Movment Speed Feet') 
+    end 
+	
+  elseif command == 'b' then 
     if use_belts == false then 
       use_belts = true
       add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
