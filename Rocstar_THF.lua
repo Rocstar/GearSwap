@@ -1,4 +1,3 @@
-
 function get_sets()   
   --[[ 
   add_to_chat(200, 'Gearswap: Th Tag with Steps/Flourish (ALT F8)') 
