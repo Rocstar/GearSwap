@@ -12,57 +12,57 @@ function get_sets()
   send_command('bind !f9 gs c b') 
   send_command('bind !f10 gs c a') 
   
-  pre = {} 
+  p = {} 
   
 --Job Ability
-  pre.Mug = {head="Assassin's Bonnet +2"} 
+  p.Mug = {head="Assassin's Bonnet +2"} 
   
-  pre['Perfect Dodge'] = {hands="Plunderer's Armlets"} 
+  p['Perfect Dodge'] = {hands="Plunderer's Armlets"} 
   
-  pre.Feint = {legs="Assassin's Culottes +2"} 
+  p.Feint = {legs="Assassin's Culottes +2"} 
   
-  pre["Assassin's Charge"] = {feet="Assassin's Poulaines +2"} 
+  p["Assassin's Charge"] = {feet="Assassin's Poulaines +2"} 
   
-  pre.Conspirator = {body="Raider's Vest +2"} 
+  p.Conspirator = {body="Raider's Vest +2"} 
   
-  pre.Collaborator = {head="Raider's Bonnet +2"} 
+  p.Collaborator = {head="Raider's Bonnet +2"} 
   
-  pre.Accomplice = set_combine(pre.Collaborator) 
+  p.Accomplice = set_combine(p.Collaborator) 
   
-  pre.Despoil = {legs="Raider's Culottes +2",feet="Raider's Poulaines +2"} 
+  p.Despoil = {legs="Raider's Culottes +2",feet="Raider's Poulaines +2"} 
   
-  pre.Hide = {body="Pillager's Vest +1"} 
+  p.Hide = {body="Pillager's Vest +1"} 
   
-  pre.Flee = {feet="Pillager's Poulaines"} 
+  p.Flee = {feet="Pillager's Poulaines"} 
   
-  pre['Curing Waltz'] = {head="Uk'uxkaj Cap",body="Iuitl Vest",
+  p['Curing Waltz'] = {head="Lithelimb Cap",body="Iuitl Vest",
     hands="Buremte Gloves",back="Iximulew Cape",
     waist="Chuq'aba Belt",legs="Kaabnax Trousers",
     feet="Iuitl Gaiters"} 
 	
-  pre['Curing Waltz II'] = set_combine(pre['Curing Waltz']) 
+  p['Curing Waltz II'] = set_combine(p['Curing Waltz']) 
   
-  pre['Curing Waltz III'] = set_combine(pre['Curing Waltz']) 
+  p['Curing Waltz III'] = set_combine(p['Curing Waltz']) 
   
-  pre.Steal = {head="Assassin's Bonnet +2",hands="Pillager's Armlets +1",
+  p.Steal = {head="Assassin's Bonnet +2",hands="Pillager's Armlets +1",
     legs="Pillager's Culottes +1",feet="Pillager's Poulaines +1"} 
   	
 -- Dagger Weapon Skills
-  pre.Exenterator = {neck="Breeze Gorget",waist="Breeze Belt"} 
+  p.Exenterator = {neck="Breeze Gorget",waist="Breeze Belt"} 
 
-  pre["Rudra's Storm"] = {neck="Shadow Gorget",waist="Shadow Belt"} 
+  p["Rudra's Storm"] = {neck="Shadow Gorget",waist="Shadow Belt"} 
 
-  pre.Evisceration = {neck="Shadow Gorget",waist="Shadow Belt"} 
+  p.Evisceration = {neck="Shadow Gorget",waist="Shadow Belt"} 
 
-  pre['Mandalic Stab'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
+  p['Mandalic Stab'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
 
-  pre['Shark Bite'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
+  p['Shark Bite'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
   
-  pre['Aeolian Edge'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
+  p['Aeolian Edge'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
 
-  pre['Dancing Edge'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
+  p['Dancing Edge'] = {neck="Breeze Gorget",waist="Breeze Belt"} 
 
-  pre['Mercy Stroke'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
+  p['Mercy Stroke'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
   
 -- Variable sets 
   DD = {main="Sandung",sub="Eminent Dagger",
@@ -170,24 +170,15 @@ end)
 
 function precast(spell) 
   if spell.type == "JobAbility" then 
-    if pre[spell.english] then 
-      equip(pre[spell.english]) 
+    if p[spell.english] then 
+      equip(p[spell.english]) 
     end
   elseif spell.type == "WeaponSkill" then 
-    if not Sa and Ta then 
-	  W = WS 
-	elseif Sa then 
-	  W = SA 
-	elseif Ta then
-	  W = TA
-	elseif Sa and Ta then 
-	  W = SATA
-        if B ~= false then
-          equip(W, pre[spell.english]) 
-	    else
-          equip(W) 
-        end 	
-    end 
+    if B ~= false then
+      equip(W, p[spell.english]) 
+    else
+      equip(W) 
+    end
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
   elseif windower.wc_match(spell.type, 'Step|Flourish1') then 
@@ -212,18 +203,19 @@ function status_change(new,old)
     equip(E) 
   elseif new == 'Idle' then 
     if player.hpp <= 75 then
-	  I = REG 
-	else
-	  I = R
-	end 
-	  if M ~= false then
-	    equip(I,({feet="Skadi's Jambeaux"})) 
-	  else 
+      I = REG 
+    else
+      I = R
+    end 
+      if M ~= false then
+	equip(I,({feet="Skadi's Jambeaux"})) 
+      else 
         equip(I) 
-	  end
+      end
   end 
 end 
 
+ 
 function buff_change(buff, gain) 
 
 --[[ Feint ]]-- 
@@ -236,7 +228,7 @@ function buff_change(buff, gain)
           equip(I) 
         end 
     else 
-      a = pre.Feint
+      a = p.Feint
       equip(a) 
     end 
 	
@@ -257,9 +249,9 @@ function buff_change(buff, gain)
       W = WS
         if player.status == 'Engaged' then 
           equip(E) 
-	    else 
-	      equip(I) 
-	    end 
+	else 
+	  equip(I) 
+	end 
     end 
 	
 --[[ Trick Attack ]]--	
@@ -279,12 +271,13 @@ function buff_change(buff, gain)
       W = WS
         if player.status == 'Engaged' then 
           equip(E) 
-	    else 
-	      equip(I) 
-	    end 
+	else 
+	  equip(I) 
+	end 
     end 
   end
 end 
+
 
 function self_command(command) 
   if command == 's' then 
