@@ -1,3 +1,4 @@
+
 function get_sets()   
   --[[ 
   add_to_chat(200, 'Gearswap: Th Tag with Steps/Flourish (ALT F8)') 
@@ -15,21 +16,34 @@ function get_sets()
   
 --Job Ability
   pre.Mug = {head="Assassin's Bonnet +2"} 
+  
   pre['Perfect Dodge'] = {hands="Plunderer's Armlets"} 
+  
   pre.Feint = {legs="Assassin's Culottes +2"} 
+  
   pre["Assassin's Charge"] = {feet="Assassin's Poulaines +2"} 
+  
   pre.Conspirator = {body="Raider's Vest +2"} 
+  
   pre.Collaborator = {head="Raider's Bonnet +2"} 
+  
   pre.Accomplice = set_combine(pre.Collaborator) 
+  
   pre.Despoil = {legs="Raider's Culottes +2",feet="Raider's Poulaines +2"} 
+  
   pre.Hide = {body="Pillager's Vest +1"} 
+  
   pre.Flee = {feet="Pillager's Poulaines"} 
+  
   pre['Curing Waltz'] = {head="Uk'uxkaj Cap",body="Iuitl Vest",
     hands="Buremte Gloves",back="Iximulew Cape",
     waist="Chuq'aba Belt",legs="Kaabnax Trousers",
     feet="Iuitl Gaiters"} 
+	
   pre['Curing Waltz II'] = set_combine(pre['Curing Waltz']) 
+  
   pre['Curing Waltz III'] = set_combine(pre['Curing Waltz']) 
+  
   pre.Steal = {head="Assassin's Bonnet +2",hands="Pillager's Armlets +1",
     legs="Pillager's Culottes +1",feet="Pillager's Poulaines +1"} 
   	
@@ -50,7 +64,7 @@ function get_sets()
 
   pre['Mercy Stroke'] = {neck="Shadow Gorget",waist="Shadow Belt"} 
   
--- Variables 
+-- Variable sets 
   DD = {main="Sandung",sub="Eminent Dagger",
     range="Raider's Boomerang",head="Lithelimb Cap",
     neck="Love Torque",ear1="Bladeborn Earring",
@@ -58,40 +72,45 @@ function get_sets()
     hands="Buremte Gloves",ring1="Epona's Ring",
     ring2="Cho'j Band",back="Atheling Mantle",
     waist="Cetl Belt",legs="Manibozho Brais",
-    feet="Manibozho Boots"} 
+    feet="Manibozho Boots"} -- damage dealer set
 	
-  ACC = {head="Manibozho Beret",neck="Love Torque",
+  A = {head="Manibozho Beret",neck="Love Torque",
     body="Manibozho Jerkin",hands="Buremte Gloves",
     back="Canny Cape",waist="Dynamic Belt",
-    legs="Manibozho Brais",feet="Manibozho Boots"}
+    legs="Manibozho Brais",
+	feet="Manibozho Boots"} -- accuracy set
  
-  REG = set_combine(E, {neck="Wiglen Gorget",ring1="Paguroidea Ring",
-    ring2="Sheltered Ring",back="Iximulew Cape"}) 
+  R = set_combine(E, {neck="Wiglen Gorget",ring1="Paguroidea Ring",
+    ring2="Sheltered Ring",
+	back="Iximulew Cape"}) -- low regen set
 	
-  max_REG = set_combine(E, {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
+  REG = set_combine(E, {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",
     ring1="Paguroidea Ring",ring2="Sheltered Ring",
-	back="Iximulew Cape"}) 
+	back="Iximulew Cape"}) -- max regen set
 
   PDT = {head="Iuitl Headgear",neck="Twilight Torque",
     ear1="Dudgeon Earring",ear2="Heartseeker Earring",
     body="Iuitl Vest",hands="Iuitl Wristbands",
     ring1="Dark Ring",ring2="Defending Ring",
     back="Mollusca Mantle",waist="Flume Belt",
-    legs="Iuitl Tights",feet="Iuitl Gaiters"} 
+    legs="Iuitl Tights",
+	feet="Iuitl Gaiters"} -- physical damage taken - set
 
   MDT = {head="Ejekamal Mask",neck="Twilight Torque",
     body="Iuitl Vest",hands="Buremte Gloves",
     back="Mollusca Mantle",legs="Kaabnax Trousers",
-    feet="Iuitl Gaiters"} 
+    feet="Iuitl Gaiters"} -- magic damage taken - set
 
   DT = set_combine(DD, {neck="Twilight Torque",ring1="Defending Ring",
     ring2="Dark Ring",back="Mollusca Mantle",
-    waist="Flume Belt"}) 
+    waist="Flume Belt"}) -- damage taken - set
 	
-  step = set_combine(ACC, {hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) 
+  step = set_combine(A, {hands="Plunderer's Armlets",
+    feet="Raider's Poulaines +2"}) -- //gs c th (treasure hunter tag set)
  	
-  full = set_combine(DD, {main="Sandung",sub="Thief's Knife",
-    hands="Plunderer's Armlets",feet="Raider's Poulaines +2"}) -- //gs c th
+  full = set_combine(E, {main="Sandung",sub="Thief's Knife",
+    hands="Plunderer's Armlets",
+	feet="Raider's Poulaines +2"}) -- treasure hunter full time set
 	
   WS = {head="Uk'uxkaj Cap",
     neck="Asperity Necklace",ear1="Bladeborn Earring",
@@ -99,40 +118,55 @@ function get_sets()
     hands="Manibozho Gloves",ring1="Epona's Ring",
     ring2="Rajas Ring",back="Atheling Mantle",
     waist="Cetl Belt",legs="Manibozho Brais",
-    feet="Manibozho Boots"} 
+    feet="Manibozho Boots"} -- default weapon skill set
   
   SA = {head="Uk'uxkaj Cap",body="Pillager's Vest +1",
-    hands="Raider's Armlets +2",feet="Iuitl Gaiters"}
+    hands="Raider's Armlets +2",
+	feet="Iuitl Gaiters"} -- sneak attack set
 	
   TA = {head="Lithelimb Cap",hands="Pillager's Armlets +1",
     back="Canny Cape",legs="Kaabnax Trousers",
-    feet="Iuitl Gaiters"}
+    feet="Iuitl Gaiters"} -- trick attack set
 	
-  SATA = set_combine(TA, {}) 
+  SATA = set_combine(TA, {}) -- sneak attack and trick attack set
   
-  I = REG 
+  TH = step -- treasure hunter = tag with step and flourish
+  
+  I = R -- idle = regen
     
-  E = DD 
+  E = DD -- engaged = damage dealer
   
-  TH = step 
+  W = WS -- weapon skill = normal 
   
-  aftercast_engaged = E
+  a = E -- aftercast engaged = engaged
   
-  SA_TA_WS = WS 
+  s = false -- //gs c s (auto stun disabled)
+    
+  B = false -- //gs c b (use WS belts / Gorget disabled)
   
-  use_belts = false -- //gs c b
+  M = true -- //gs c m -- (movement speed feet while idle enabled)
   
-  Auto_Stun = false -- //gs c a
+  Sa = buffactive['Sneak Attack'] 
   
-  use_movment_speed_feet = true -- //gs c m
+  Ta = buffactive['Trick Attack'] 
   
 end
 
-function file_unload() 
-  send_command('unbind !f8')
-  send_command('unbind !f9')
-  send_command('unbind !f10')  
-end 
+windower.register_event('action', function(_) 
+  if s ~= false then 
+    local m = windower.ffxi.get_mob_by_target('t')
+    if _.target_count ~= 0 then 
+      if _.targets[1].action_count ~= 0 then 
+        if _.targets[1].actions[1].message ~= 0 then 
+          if (m and m.is_npc and m.id == _.actor_id) and 
+            s:contains(_.category) then 
+            windower.send_command('input /ja "Violent Flourish" <t>') 
+          end 
+        end 
+      end 
+    end 
+  end 
+end) 
 
 function precast(spell) 
   if spell.type == "JobAbility" then 
@@ -140,14 +174,19 @@ function precast(spell)
       equip(pre[spell.english]) 
     end
   elseif spell.type == "WeaponSkill" then 
-    if buffactive[S{'Trick Attack','Sneak Attack'}] then 
-      if use_belts == true then 
-        equip(SA_TA_WS, pre[spell.english]) 
-      else
-        equip(SA_TA_WS) 
-      end 
-    else 
-      equip(SA_TA_WS) 
+    if not Sa and Ta then 
+	  W = WS 
+	elseif Sa then 
+	  W = SA 
+	elseif Ta then
+	  W = TA
+	elseif Sa and Ta then 
+	  W = SATA
+        if B ~= false then
+          equip(W, pre[spell.english]) 
+	    else
+          equip(W) 
+        end 	
     end 
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
@@ -155,14 +194,14 @@ function precast(spell)
     if TH == step then 
       equip(TH) 
     else 
-      equip(ACC) 
+      equip(A) 
     end
   end 
 end 
 
 function aftercast(spell) 
   if player.status == 'Engaged' then 
-    equip(aftercast_engaged) 
+    equip(a) 
   else 
     equip(I) 
   end 
@@ -173,11 +212,11 @@ function status_change(new,old)
     equip(E) 
   elseif new == 'Idle' then 
     if player.hpp <= 75 then
-	  I = max_REG 
-	else
 	  I = REG 
+	else
+	  I = R
 	end 
-	  if use_movment_speed_feet ~= false then
+	  if M ~= false then
 	    equip(I,({feet="Skadi's Jambeaux"})) 
 	  else 
         equip(I) 
@@ -190,32 +229,32 @@ function buff_change(buff, gain)
 --[[ Feint ]]-- 
   if buff == 'Feint' then 
     if not gain then 
-      aftercast_engaged = E
+      a = E
         if player.status == 'Engaged' then 
           equip(E) 
         else 
           equip(I) 
         end 
     else 
-      aftercast_engaged = pre.Feint
-      equip(pre.Feint) 
+      a = pre.Feint
+      equip(a) 
     end 
 	
 --[[ Sneak Attack ]]-- 	
   elseif buff == 'Sneak Attack' then 
     if gain then 
-      if buffactive['Trick Attack'] then 
-        SA_TA_WS = SATA 
-        aftercast_engaged = SATA 
-        equip(SA_TA_WS) 
+      if Ta then 
+        W = SATA 
+        a = SATA 
+        equip(W) 
       else 
-        SA_TA_WS = SA 
-        aftercast_engaged = SA
-        equip(SA_TA_WS) 
+        W = SA 
+        a = SA
+        equip(W) 
       end
     elseif not gain then 
-      aftercast_engaged = E
-      SA_TA_WS = WS
+      a = E
+      W = WS
         if player.status == 'Engaged' then 
           equip(E) 
 	    else 
@@ -226,18 +265,18 @@ function buff_change(buff, gain)
 --[[ Trick Attack ]]--	
   elseif buff == 'Trick Attack' then 
     if gain then 
-      if buffactive['Sneak Attack'] then 
-        SA_TA_WS = SATA 
-        aftercast_engaged = SATA
-        equip(SA_TA_WS) 
+      if Sa then 
+        W = SATA 
+        a = SATA
+        equip(W) 
       else 
-        SA_TA_WS = TA 
-        aftercast_engaged = TA
-        equip(SA_TA_WS) 
+        W = TA 
+        a = TA
+        equip(W) 
       end
     elseif not gain then 
-      aftercast_engaged = E
-      SA_TA_WS = WS
+      a = E
+      W = WS
         if player.status == 'Engaged' then 
           equip(E) 
 	    else 
@@ -248,64 +287,64 @@ function buff_change(buff, gain)
 end 
 
 function self_command(command) 
-  if command == 'a' then 
-    if Auto_Stun == false then 
-      Auto_Stun = S{7,8} 
+  if command == 's' then 
+    if s == false then 
+      s = S{7,8} 
       add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting') 
-    elseif Auto_Stun == S{7,8} then 
-      Auto_Stun = S{7} 
+    elseif s == S{7,8} then 
+      s = S{7} 
       add_to_chat(200, 'Gearswap: Auto Stun now TP') 
-    elseif Auto_Stun == S{7} then 
-      Auto_Stun = S{8} 
+    elseif s == S{7} then 
+      s = S{8} 
       add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
-    elseif Auto_Stun == S{8} then 
-      Auto_Stun = false 
+    elseif s == S{8} then 
+      s = false 
       add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
     end 
 	
   elseif command == 'th' then 
     if S{false, full}:contains(TH) then 
       TH = step
-      aftercast_engaged = DD
+      a = DD
       E = DD
       equip(E) 
       add_to_chat(200, 'Gearswap: engaged now DD, TH Tag with Steps/Flourish') 
     elseif TH == step then 
       TH = full
-      aftercast_engaged = full
+      a = full
       E = full
       equip(E) 
       add_to_chat(200, 'Gearswap: engaged now Full Time TH') 
     end 
 	
   elseif command == 'm' then 
-    if use_movment_speed_feet == false then 
-      use_movment_speed_feet = true
+    if M == false then 
+      M = true
       add_to_chat(200, 'Gearswap: Using Movment Speed Feet') 
-    elseif use_movment_speed_feet == true then 
-      use_movment_speed_feet = false
+    elseif M == true then 
+      M = false
       add_to_chat(200, 'Gearswap: Disabled Movment Speed Feet') 
     end 
 	
   elseif command == 'b' then 
-    if use_belts == false then 
-      use_belts = true
+    if B == false then 
+      B = true
       add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
-    elseif use_belts == true then 
-      use_belts = false
+    elseif B == true then 
+      B = false
       add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
     end 
 	
   elseif command == 'PDT' then 
     TH = false
-    aftercast_engaged = PDT
+    a = PDT
     E = PDT 
     equip(E) 
     add_to_chat(200, 'Gearswap: engaged now PDT') 
 	
   elseif command == 'MDT' then 
     TH = false
-    aftercast_engaged = MDT
+    a = MDT
     E = MDT 
     equip(E) 
     add_to_chat(200, 'Gearswap: engaged now MDT') 
@@ -313,18 +352,8 @@ function self_command(command)
   end 
 end 
 
-windower.register_event('action', function(Action_Stun) 
-  if Auto_Stun ~= false then 
-    local mob = windower.ffxi.get_mob_by_target('t')
-    if Action_Stun.target_count ~= 0 then 
-      if Action_Stun.targets[1].action_count ~= 0 then 
-        if Action_Stun.targets[1].actions[1].message ~= 0 then 
-          if (mob and mob.is_npc and mob.id == Action_Stun.actor_id) and 
-            Auto_Stun:contains(Action_Stun.category) then 
-            windower.send_command('input /ja "Violent Flourish" <t>') 
-          end 
-        end 
-      end 
-    end 
-  end 
-end) 
+function file_unload() 
+  send_command('unbind !f8')
+  send_command('unbind !f9')
+  send_command('unbind !f10')  
+end 
