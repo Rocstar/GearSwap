@@ -1,6 +1,5 @@
 function get_sets()   
-  --[[ 
-  add_to_chat(200, 'Gearswap: Th Tag with Steps/Flourish (ALT F8)') 
+  --[[ add_to_chat(200, 'Gearswap: Th Tag with Steps/Flourish (ALT F8)') 
   add_to_chat(200, 'Gearswap: WS Belt/Gorget Disabled (ALT F9)') 
   add_to_chat(200, 'Gearswap: Auto Stun Disabled (ALT F10)') ]]
   
