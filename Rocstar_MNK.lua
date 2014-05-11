@@ -11,9 +11,8 @@ function get_sets()
  
   p = {} 
   
-  p.w = {head="Otronif Mask",body="Otronif Harness",
-    hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
-    back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
+  p.w = {head="Otronif Mask",body="Otronif Harness",hands="Otronif Gloves",ring1="Defending Ring",
+    ring2="Dark Ring",back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
     feet="Otronif Boots"}
 
   p['Curing Waltz II'] = p.w 
@@ -44,64 +43,41 @@ function get_sets()
 
   p["Ascetic's Fury"] = p.l
 
-  Attack = {ammo="Honed Tathlum",head="Lithelimb Cap",
-    neck="Asperity Necklace",ear1="Bladeborn Earring",
-    ear2="Steelflash Earring",body="Manibozho Jerkin",
-    hands="Manibozho Gloves",ring1="Epona's Ring",
-    ring2="Rajas Ring",back="Atheling Mantle",
-    waist="Cetl Belt",legs="Manibozho Brais",
+  Attack = {ammo="Honed Tathlum",head="Lithelimb Cap",neck="Asperity Necklace",ear1="Bladeborn Earring",
+    ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Manibozho Gloves",ring1="Epona's Ring",
+    ring2="Rajas Ring",back="Atheling Mantle",waist="Cetl Belt",legs="Manibozho Brais",
     feet="Manibozho Boots"} 
 
-  ACC = {ammo="Honed Tathlum",
-    head="Manibozho Beret",neck="Asperity Necklace",
-    ear1="Bladeborn Earring",ear2="Steelflash Earring",
-    body="Manibozho Jerkin",hands="Manibozho Gloves",
-    ring1="Epona's Ring",ring2="Rajas Ring",
-    back="Anchoret's Mantle",waist="Cetl Belt",
+  ACC = {ammo="Honed Tathlum",head="Manibozho Beret",neck="Asperity Necklace",ear1="Bladeborn Earring",
+    ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Manibozho Gloves",ring1="Epona's Ring",
+    ring2="Rajas Ring",back="Anchoret's Mantle",waist="Cetl Belt",legs="Manibozho Brais",
+    feet="Manibozho Boots"} 
+  
+  Critical_Hit_Damage = {head="Espial Cap",ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Espial Gambison",
+    hands="Espial Bracers",ring1="Epona's Ring",ring2="Rajas Ring",back="Atheling Mantle",
+    waist="Cetl Belt",legs="Espial Hose",feet="Espial Socks"} 
+  
+  DD = {main="Maochinoli",ammo="Honed Tathlum",head="Lithelimb Cap",neck="Wiglen Gorget",
+    ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands="Otronif Gloves",
+    ring1="Epona's Ring",ring2="Cho'j Band",back="Atheling Mantle",waist="Cetl Belt",
     legs="Manibozho Brais",feet="Manibozho Boots"} 
-  
-  Critical_Hit_Damage = {head="Espial Cap",
-    ear1="Bladeborn Earring",ear2="Steelflash Earring",
-    body="Espial Gambison",hands="Espial Bracers",
-    ring1="Epona's Ring",ring2="Rajas Ring",
-    back="Atheling Mantle",waist="Cetl Belt",
-    legs="Espial Hose",feet="Espial Socks"} 
-  
-  DD = {main="Maochinoli",
-    ammo="Honed Tathlum",head="Lithelimb Cap",
-    neck="Wiglen Gorget",ear1="Bladeborn Earring",
-    ear2="Steelflash Earring",body="Manibozho Jerkin",
-    hands="Otronif Gloves",ring1="Epona's Ring",
-    ring2="Cho'j Band",back="Atheling Mantle",
-    waist="Cetl Belt",legs="Manibozho Brais",
-    feet="Manibozho Boots"} 
 
-  MDT = {head="Ejekamal Mask",
-    neck="Twilight Torque",body="Otronif Harness",
-    hands="Otronif Gloves",ring1="Defending Ring",
-    ring2="Dark Ring",back="Mollusca Mantle",
-    legs="Kaabnax Trousers",feet="Otronif Boots"} 
+  MDT = {head="Ejekamal Mask",neck="Twilight Torque",body="Otronif Harness",hands="Otronif Gloves",
+    ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",legs="Kaabnax Trousers",
+    feet="Otronif Boots"} 
 
-  PDT = {main="Maochinoli",
-    head="Otronif Mask",neck="Wiglen Gorget",
-    body="Otronif Harness",hands="Otronif Gloves",
-    ring1="Defending Ring",ring2="Dark Ring",
-    back="Iximulew Cape",waist="Black Belt",
-    legs="Otronif Brais",feet="Otronif Boots"} 
+  PDT = {main="Maochinoli",head="Otronif Mask",neck="Wiglen Gorget",body="Otronif Harness",
+    hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",back="Iximulew Cape",
+    waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"} 
 
-  DT = {main="Maochinoli",
-    head="Otronif Mask",neck="Twilight Torque",
-    body="Otronif Harness",hands="Otronif Gloves",
-    ring1="Defending Ring",ring2="Dark Ring",
-    back="Mollusca Mantle",waist="Black Belt",
-    legs="Otronif Brais",feet="Otronif Boots"} 
+  DT = {main="Maochinoli",head="Otronif Mask",neck="Twilight Torque",body="Otronif Harness",
+    hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",back="Mollusca Mantle",
+    waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"} 
 
-  max_reg = set_combine(E, {head="Ocelomeh Headpiece +1",
-    neck="Wiglen Gorget",body="Mel. Cyclas +2",
+  max_reg = set_combine(E, {head="Ocelomeh Headpiece +1",neck="Wiglen Gorget",body="Mel. Cyclas +2",
     ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 	
-  normal_reg = set_combine(E, {neck="Wiglen Gorget",
-    ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
+  normal_reg = set_combine(E, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 
   W = Attack 
 
