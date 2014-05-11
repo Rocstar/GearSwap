@@ -1,13 +1,3 @@
-function file_unload() 
-  send_command('unbind !F1') 
-  
-  send_command('unbind !F2') 
-  
-  send_command('unbind !F3') 
-  
-  send_command('unbind !F4') 
-end 
-
 function get_sets() 
   send_command('bind !F1 gs c w') 
   
@@ -15,62 +5,50 @@ function get_sets()
   
   send_command('bind !F3 gs c i') 
   
-  send_command('bind !F4 gs c a') 
+  send_command('bind !F4 gs c s') 
   
-  send_command('input /macro book 2;wait .1;input /macro set 1') 
+  send_command('input /macro book 7;wait .1;input /macro set 1') 
+ 
+  p = {} 
   
-  add_to_chat(200, 'Gearswap: Loaded your MNK Lua file!') 
+  p.waltz = {head="Otronif Mask",body="Otronif Harness",
+    hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
+	back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
+	feet="Otronif Boots"}
+
+  p['Curing Waltz'] = p.waltz
+
+  p['Curing Waltz II'] = p.waltz 
+
+  p['Curing Waltz III'] = p.waltz 
+
+  p.Chakra = set_combine(p.waltz, {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"}) 
   
-  add_to_chat(200, 'Gearswap: Engaged PDT. ALT F2, //gs c e pdt') 
+  p['Hundred Fists'] = {legs="Melee hose +2"} 
+
+  p['Formless Strikes'] = {body="Melee Cyclas +2"} 
+
+  p['Chi Blast'] = {body="Melee crown +2"} 
+
+  p.Footwork = {feet="Tantra Gaiters +2"} 
+
+  p.Counterstance = {feet="Melee Gaiters +2"} 
+
+  p.Mantra = {feet="Melee Gaiters +2"} 
+
+  p.light_ws = {neck="Light Gorget",waist="Light Belt"}
   
-  add_to_chat(200, 'Gearswap: Auto Stun Disabled. ALT F4, //gs c s') 
-
-  pre = {} 
-  
-  pre['Hundred Fists'] = {legs="Melee hose +2"} 
-
-  pre['Formless Strikes'] = {body="Melee Cyclas +2"} 
-
-  pre['Chi Blast'] = {body="Melee crown +2"} 
-
-  pre.Footwork = {feet="Tantra Gaiters +2"} 
-
-  pre.Counterstance = {feet="Melee Gaiters +2"} 
-
-  pre.Mantra = {feet="Melee Gaiters +2"} 
-
-  pre['Curing Waltz III'] = {head="Otronif Mask",
-    body="Otronif Harness",hands="Otronif Gloves",
-    ring1="Defending Ring",ring2="Dark Ring",
-	back="Iximulew Cape",waist="Chuq'aba Belt",
-    legs="Kaabnax Trousers",feet="Otronif Boots"} 
-
-  pre['Curing Waltz II'] = set_combine(pre['Curing Waltz III']) 
-
-  pre['Curing Waltz'] = set_combine(pre['Curing Waltz III']) 
-
-  pre.Chakra = set_combine(pre['Curing Waltz III'], 
-    {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"}) 
-
-  pre.cast = {head="Haruspex Hat",neck="Orunmila's Torque",
-    ear2="Loquacious Earring",hands="Thaumas Gloves"} 
+  p['Shijin Spiral'] = p.light_ws
 	
-  pre["Victory Smite"] = {neck="Light Gorget",waist="Light Belt"} 
+  p['Victory Smite'] = p.light_ws 
 
-  pre["Final Heaven"] = {neck="Light Gorget",waist="Light Belt"} 
+  p['Final Heaven'] = p.light_ws 
 
-  pre["Ascetic's Fury"] = {neck="Light Gorget",waist="Light Belt"} 
-
-  pre["Shijin Spiral"] = {neck="Light Gorget",waist="Light Belt"} 
+  p["Ascetic's Fury"] = p.light_ws
   
-  Critical_Hit_Damage = {head="Espial Cap",
-    ear1="Bladeborn Earring",ear2="Steelflash Earring",
-	body="Espial Gambison",hands="Espial Bracers",
-	ring1="Epona's Ring",ring2="Rajas Ring",
-	back="Atheling Mantle",waist="Cetl Belt",
-	legs="Espial Hose",feet="Espial Socks"} 
+  p.Combo = {}
 
-  High_Attack = {ammo="Honed Tathlum",head="Manibozho Beret",
+  Attack = {ammo="Honed Tathlum",head="Lithelimb Cap",
 	neck="Asperity Necklace",ear1="Bladeborn Earring",
 	ear2="Steelflash Earring",body="Manibozho Jerkin",
 	hands="Manibozho Gloves",ring1="Epona's Ring",
@@ -78,7 +56,7 @@ function get_sets()
 	waist="Cetl Belt",legs="Manibozho Brais",
 	feet="Manibozho Boots"} 
 
-  High_ACC = {ammo="Honed Tathlum",
+  ACC = {ammo="Honed Tathlum",
     head="Manibozho Beret",neck="Asperity Necklace",
     ear1="Bladeborn Earring",ear2="Steelflash Earring",
 	body="Manibozho Jerkin",hands="Manibozho Gloves",
@@ -86,19 +64,20 @@ function get_sets()
 	back="Anchoret's Mantle",waist="Cetl Belt",
     legs="Manibozho Brais",feet="Manibozho Boots"} 
   
-  DD = {main="Oatixur",
-    ammo="Honed Tathlum",head="Manibozho Beret",
-	neck="Asperity Necklace",ear1="Bladeborn Earring",
+  Critical_Hit_Damage = {head="Espial Cap",
+    ear1="Bladeborn Earring",ear2="Steelflash Earring",
+	body="Espial Gambison",hands="Espial Bracers",
+	ring1="Epona's Ring",ring2="Rajas Ring",
+	back="Atheling Mantle",waist="Cetl Belt",
+	legs="Espial Hose",feet="Espial Socks"} 
+  
+  DD = {main="Maochinoli",
+    ammo="Honed Tathlum",head="Lithelimb Cap",
+	neck="Wiglen Gorget",ear1="Bladeborn Earring",
 	ear2="Steelflash Earring",body="Manibozho Jerkin",
-	hands="Manibozho Gloves",ring1="Epona's Ring",
-	ring2="Rajas Ring",back="Atheling Mantle",
+	hands="Otronif Gloves",ring1="Epona's Ring",
+	ring2="Cho'j Band",back="Atheling Mantle",
 	waist="Cetl Belt",legs="Manibozho Brais",
-	feet="Manibozho Boots"} 
-	
-  ACC = {head="Manibozho Beret",
-    ammo="Honed Tathlum",body="Manibozho Jerkin",
-	hands="Manibozho Gloves",ring1="Ulthalam's Ring",
-	back="Anchoret's Mantle",legs="Manibozho Brais",
 	feet="Manibozho Boots"} 
 
   MDT = {head="Ejekamal Mask",
@@ -107,68 +86,57 @@ function get_sets()
     ring2="Dark Ring",back="Mollusca Mantle",
 	legs="Kaabnax Trousers",feet="Otronif Boots"} 
 
-  PDT = {main="Oatixur",
+  PDT = {main="Maochinoli",
     head="Otronif Mask",neck="Wiglen Gorget",
     body="Otronif Harness",hands="Otronif Gloves",
 	ring1="Defending Ring",ring2="Dark Ring",
     back="Iximulew Cape",waist="Black Belt",
 	legs="Otronif Brais",feet="Otronif Boots"} 
 
-  DT = {main="Oatixur",
+  DT = {main="Maochinoli",
     head="Otronif Mask",neck="Twilight Torque",
 	body="Otronif Harness",hands="Otronif Gloves",
     ring1="Defending Ring",ring2="Dark Ring",
 	back="Mollusca Mantle",waist="Black Belt",
 	legs="Otronif Brais",feet="Otronif Boots"} 
 
-  max_REG = set_combine(E, {head="Ocelomeh Headpiece +1",
+  max_reg = set_combine(E, {head="Ocelomeh Headpiece +1",
     neck="Wiglen Gorget",body="Mel. Cyclas +2",
     ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 	
-  REG = set_combine(E, {neck="Wiglen Gorget",
+  normal_reg = set_combine(E, {neck="Wiglen Gorget",
     ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 
-  W = High_Attack -- Weaponskill set to High Attack. //gs c w
+  W = Attack -- Weaponskill set to High Attack. //gs c w
 
   E = DD -- Engaged set to DD. //gs c e pdt, //gs c e dd (ect...)
   
-  I = REG -- Idle set to low Regen. increases with less hp after status change threshold 80%
+  I = normal_reg -- Idle set to low Regen. increases with less hp after status change (80%)
   
-  A = false --Disabled Auto Action Stun. to toggle //gs c a 
+  s = false -- //gs c s (auto stun disabled)
   
-  B = false --Disabled WS Belt Gorget. to toggle //gs c b 
+  Belt_Gorget = false --Disabled WS Belt Gorget. to toggle //gs c b 
   
-  R = false --Disabled Sheltered Ring while Engaged with no Pro/Shell. to toggle //gs c r   
+  Sheltered_Ring = false --Disabled Sheltered Ring while Engaged with no Pro/Shell. to toggle //gs c r 
+  
+  pro = buffactive['Protect']
+  
+  shell = buffactive['Shell']
+  
 end 
-
-windower.register_event('action', function(Action_Stun) 
-  if A ~= false then 
-   local mob=windower.ffxi.get_mob_by_target('t')
-    if Action_Stun.target_count ~= 0 then 
-      if Action_Stun.targets[1].action_count ~= 0 then 
-        if Action_Stun.targets[1].actions[1].message ~= 0 then 
-          if (mob and mob.is_npc and mob.id == Action_Stun.actor_id) and 
-		    A:contains(Action_Stun.category) then 
-		    windower.send_command('input /ja "Violent Flourish" <t>') 
-          end 
-        end 
-      end 
-    end 
-  end 
-end) 
 
 function precast(spell) 
   if spell.type == 'WeaponSkill' then 
-    if pre[spell.english] then 
-	  if B == true then -- WS Belts/Gorget
-        equip(W, pre[spell.english]) 
+    if p[spell.english] then 
+	  if Belt_Gorget ~= false then 
+        equip(W, p[spell.english]) 
 	  else 
 	    equip(W) 
 	  end 
 	end
   elseif spell.type == "JobAbility" then 
-    if pre[spell.english] then 
-      equip(pre[spell.english]) 
+    if p[spell.english] then 
+      equip(p[spell.english]) 
     end	  
   elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
     send_command('cancel 71') 
@@ -179,8 +147,8 @@ end
 
 function aftercast(spell) 
   if player.status == 'Engaged' then 
-    if R == true then -- sheltered ring while engaged
-      if buffactive['Shell'] and buffactive['Protect'] then 
+    if Sheltered_Ring ~= false then 
+      if pro and shell then 
         equip(E)
 	  else
 	    equip(E,({ring2="Sheltered Ring"})) 
@@ -195,8 +163,8 @@ end
 
 function status_change(new,old) 
   if new == 'Engaged' then 
-    if R == true then -- sheltered ring while engaged
-      if buffactive['Shell'] and buffactive['Protect'] then 
+    if Sheltered_Ring ~= false then 
+      if pro and shell then 
         equip(E)
 	  else
 	    equip(E,({ring2="Sheltered Ring"})) 
@@ -206,13 +174,29 @@ function status_change(new,old)
 	end
   elseif new == 'Idle' then 
     if player.hpp <= 80 then
-	  I = max_REG 
+	  I = max_reg 
 	else
-	  I = REG 
+	  I = normal_reg 
 	end 
     equip(I) 
   end 
 end 
+
+windower.register_event('action', function(_) 
+  if s ~= false then 
+    local m = windower.ffxi.get_mob_by_target('t')
+    if _.target_count ~= 0 then 
+      if _.targets[1].action_count ~= 0 then 
+        if _.targets[1].actions[1].message ~= 0 then 
+          if (m and m.is_npc and m.id == _.actor_id) and 
+            s:contains(_.category) then 
+            windower.send_command('input /ja "Violent Flourish" <t>') 
+          end 
+        end 
+      end 
+    end 
+  end 
+end) 
 
 function self_command(command) 
 --[[ Toggled commands. or type //gs c e, //gs c i (ect...). ]]-- 
@@ -243,14 +227,14 @@ function self_command(command)
 --[[ Weaponskill ]]-- 
   elseif command == 'w' then 
     if W == Critical_Hit_Damage then 
-	  W = High_ACC
+	  W = ACC
       add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') 
 	  equip(W)
-    elseif W == High_ACC then 
-	  W = High_Attack
+    elseif W == ACC then 
+	  W = Attack
       add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer') 
 	  equip(W)
-    elseif W == High_Attack then 
+    elseif W == Attack then 
 	  W = Critical_Hit_Damage
       add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') 
 	  equip(W) 
@@ -258,21 +242,21 @@ function self_command(command)
 	
 --[[ Sheltered Ring while Engaged ]]--	
   elseif command == 'r' then 
-    if R == false then 
-      R = true
+    if Sheltered_Ring == false then 
+      Sheltered_Ring = true
       add_to_chat(200, 'Gearswap: Using Sheltered Ring while Engaged if no Pro + Shell') 
-    elseif R == true then 
-      R = false
+    elseif Sheltered_Ring == true then 
+      Sheltered_Ring = false
       add_to_chat(200, 'Gearswap: Disabled Sheltered Ring while Engaged if no Pro + Shell') 
     end 
 	
 --[[ Weaponskill Belts Gorget ]]--	
   elseif command == 'b' then 
-    if B == false then 
-      B = true
+    if Belt_Gorget == false then 
+      Belt_Gorget = true
       add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
-    elseif B == true then 
-      B = false
+    elseif Belt_Gorget == true then 
+      Belt_Gorget = false
       add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
     end 
 
@@ -297,20 +281,20 @@ function self_command(command)
 	end
 
 --[[ Auto Stun ]]-- 
-  elseif command == 'a' then 
-    if A == false then 
-	  A = S{7,8} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
-    elseif A == S{7,8} then 
-	  A = S{7} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now TP')
-    elseif A == S{7} then 
-	  A = S{8} 
-	  add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
-    elseif A == S{8} then 
-	  A = false 
-	  add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
-	end 
+  elseif command == 's' then 
+    if s == false then 
+      s = S{7,8} 
+      add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting') 
+    elseif s == S{7,8} then 
+      s = S{7} 
+      add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+    elseif s == S{7} then 
+      s = S{8} 
+      add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+    elseif s == S{8} then 
+      s = false 
+      add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
+    end 
 	
 --[[ Typed commands //gs c e pdt, //gs c e dd (ect...) ]]-- 	
 
@@ -336,4 +320,14 @@ function self_command(command)
     add_to_chat(200, 'Gearswap: engaged now DT') 
 	
   end 
-end
+end 
+
+function file_unload() 
+  send_command('unbind !F1') 
+  
+  send_command('unbind !F2') 
+  
+  send_command('unbind !F3') 
+  
+  send_command('unbind !F4') 
+end 
