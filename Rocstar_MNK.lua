@@ -13,8 +13,8 @@ function get_sets()
   
   p.waltz = {head="Otronif Mask",body="Otronif Harness",
     hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
-	back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
-	feet="Otronif Boots"}
+    back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
+    feet="Otronif Boots"}
 
   p['Curing Waltz II'] = p.waltz 
 
