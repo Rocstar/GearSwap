@@ -11,16 +11,16 @@ function get_sets()
  
   p = {} 
   
-  p.waltz = {head="Otronif Mask",body="Otronif Harness",
+  p.w = {head="Otronif Mask",body="Otronif Harness",
     hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",
     back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
     feet="Otronif Boots"}
 
-  p['Curing Waltz II'] = p.waltz 
+  p['Curing Waltz II'] = p.w 
 
-  p['Curing Waltz III'] = p.waltz 
+  p['Curing Waltz III'] = p.w 
 
-  p.Chakra = set_combine(p.waltz, {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"}) 
+  p.Chakra = set_combine(p.w, {body="Anchorite's Cyclas +1",hands="Hesychast's Gloves +1"}) 
   
   p['Hundred Fists'] = {legs="Melee hose +2"} 
 
@@ -34,17 +34,15 @@ function get_sets()
 
   p.Mantra = {feet="Melee Gaiters +2"} 
 
-  p.light_ws = {neck="Light Gorget",waist="Light Belt"}
+  p.l = {neck="Light Gorget",waist="Light Belt"}
   
-  p['Shijin Spiral'] = p.light_ws
+  p['Shijin Spiral'] = p.l
 	
-  p['Victory Smite'] = p.light_ws 
+  p['Victory Smite'] = p.l 
 
-  p['Final Heaven'] = p.light_ws 
+  p['Final Heaven'] = p.l 
 
-  p["Ascetic's Fury"] = p.light_ws
-  
-  p.Combo = {}
+  p["Ascetic's Fury"] = p.l
 
   Attack = {ammo="Honed Tathlum",head="Lithelimb Cap",
     neck="Asperity Necklace",ear1="Bladeborn Earring",
@@ -105,18 +103,18 @@ function get_sets()
   normal_reg = set_combine(E, {neck="Wiglen Gorget",
     ring1="Paguroidea Ring",ring2="Sheltered Ring"}) 
 
-  W = Attack -- Weaponskill set to High Attack. //gs c w
+  W = Attack 
 
-  E = DD -- Engaged set to DD. //gs c e pdt, //gs c e dd (ect...)
+  E = DD 
   
-  I = normal_reg -- Idle set to low Regen. increases with less hp after status change (80%)
+  I = normal_reg 
   
-  s = false -- //gs c s (auto stun disabled)
+  s = false 
   
-  Belt_Gorget = false --Disabled WS Belt Gorget. to toggle //gs c b 
+  Belt_Gorget = false 
   
-  Sheltered_Ring = false --Disabled Sheltered Ring while Engaged with no Pro/Shell. to toggle //gs c r 
-  
+  Sheltered_Ring = false 
+
   pro = buffactive['Protect']
   
   shell = buffactive['Shell']
@@ -197,8 +195,6 @@ windower.register_event('action', function(_)
 end) 
 
 function self_command(command) 
---[[ Toggled commands. or type //gs c e, //gs c i (ect...). ]]-- 
---[[ Engaged ]]-- 
   if command == 'e' then 
     if E == DD then 
       E = PDT 
@@ -221,8 +217,6 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') 
       equip(E) 
     end 
-	
---[[ Weaponskill ]]-- 
   elseif command == 'w' then 
     if W == Critical_Hit_Damage then 
       W = ACC
@@ -237,8 +231,6 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') 
       equip(W) 
     end 
-	
---[[ Sheltered Ring while Engaged ]]--	
   elseif command == 'r' then 
     if Sheltered_Ring == false then 
       Sheltered_Ring = true
@@ -247,8 +239,6 @@ function self_command(command)
       Sheltered_Ring = false
       add_to_chat(200, 'Gearswap: Disabled Sheltered Ring while Engaged if no Pro + Shell') 
     end 
-	
---[[ Weaponskill Belts Gorget ]]--	
   elseif command == 'b' then 
     if Belt_Gorget == false then 
       Belt_Gorget = true
@@ -257,8 +247,6 @@ function self_command(command)
       Belt_Gorget = false
       add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
     end 
-
---[[ Idle ]]-- 
   elseif command == 'i' then 
     if I == REG then 
       I = PDT 
@@ -277,8 +265,6 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: Idle now Regen') 
       equip(I) 
     end
-
---[[ Auto Stun ]]-- 
   elseif command == 's' then 
     if s == false then 
       s = S{7,8} 
@@ -293,9 +279,6 @@ function self_command(command)
       s = false 
       add_to_chat(200, 'Gearswap: Auto Stun now Disabled') 
     end 
-	
---[[ Typed commands //gs c e pdt, //gs c e dd (ect...) ]]-- 	
-
   elseif command == 'e dd' then 
     E = DD 
     equip(E) 
@@ -316,7 +299,6 @@ function self_command(command)
     E = DT 
     equip(E) 
     add_to_chat(200, 'Gearswap: engaged now DT') 
-	
   end 
 end 
 
