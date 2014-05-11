@@ -89,7 +89,7 @@ function get_sets()
   
   Belt_Gorget = false 
   
-  Sheltered_Ring = true 
+  Sheltered_Ring = false -- change to true or type //gs c r to use sheltered while engaged 
 
   pro = buffactive['Protect']
   
