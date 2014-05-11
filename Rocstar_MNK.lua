@@ -16,8 +16,6 @@ function get_sets()
 	back="Iximulew Cape",waist="Chuq'aba Belt",legs="Kaabnax Trousers",
 	feet="Otronif Boots"}
 
-  p['Curing Waltz'] = p.waltz
-
   p['Curing Waltz II'] = p.waltz 
 
   p['Curing Waltz III'] = p.waltz 
@@ -49,56 +47,56 @@ function get_sets()
   p.Combo = {}
 
   Attack = {ammo="Honed Tathlum",head="Lithelimb Cap",
-	neck="Asperity Necklace",ear1="Bladeborn Earring",
-	ear2="Steelflash Earring",body="Manibozho Jerkin",
-	hands="Manibozho Gloves",ring1="Epona's Ring",
-	ring2="Rajas Ring",back="Atheling Mantle",
-	waist="Cetl Belt",legs="Manibozho Brais",
-	feet="Manibozho Boots"} 
+    neck="Asperity Necklace",ear1="Bladeborn Earring",
+    ear2="Steelflash Earring",body="Manibozho Jerkin",
+    hands="Manibozho Gloves",ring1="Epona's Ring",
+    ring2="Rajas Ring",back="Atheling Mantle",
+    waist="Cetl Belt",legs="Manibozho Brais",
+    feet="Manibozho Boots"} 
 
   ACC = {ammo="Honed Tathlum",
     head="Manibozho Beret",neck="Asperity Necklace",
     ear1="Bladeborn Earring",ear2="Steelflash Earring",
-	body="Manibozho Jerkin",hands="Manibozho Gloves",
+    body="Manibozho Jerkin",hands="Manibozho Gloves",
     ring1="Epona's Ring",ring2="Rajas Ring",
-	back="Anchoret's Mantle",waist="Cetl Belt",
+    back="Anchoret's Mantle",waist="Cetl Belt",
     legs="Manibozho Brais",feet="Manibozho Boots"} 
   
   Critical_Hit_Damage = {head="Espial Cap",
     ear1="Bladeborn Earring",ear2="Steelflash Earring",
-	body="Espial Gambison",hands="Espial Bracers",
-	ring1="Epona's Ring",ring2="Rajas Ring",
-	back="Atheling Mantle",waist="Cetl Belt",
-	legs="Espial Hose",feet="Espial Socks"} 
+    body="Espial Gambison",hands="Espial Bracers",
+    ring1="Epona's Ring",ring2="Rajas Ring",
+    back="Atheling Mantle",waist="Cetl Belt",
+    legs="Espial Hose",feet="Espial Socks"} 
   
   DD = {main="Maochinoli",
     ammo="Honed Tathlum",head="Lithelimb Cap",
-	neck="Wiglen Gorget",ear1="Bladeborn Earring",
-	ear2="Steelflash Earring",body="Manibozho Jerkin",
-	hands="Otronif Gloves",ring1="Epona's Ring",
-	ring2="Cho'j Band",back="Atheling Mantle",
-	waist="Cetl Belt",legs="Manibozho Brais",
-	feet="Manibozho Boots"} 
+    neck="Wiglen Gorget",ear1="Bladeborn Earring",
+    ear2="Steelflash Earring",body="Manibozho Jerkin",
+    hands="Otronif Gloves",ring1="Epona's Ring",
+    ring2="Cho'j Band",back="Atheling Mantle",
+    waist="Cetl Belt",legs="Manibozho Brais",
+    feet="Manibozho Boots"} 
 
   MDT = {head="Ejekamal Mask",
     neck="Twilight Torque",body="Otronif Harness",
-	hands="Otronif Gloves",ring1="Defending Ring",
+    hands="Otronif Gloves",ring1="Defending Ring",
     ring2="Dark Ring",back="Mollusca Mantle",
-	legs="Kaabnax Trousers",feet="Otronif Boots"} 
+    legs="Kaabnax Trousers",feet="Otronif Boots"} 
 
   PDT = {main="Maochinoli",
     head="Otronif Mask",neck="Wiglen Gorget",
     body="Otronif Harness",hands="Otronif Gloves",
-	ring1="Defending Ring",ring2="Dark Ring",
+    ring1="Defending Ring",ring2="Dark Ring",
     back="Iximulew Cape",waist="Black Belt",
-	legs="Otronif Brais",feet="Otronif Boots"} 
+    legs="Otronif Brais",feet="Otronif Boots"} 
 
   DT = {main="Maochinoli",
     head="Otronif Mask",neck="Twilight Torque",
-	body="Otronif Harness",hands="Otronif Gloves",
+    body="Otronif Harness",hands="Otronif Gloves",
     ring1="Defending Ring",ring2="Dark Ring",
-	back="Mollusca Mantle",waist="Black Belt",
-	legs="Otronif Brais",feet="Otronif Boots"} 
+    back="Mollusca Mantle",waist="Black Belt",
+    legs="Otronif Brais",feet="Otronif Boots"} 
 
   max_reg = set_combine(E, {head="Ocelomeh Headpiece +1",
     neck="Wiglen Gorget",body="Mel. Cyclas +2",
@@ -128,12 +126,12 @@ end
 function precast(spell) 
   if spell.type == 'WeaponSkill' then 
     if p[spell.english] then 
-	  if Belt_Gorget ~= false then 
+      if Belt_Gorget ~= false then 
         equip(W, p[spell.english]) 
-	  else 
-	    equip(W) 
-	  end 
-	end
+      else 
+        equip(W) 
+      end 
+    end
   elseif spell.type == "JobAbility" then 
     if p[spell.english] then 
       equip(p[spell.english]) 
@@ -150,12 +148,12 @@ function aftercast(spell)
     if Sheltered_Ring ~= false then 
       if pro and shell then 
         equip(E)
-	  else
-	    equip(E,({ring2="Sheltered Ring"})) 
-	  end 
-	else 
-	  equip(E)
-	end
+      else
+        equip(E,({ring2="Sheltered Ring"})) 
+      end 
+    else 
+      equip(E)
+    end
   else 
     equip(I) 
   end 
@@ -166,18 +164,18 @@ function status_change(new,old)
     if Sheltered_Ring ~= false then 
       if pro and shell then 
         equip(E)
-	  else
-	    equip(E,({ring2="Sheltered Ring"})) 
-	  end 
-	else 
-	  equip(E)
-	end
+      else
+        equip(E,({ring2="Sheltered Ring"})) 
+      end 
+    else 
+      equip(E)
+    end
   elseif new == 'Idle' then 
     if player.hpp <= 80 then
-	  I = max_reg 
-	else
-	  I = normal_reg 
-	end 
+      I = max_reg 
+    else
+      I = normal_reg 
+    end 
     equip(I) 
   end 
 end 
@@ -203,42 +201,42 @@ function self_command(command)
 --[[ Engaged ]]-- 
   if command == 'e' then 
     if E == DD then 
-	  E = PDT 
-	  add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') 
-	  equip(E)
+      E = PDT 
+      add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') 
+      equip(E)
     elseif E == PDT then 
       E = MDT 
-	  add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') 
-	  equip(E)
+      add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') 
+      equip(E)
     elseif E == MDT then 
       E = DT 
-	  add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') 
-	  equip(E)
+      add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') 
+      equip(E)
     elseif E == DT then 
       E = ACC 
-	  add_to_chat(200, 'Gearswap: Engaged now Accuracy') 
-	  equip(E)
+      add_to_chat(200, 'Gearswap: Engaged now Accuracy') 
+      equip(E)
     elseif E == ACC then 
       E = DD 
-	  add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') 
-	  equip(E) 
+      add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') 
+      equip(E) 
     end 
 	
 --[[ Weaponskill ]]-- 
   elseif command == 'w' then 
     if W == Critical_Hit_Damage then 
-	  W = ACC
+      W = ACC
       add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') 
-	  equip(W)
+      equip(W)
     elseif W == ACC then 
-	  W = Attack
+      W = Attack
       add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer') 
-	  equip(W)
+      equip(W)
     elseif W == Attack then 
-	  W = Critical_Hit_Damage
+      W = Critical_Hit_Damage
       add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') 
-	  equip(W) 
-	end 
+      equip(W) 
+    end 
 	
 --[[ Sheltered Ring while Engaged ]]--	
   elseif command == 'r' then 
@@ -263,22 +261,22 @@ function self_command(command)
 --[[ Idle ]]-- 
   elseif command == 'i' then 
     if I == REG then 
-	  I = PDT 
-	  add_to_chat(200, 'Gearswap: Idle now Physical Damage Taken -') 
-	  equip(I)
+      I = PDT 
+      add_to_chat(200, 'Gearswap: Idle now Physical Damage Taken -') 
+      equip(I)
     elseif I == PDT then 
-	  I = MDT 
-	  add_to_chat(200, 'Gearswap: Idle now Magic Damage Taken -') 
-	  equip(I)
+      I = MDT 
+      add_to_chat(200, 'Gearswap: Idle now Magic Damage Taken -') 
+      equip(I)
     elseif I == MDT then 
-	  I = DT 
-	  add_to_chat(200, 'Gearswap: Idle now Damage Taken -') 
-	  equip(I)
+      I = DT 
+      add_to_chat(200, 'Gearswap: Idle now Damage Taken -') 
+      equip(I)
     elseif I == DT then 
-	  I = REG 
-	  add_to_chat(200, 'Gearswap: Idle now Regen') 
-	  equip(I) 
-	end
+      I = REG 
+      add_to_chat(200, 'Gearswap: Idle now Regen') 
+      equip(I) 
+    end
 
 --[[ Auto Stun ]]-- 
   elseif command == 's' then 
