@@ -89,7 +89,7 @@ function get_sets()
   
   Belt_Gorget = false 
   
-  Sheltered_Ring = false 
+  Sheltered_Ring = true 
 
   pro = buffactive['Protect']
   
@@ -124,6 +124,7 @@ function aftercast(spell)
         equip(E)
       else
         equip(E,({ring2="Sheltered Ring"})) 
+	windower.send_command('input /p pro/shell please. ty.') 
       end 
     else 
       equip(E)
@@ -140,6 +141,7 @@ function status_change(new,old)
         equip(E)
       else
         equip(E,({ring2="Sheltered Ring"})) 
+	windower.send_command('input /p pro/shell please. ty.') 
       end 
     else 
       equip(E)
