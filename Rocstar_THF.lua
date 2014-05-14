@@ -1,6 +1,6 @@
 function get_sets() 
-  Sa = buffactive['Sneak Attack'] 
-  Ta = buffactive['Trick Attack'] 
+  SA_up = buffactive['Sneak Attack'] 
+  TA_up = buffactive['Trick Attack'] 
   send_command('@input /macro book 8;wait .1;input /macro set 1') 
   send_command('bind !f7 gs c s') -- alt + F7 toggle auto stun
   send_command('bind !f8 gs c th') -- alt + F8 toggle TH/DD
@@ -26,7 +26,7 @@ function get_sets()
   pre_cast.Steal = {head="Assassin's Bonnet +2",hands="Pillager's Armlets +1",legs="Pillager's Culottes +1",
     feet="Pillager's Poulaines +1"} 
 	
-   --[[WS Sets]]--
+  --[[WS Sets]]--
   pre_cast.breeze = {neck="Breeze Gorget",waist="Breeze Belt"} 
   pre_cast.shadow = {neck="Shadow Gorget",waist="Shadow Belt"} 
   pre_cast['Aeolian Edge'] = pre_cast.breeze 
@@ -44,7 +44,7 @@ function get_sets()
   TA = {head="Lithelimb Cap",hands="Pillager's Armlets +1",back="Canny Cape",legs="Kaabnax Trousers",
     feet="Iuitl Gaiters"} 
 	
- --[[variable Sets]]--
+  --[[variable Sets]]--
   DD = {main="Sandung",sub="Eminent Dagger",range="Raider's Boomerang",head="Pillager's Bonnet +1",
     neck="Ishtar's Collar",ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",
     hands="Buremte Gloves",ring1="Epona's Ring",ring2="Rajas Ring",back="Atheling Mantle",
@@ -94,34 +94,24 @@ end)
 
 function precast(spell) 
   if windower.wc_match(spell.type, 'JobAbility|Waltz') then 
-    if pre_cast[spell.english] then equip(pre_cast[spell.english]) 
-    end
+    if pre_cast[spell.english] then equip(pre_cast[spell.english]) end
   elseif windower.wc_match(spell.type, 'Step|Flourish1') then 
-    if TH == step then equip(TH) else equip(ACC) 
-    end
+    if TH == step then equip(TH) else equip(ACC) end
   elseif spell.type == "WeaponSkill" then 
-    if belt_gorget ~= false then equip(W, pre_cast[spell.english]) else equip(W) 
-    end
-  elseif spell.english == 'Spectral Jig' and buffactive.sneak then 
-    send_command('cancel 71') 
+    if belt_gorget ~= false then equip(W, pre_cast[spell.english]) else equip(W) end
+  elseif spell.english == 'Spectral Jig' and buffactive.sneak then send_command('cancel 71') 
   end 
 end 
 
 function aftercast(spell) 
-  if player.status == 'Engaged' then equip(after_cast) else equip(idle) 
-  end 
+  if player.status == 'Engaged' then equip(after_cast) else equip(idle) end 
 end 
 
 function status_change(new,old) 
-  if new == 'Engaged' then 
-    equip(engaged) 
+  if new == 'Engaged' then equip(engaged) 
   elseif new == 'Idle' then 
-    if player.hpp <= 75 then 
-      idle = max_reg else idle = normal_reg 
-    end 
-    if movement_feet ~= false then 
-      equip(idle,({feet="Pillager's Poulaines +1"})) else equip(idle) 
-    end
+    if player.hpp <= 75 then idle = max_reg else idle = normal_reg end 
+    if movement_feet ~= false then equip(idle,({feet="Pillager's Poulaines +1"})) else equip(idle) end
   end 
 end 
  
@@ -129,18 +119,19 @@ function buff_change(buff, gain)
 --[[ Feint ]]-- 
   if buff == 'Feint' then 
     if not gain then after_cast = engaged
-      if player.status == 'Engaged' then equip(engaged) else equip(idle) 
-      end else after_cast = pre_cast.Feint equip(after_cast) 
-    end 
+      if player.status == 'Engaged' then equip(engaged) else equip(idle) end 
+    else after_cast = pre_cast.Feint equip(after_cast) end 
 --[[ Sneak Attack ]]-- 	
   elseif buff == 'Sneak Attack' then 
-    if gain then if Ta then W = SATA after_cast = SATA equip(W) else W = SA after_cast = SA equip(W) end
+    if gain then 
+      if TA_up then W = SATA after_cast = SATA equip(W) else W = SA after_cast = SA equip(W) end
     elseif not gain then W = WS after_cast = engaged 
       if player.status == 'Engaged' then equip(engaged) else equip(idle) end 
     end 
 --[[ Trick Attack ]]--	
   elseif buff == 'Trick Attack' then 
-    if gain then if Sa then W = SATA after_cast = SATA equip(W) else W = TA after_cast = TA equip(W) end
+    if gain then 
+      if SA_up then W = SATA after_cast = SATA equip(W) else W = TA after_cast = TA equip(W) end
     elseif not gain then W = WS after_cast = engaged 
       if player.status == 'Engaged' then equip(engaged) else equip(idle) end 
     end 
