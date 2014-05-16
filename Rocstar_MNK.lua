@@ -212,13 +212,13 @@ function self_command(command)
      stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
    end 
    
- elseif command == 'stun all' then 
+ elseif windower.wc_match(command, 'on|go|On|Go|stun on|stun go|Stun On|Stun Go|stun all|Stun All') then 
 -- macro /console gs c stun all or type //gs c stun all
    if stun ~= S{7,8} then 
      stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
    end
    
- elseif command == 'stun off' then 
+ elseif windower.wc_match(command, 'off|stop|Stop|Stop|stun off|stun stop|Stun Off|Stun Stop') then 
 -- macro /console gs c stun off or type //gs c stun off
    if stun ~= false then 
      stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
