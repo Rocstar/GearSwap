@@ -86,7 +86,8 @@ sheltered = false
 
 shell = buffactive['Shell']
 
-pro = buffactive['Protect'] 
+pro = buffactive['Protect']
+
 end
 
 function precast(spell)
