@@ -11,8 +11,7 @@ send_command('bind !F9 gs c w')
 pre = {}
 
 pre.waltz = {head="Otronif Mask",body="Otronif Harness",hands="Otronif Gloves",
-ring1="Defending Ring",ring2="Dark Ring",back="Iximulew Cape",legs="Otronif Brais",
-feet="Otronif Boots"}
+back="Iximulew Cape",legs="Otronif Brais",feet="Otronif Boots"}
 
 pre['Curing Waltz II'] = pre.waltz
 
@@ -147,7 +146,20 @@ function status_change(new,old)
 end
 
 function self_command(command)
- if windower.wc_match(command, 'e|engaged|E|Engaged') then
+ if windower.wc_match(command, 's|S|stun|Stun|stun mode|Stun Mode') then 
+-- toggle auto stun. key bound ALT+F7. or type //gs c s 
+   if stun == false then 
+     stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
+   elseif stun == S{7,8} then 
+     stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
+   elseif stun == S{7} then 
+     stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
+   elseif stun == S{8} then 
+     stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
+  end
+  
+ elseif windower.wc_match(command, 'e|engaged|E|Engaged') then 
+-- toggle engaged set. key bound ALT+F8. type //gs c e
    if e == dd then 
      e = pdt add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') equip(e)
    elseif e == pdt then 
@@ -161,6 +173,7 @@ function self_command(command)
    end
   
  elseif windower.wc_match(command, 'w|W|ws|WS|weaponskill|WeaponSkill|weapon skill|Weapon Skill') then
+-- toggle ws set. key bound ALT+F9. type //gs c w
    if ws == crit_dmg then 
      ws = accuracy add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') equip(ws)
    elseif ws == accuracy then 
@@ -170,6 +183,7 @@ function self_command(command)
    end
   
  elseif windower.wc_match(command, 'r|ring|R|Ring|sheltered|Sheltered') then
+-- toggle sheltered ring engaged with no shell/pro. type //gs c r
    if sheltered == false then 
      sheltered = true add_to_chat(200, 'Gearswap: Using Sheltered Ring Engaged') 
      if player.status == 'Engaged' then equip(e,({ring2="Sheltered Ring"})) else equip(i) 
@@ -179,44 +193,39 @@ function self_command(command)
    end
   
  elseif windower.wc_match(command, 'g|gorget|G|Gorget|b|belt|belts|B|Belt|Belts') then 
+-- toggle ws belts and gorget. type //gs c g
    if gorget == false then 
      gorget = true add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
    elseif gorget == true then 
      gorget = false add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
    end 
-  
- elseif windower.wc_match(command, 's|S|stun|Stun') then
-   if stun == false then 
-     stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
-   elseif stun == S{7,8} then 
-     stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
-   elseif stun == S{7} then 
-     stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
-   elseif stun == S{8} then 
-     stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
-  end
-  
+
  elseif command == 'stun tp' then 
+-- macro /console gs c stun tp or type //gs c stun tp
    if stun ~= S{7} then 
      stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP') 
    end
  
  elseif command == 'stun ma' then 
+-- macro /console gs c stun ma or type //gs c stun ma
    if stun ~= S{8} then 
      stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
    end 
    
  elseif command == 'stun all' then 
+-- macro /console gs c stun all or type //gs c stun all
    if stun ~= S{7,8} then 
      stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
    end
    
  elseif command == 'stun off' then 
+-- macro /console gs c stun off or type //gs c stun off
    if stun ~= false then 
      stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
    end
    
  elseif command == 'fish' then 
+-- macro /console gs c fish or type //gs c fish
    equip(fish) add_to_chat(200, 'Gearswap: equip fishing set')
  end 
 end
