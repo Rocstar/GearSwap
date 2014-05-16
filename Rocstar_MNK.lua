@@ -1,6 +1,6 @@
 function get_sets()
 
-send_command('input /macro book 7;wait .1;input /macro set 1')
+send_command('input /macro book 2;wait .1;input /macro set 1')
 
 send_command('bind !F7 gs c s') 
 
@@ -152,7 +152,7 @@ function self_command(command)
   elseif e == PDT then e = MDT add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') equip(e)
   elseif e == MDT then e = DT add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') equip(e)
   elseif e == DT then e = acc add_to_chat(200, 'Gearswap: Engaged now Accuracy') equip(e)
-  elseif e == accuracy then e = dd add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') equip(e)
+  elseif e == acc then e = dd add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') equip(e)
   end
  elseif command == 'ws' then
   if ws == crit_dmg then ws = accuracy add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') equip(ws)
@@ -175,7 +175,11 @@ function self_command(command)
   elseif stun == S{7} then stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
   elseif stun == S{8} then stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
   end
- elseif command == 'fish' then equip(fish) add_to_chat(200, 'Gearswap: equip fishing set') 
+ elseif command == 'fish' then equip(fish) add_to_chat(200, 'Gearswap: equip fishing set')
+ elseif command == 'stun tp' then stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+ elseif command == 'stun ma' then stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+ elseif command == 'stun all' then stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')  
+ elseif command == 'stun off' then stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
  end 
 end
 
