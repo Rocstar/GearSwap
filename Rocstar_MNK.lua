@@ -55,16 +55,16 @@ ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Manibozho Jerkin",hands
 ring1="Epona's Ring",ring2="Enlivened Ring",back="Anchoret's Mantle",waist="Cetl Belt",
 legs="Manibozho Brais",feet="Manibozho Boots"}
 
-PDT = {main="Oatixur",ammo="Honed Tathlum",head="Otronif Mask",
+pdt = {main="Oatixur",ammo="Honed Tathlum",head="Otronif Mask",
 neck="Wiglen Gorget",ear1="Bladeborn Earring",ear2="Steelflash Earring",body="Otronif Harness",
 hands="Otronif Gloves",ring1="Defending Ring",ring2="Dark Ring",back="Atheling Mantle",
 waist="Black Belt",legs="Otronif Brais",feet="Otronif Boots"}
 
-MDT = set_combine(PDT, {neck="Twilight Torque",back="Mollusca Mantle"})
+mdt = set_combine(pdt, {neck="Twilight Torque",back="Mollusca Mantle"})
 
-DT = set_combine(PDT, {neck="Twilight Torque",back="Mollusca Mantle"})
+dt = set_combine(pdt, {neck="Twilight Torque",back="Mollusca Mantle"})
 
-low = set_combine(PDT, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Iximulew Cape"})
+low = set_combine(pdt, {neck="Wiglen Gorget",ring1="Paguroidea Ring",ring2="Sheltered Ring",back="Iximulew Cape"})
 
 high = set_combine(low, {head="Ocelomeh Headpiece +1",body="Mel. Cyclas +2"})
 
@@ -147,39 +147,77 @@ function status_change(new,old)
 end
 
 function self_command(command)
- if command == 'e' then
-  if e == dd then e = PDT add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') equip(e)
-  elseif e == PDT then e = MDT add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') equip(e)
-  elseif e == MDT then e = DT add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') equip(e)
-  elseif e == DT then e = acc add_to_chat(200, 'Gearswap: Engaged now Accuracy') equip(e)
-  elseif e == acc then e = dd add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') equip(e)
+ if windower.wc_match(command, 'e|engaged|E|Engaged') then
+   if e == dd then 
+     e = pdt add_to_chat(200, 'Gearswap: Engaged now Physical Damage Taken -') equip(e)
+   elseif e == pdt then 
+     e = mdt add_to_chat(200, 'Gearswap: Engaged now Magic Damage Taken -') equip(e)
+   elseif e == mdt then 
+     e = dt add_to_chat(200, 'Gearswap: Engaged now Damage Taken -') equip(e)
+   elseif e == dt then 
+     e = acc add_to_chat(200, 'Gearswap: Engaged now Accuracy') equip(e)
+   elseif e == acc then 
+     e = dd add_to_chat(200, 'Gearswap: Engaged now Damage Dealer') equip(e)
+   end
+  
+ elseif windower.wc_match(command, 'w|W|ws|WS|weaponskill|WeaponSkill|weapon skill|Weapon Skill') then
+   if ws == crit_dmg then 
+     ws = accuracy add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') equip(ws)
+   elseif ws == accuracy then 
+     ws = dd add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer') equip(ws)
+   elseif ws == dd then 
+     ws = crit_dmg add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') equip(ws)
+   end
+  
+ elseif windower.wc_match(command, 'r|ring|R|Ring|sheltered|Sheltered') then
+   if sheltered == false then 
+     sheltered = true add_to_chat(200, 'Gearswap: Using Sheltered Ring Engaged') 
+     if player.status == 'Engaged' then equip(e,({ring2="Sheltered Ring"})) else equip(i) 
+	 end
+   elseif sheltered == true then 
+     sheltered = false add_to_chat(200, 'Gearswap: Disabled Sheltered Ring Engaged')
+   end
+  
+ elseif windower.wc_match(command, 'g|gorget|G|Gorget|b|belt|belts|B|Belt|Belts') then 
+   if gorget == false then 
+     gorget = true add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
+   elseif gorget == true then 
+     gorget = false add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
+   end 
+  
+ elseif windower.wc_match(command, 's|S|stun|Stun') then
+   if stun == false then 
+     stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
+   elseif stun == S{7,8} then 
+     stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
+   elseif stun == S{7} then 
+     stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
+   elseif stun == S{8} then 
+     stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
   end
- elseif command == 'ws' then
-  if ws == crit_dmg then ws = accuracy add_to_chat(200, 'Gearswap: Weapon Skill now Accuracy') equip(ws)
-  elseif ws == accuracy then ws = dd add_to_chat(200, 'Gearswap: Weapon Skill now Damage Dealer') equip(ws)
-  elseif ws == dd then ws = crit_dmg add_to_chat(200, 'Gearswap: Weapon Skill now Crit. Damage') equip(ws)
-  end
- elseif command == 'r' then
-  if sheltered == false then sheltered = true
-  add_to_chat(200, 'Gearswap: Using Sheltered Ring while Engaged if no Pro + Shell')
-  elseif sheltered == true then sheltered = false
-  add_to_chat(200, 'Gearswap: Disabled Sheltered Ring while Engaged if no Pro + Shell')
-  end
- elseif command == 'b' then
-  if gorget == false then gorget = true add_to_chat(200, 'Gearswap: Using WS Belt and Gorget') 
-  elseif gorget == true then gorget = false add_to_chat(200, 'Gearswap: Disabled WS Belt and Gorget') 
-  end
- elseif command == 's' then
-  if stun == false then stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
-  elseif stun == S{7,8} then stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP')
-  elseif stun == S{7} then stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting')
-  elseif stun == S{8} then stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
-  end
- elseif command == 'fish' then equip(fish) add_to_chat(200, 'Gearswap: equip fishing set')
- elseif command == 'stun tp' then stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP') 
- elseif command == 'stun ma' then stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
- elseif command == 'stun all' then stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')  
- elseif command == 'stun off' then stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
+  
+ elseif command == 'stun tp' then 
+   if stun ~= S{7} then 
+     stun = S{7} add_to_chat(200, 'Gearswap: Auto Stun now TP') 
+   end
+ 
+ elseif command == 'stun ma' then 
+   if stun ~= S{8} then 
+     stun = S{8} add_to_chat(200, 'Gearswap: Auto Stun now Spellcasting') 
+   end 
+   
+ elseif command == 'stun all' then 
+   if stun ~= S{7,8} then 
+     stun = S{7,8} add_to_chat(200, 'Gearswap: Auto Stun now TP and Spellcasting')
+   end
+   
+ elseif command == 'stun off' then 
+   if stun ~= false then 
+     stun = false add_to_chat(200, 'Gearswap: Auto Stun now Disabled')
+   end
+   
+ elseif command == 'fish' then 
+   equip(fish) add_to_chat(200, 'Gearswap: equip fishing set')
  end 
 end
 
