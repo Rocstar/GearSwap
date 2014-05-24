@@ -275,7 +275,7 @@ function midcast(spell)
     else 
       equip(mid.nuke, pre[spell.element]) 
     end 
-  elseif S{'DivineMagic','ElementalMagic'}:contains(spell.skill)then 
+  elseif windower.wc_match(spell.skill, 'Ele*|Div*') then 
     equip(mid.nuke, pre[spell.element]) 
   end
 end
