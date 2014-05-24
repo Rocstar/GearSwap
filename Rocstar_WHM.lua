@@ -11,7 +11,7 @@ function get_sets() pre = {} mid = {}
 --[[ Key Binds ]]--
 
   send_command('bind !f9 gs c e') 
-  send_command('bind f9 gs c i') 
+  send_command('bind f9 gs c ei') 
 
 --[[ Job Abilities ]]--
 
