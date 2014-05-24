@@ -2,16 +2,16 @@ function get_sets() pre = {} mid = {}
 
 --[[ Start Message ]]--
 
-  add_to_chat(200, 'Gearswap: Idle Wayfarer ( F9 )') 
-  add_to_chat(200, 'Gearswap: Engaged Darkness Damage ( ALT F9 ) ') 
+  add_to_chat(200, 'Gearswap: Idle Wayfarer ( ALT F8 )') 
+  add_to_chat(200, 'Gearswap: toggle DT ( ALT F7 ) ') 
 --[[ Change Macros ]]--
 
   send_command('@input /macro book 1;wait .1;input /macro set 1') 
   
 --[[ Key Binds ]]--
 
-  send_command('bind !f9 gs c e') 
-  send_command('bind f9 gs c ei') 
+  send_command('bind !f7 gs c ei') 
+  send_command('bind !f8 gs c i') 
 
 --[[ Job Abilities ]]--
 
@@ -350,6 +350,6 @@ function self_command(command)
 end 
 
 function file_unload() 
-  send_command('unbind !f9') 
-  send_command('unbind f9') 
+  send_command('unbind !f7') 
+  send_command('unbind !f8') 
 end 
