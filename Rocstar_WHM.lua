@@ -2,16 +2,16 @@ function get_sets() pre = {} mid = {}
 
 --[[ Start Message ]]--
 
-  add_to_chat(200, 'Gearswap: Idle Wayfarer ( ALT F8 )') 
-  add_to_chat(200, 'Gearswap: toggle DT ( ALT F7 ) ') 
+  add_to_chat(200, 'Gearswap: Idle Wayfarer ( F9 )') 
+  add_to_chat(200, 'Gearswap: Engaged Darkness Damage ( ALT F9 ) ') 
 --[[ Change Macros ]]--
 
   send_command('@input /macro book 1;wait .1;input /macro set 1') 
   
 --[[ Key Binds ]]--
 
-  send_command('bind !f7 gs c ei') 
-  send_command('bind !f8 gs c i') 
+  send_command('bind !f9 gs c e') 
+  send_command('bind f9 gs c i') 
 
 --[[ Job Abilities ]]--
 
@@ -307,11 +307,10 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: Idle set to Wayfarer')
       aftercast(spell)
     elseif idle == Wayfarer then 
-      idle = REF 
+      idle = refresh 
       add_to_chat(200, 'Gearswap: Idle set to Refresh') 
       aftercast(spell)
     end 
-	
 	
 --[[ Toggle DT ( F9 ) or ( //gs c ei ) ]]--	
   elseif windower.wc_match(command, 'ei|ie|e i|i e|engaged idle|idle engaged') then 
@@ -331,7 +330,7 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: engaged and idle now DT')
       aftercast(spell)
     elseif engaged == DT then 
-      idle = REF 	
+      idle = refresh 	
       engaged = DD 
       add_to_chat(200, 'Gearswap: engaged now DD idle Refresh')
       aftercast(spell)
@@ -351,6 +350,6 @@ function self_command(command)
 end 
 
 function file_unload() 
-  send_command('unbind !f7') 
-  send_command('unbind !f8') 
+  send_command('unbind !f9') 
+  send_command('unbind f9') 
 end 
