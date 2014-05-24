@@ -2,8 +2,8 @@ function get_sets() pre = {} mid = {}
 
 --[[ Start Message ]]--
 
-  add_to_chat(200, 'Gearswap: Idle Refresh ( F9 )') 
-  add_to_chat(200, 'Engaged DD ( ALT F9 ) ') 
+  add_to_chat(200, 'Gearswap: Idle Wayfarer ( F9 )') 
+  add_to_chat(200, 'Gearswap: Engaged Darkness Damage ( ALT F9 ) ') 
 --[[ Change Macros ]]--
 
   send_command('@input /macro book 1;wait .1;input /macro set 1') 
@@ -29,7 +29,7 @@ function get_sets() pre = {} mid = {}
 
 --[[ Stoneskin Spellcasting ]]--
 
-  pre.Stoneskin = set_combine(pre.enhancing, {hands="Carapacho Cuffs"}) 
+  pre.Stoneskin = set_combine(pre.enhancing, {head="Umuthi Hat",hands="Carapacho Cuffs"}) 
 
 --[[ Fast Cast ]]--
 
@@ -69,7 +69,9 @@ function get_sets() pre = {} mid = {}
   
 --[[ Enhancing Duration ]]--
 
-  mid.enhancing = {hands="Dynasty Mitts"} 
+  mid.enhancing = {main="Beneficus",hands="Dynasty Mitts",
+    waist="Olympus Sash",legs="Cleric's pantaloons +2",
+    feet="Theo. Duckbills"} 
 
 --[[ Weather Day ]]--
   mid.Fire = {waist='Karin Obi',back='Twilight Cape',
@@ -129,7 +131,7 @@ function get_sets() pre = {} mid = {}
     back="Mending cape",legs="Theophany pantaloons"} 
 
 --[[ Midcast Stoneskin ]]--
-  mid.Stoneskin = set_combine(mid.enhancing, {feet="Wayfarer Clogs"}) 
+  mid.Stoneskin = set_combine(mid.enhancing, {waist="Siegel Sash"}) 
 
 --[[ Bar Element ]]--
   mid.bar = {main="Beneficus",head="Orison Cap +2",
@@ -144,7 +146,9 @@ function get_sets() pre = {} mid = {}
 
 --[[ Midcast Protect ]]--
   mid.Pro = set_combine(mid.enhancing, {ring2="Sheltered Ring",feet="Cleric's duckbills +2"}) 
-
+  
+  mid.Stun = {main="Apamajas II"} 
+  
 --[[ Refresh ]]--
   REF = {main="Terra's Staff",sub="Oneiros Grip",
     ammo="Shadow Sachet",head="Wivre Hairpin",
@@ -188,7 +192,7 @@ function get_sets() pre = {} mid = {}
   
 --[[ Melee ]]--
 
-  DD = {} 
+  DD = set_combine(mid.nuke, {main="Xsaeta I"}) 
   
 --[[ Resting ]]--
 
@@ -205,16 +209,16 @@ function get_sets() pre = {} mid = {}
 end 
 
 function precast(spell)
-  if spell.skill == 'HealingMagic' then 
+  if spell.skill == 'Healing Magic' then 
     if windower.wc_match(spell.english, 'Cura*|Cure*') then  
       equip(pre.cast, pre.cure, pre[spell.element]) 
 	else 
 	  equip(pre.cast, pre.healing, pre[spell.element]) 
 	end
-  elseif spell.skill == 'EnhancingMagic' then 
+  elseif spell.skill == 'Enhancing Magic' then 
     if spell.english == 'Stoneskin' then 
       equip(pre.cast, pre[spell.english], pre[spell.element]) 
-    else 
+	else 
       equip(pre.cast, pre.enhancing, pre[spell.element]) 
     end 
   elseif windower.wc_match(spell.type, 'WeaponSkill|JobAbility') then 
@@ -227,7 +231,7 @@ function precast(spell)
 end 
 
 function midcast(spell) 
-  if spell.skill == 'HealingMagic' then 
+  if spell.skill == 'Healing Magic' then 
     if windower.wc_match(spell.english, 'Cura*|Cure*') then 
       equip(mid.Cure)  
     elseif spell.english:endswith('na') and spell.english ~= 'Cursna' then 
@@ -235,7 +239,7 @@ function midcast(spell)
     elseif spell.english == 'Cursna' then 
       equip(mid.Cursna)
     end 
-  elseif spell.skill == 'EnhancingMagic' then
+  elseif spell.skill == 'Enhancing Magic' then
     if not windower.wc_match(spell.english, 'Erase|Bar*|Regen*|Protect*|Shell*|Stoneskin') then 
       equip(mid.enhancing) 
     elseif spell.english == 'Erase' then 
@@ -265,7 +269,13 @@ function midcast(spell)
     else 
       equip(mid.MND_Enfeeb) 
     end 
-  elseif windower.wc_match(spell.skill, 'DivineMagic|ElementalMagic|DarkMagic') then 
+  elseif spell.skill == 'DarkMagic' then 
+    if mid[spell.english] then 
+      equip(mid[spell.english]) 
+    else 
+      equip(mid.nuke, pre[spell.element]) 
+    end 
+  elseif S{'DivineMagic','ElementalMagic'}:contains(spell.skill)then 
     equip(mid.nuke, pre[spell.element]) 
   end
 end
@@ -294,7 +304,7 @@ function self_command(command)
   if command == 'i' then 
     if idle == REF then 
       idle = REG 
-      add_to_chat(200, 'Gearswap: Idle set to Regen') 
+      add_to_chat(200, 'Gearswap: Idle set to Wayfarer') 
         if player.status ~= 'Engaged' then 
           equip(idle) 
 	end 
