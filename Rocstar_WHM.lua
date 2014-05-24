@@ -2,16 +2,16 @@ function get_sets() pre = {} mid = {}
 
 --[[ Start Message ]]--
 
-  add_to_chat(200, 'Gearswap: Idle Wayfarer ( F9 )') 
-  add_to_chat(200, 'Gearswap: Engaged Darkness Damage ( ALT F9 ) ') 
+  add_to_chat(200, 'Gearswap: Toggle DT sets ( ALT F7 )') 
+  add_to_chat(200, 'Gearswap: Toggle Refresh sets ( ALT F8 ) ') 
 --[[ Change Macros ]]--
 
   send_command('@input /macro book 1;wait .1;input /macro set 1') 
   
 --[[ Key Binds ]]--
 
-  send_command('bind !f9 gs c e') 
-  send_command('bind f9 gs c i') 
+  send_command('bind !f7 gs c F') 
+  send_command('bind !f8 gs c I') 
 
 --[[ Job Abilities ]]--
 
@@ -204,7 +204,7 @@ function get_sets() pre = {} mid = {}
   
 --[[ Idle ]]--
 
-  idle = Wayfarer 
+  idle = wayfarer 
 
 end 
 
@@ -299,21 +299,19 @@ function status_change(new,old)
 end 
 
 function self_command(command) 
-
---[[ Toggle idle refresh ( ALT F9 ) or ( //gs c i ) ]]--		
-  if windower.wc_match(command, 'i|idle') then 
-    if idle ~= Wayfarer then 
-      idle = Wayfarer 
+--[[ Toggle idle refresh ( ALT F8 ) or ( //gs c i ) ]]--		
+  if windower.wc_match(command, 'i|I|idle|Idle') then 
+    if idle ~= wayfarer then 
+      idle = wayfarer 
       add_to_chat(200, 'Gearswap: Idle set to Wayfarer')
       aftercast(spell)
-    elseif idle == Wayfarer then 
+    elseif idle == wayfarer then 
       idle = refresh 
       add_to_chat(200, 'Gearswap: Idle set to Refresh') 
       aftercast(spell)
     end 
-	
---[[ Toggle DT ( F9 ) or ( //gs c ei ) ]]--	
-  elseif windower.wc_match(command, 'ei|ie|e i|i e|engaged idle|idle engaged') then 
+--[[ Toggle DT ( ALT F7 ) or ( //gs c f ) ]]--	
+  elseif windower.wc_match(command, 'f|F|full|Full|FULL|ei|ie|e i|i e|engaged idle|idle engaged') then 
     if engaged == PDT then 
       idle = MDT 	
       engaged = MDT 
@@ -340,16 +338,44 @@ function self_command(command)
       add_to_chat(200, 'Gearswap: engaged and idle now PDT')
       aftercast(spell)
     end 
+--[[ macro or typed commands ( /console gs c pdt ) or ( //gs c pdt ) ]]--	
+  elseif windower.wc_match(command, 'pdt|PDT') then
+    idle = PDT 	
+    engaged = PDT 
+    add_to_chat(200, 'Gearswap: engaged and idle now PDT') 
+    aftercast(spell)
 	
   elseif windower.wc_match(command, 'mdt|MDT') then
     idle = MDT 	
     engaged = MDT 
     add_to_chat(200, 'Gearswap: engaged and idle now MDT') 
     aftercast(spell)
+	
+  elseif windower.wc_match(command, 'bdt|BDT') then
+    idle = BDT 	
+    engaged = BDT 
+    add_to_chat(200, 'Gearswap: engaged and idle now BDT') 
+    aftercast(spell)
+	
+  elseif windower.wc_match(command, 'dt|DT') then
+    idle = DT 	
+    engaged = DT 
+    add_to_chat(200, 'Gearswap: engaged and idle now DT') 
+    aftercast(spell)
+	
+  elseif windower.wc_match(command, 'iw|i w|IW|I W|idlewayfarer|IdleWayfarer|idle wayfarer|Idle Wayfarer') then
+    idle = wayfarer 
+    add_to_chat(200, 'Gearswap: Idle now Wayfarer') 
+    aftercast(spell)
+	
+  elseif windower.wc_match(command, 'ir|i r|IR|I R|idlerefresh|IdleRefresh|idle refresh|Idle Refresh') then
+    idle = refresh 
+    add_to_chat(200, 'Gearswap: Idle now Refresh') 
+    aftercast(spell)
   end 
 end 
 
 function file_unload() 
-  send_command('unbind !f9') 
-  send_command('unbind f9') 
+  send_command('unbind !f7') 
+  send_command('unbind !f8') 
 end 
