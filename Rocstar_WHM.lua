@@ -1,5 +1,5 @@
-function get_sets() 
-mid = {} 
+function get_sets()
+
 add_to_chat(200, 'Gearswap: Toggle DT sets ( ALT F7 )') 
 add_to_chat(200, 'Gearswap: Toggle Refresh sets ( ALT F8 )') 
 send_command('@input /macro book 1;wait .1;input /macro set 1') 
@@ -47,7 +47,10 @@ pre.Thunder = {main="Apamajas I"}
 pre.Light = {main="Arka I"} 
 pre.Dark = {main="Xsaeta I"}
 
+mid = {}
+--[[ midcast sets ]]--
 --[[ Enhancing Skill should be 500+ ]]--
+
 mid.enhancing = {main="Beneficus",hands="Dynasty Mitts",waist="Olympus Sash",
 legs="Cleric's pantaloons +2",feet="Theo. Duckbills"} 
 
