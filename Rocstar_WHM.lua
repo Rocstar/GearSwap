@@ -204,7 +204,7 @@ function get_sets() pre = {} mid = {}
   
 --[[ Idle ]]--
 
-  idle = REG 
+  idle = Wayfarer 
 
 end 
 
@@ -300,55 +300,52 @@ end
 
 function self_command(command) 
 
---[[ Toggle Idle ( ALT F9 ) or ( //gs c i ) ]]--		
-  if command == 'i' then 
-    if idle == REF then 
-      idle = REG 
-      add_to_chat(200, 'Gearswap: Idle set to Wayfarer') 
-        if player.status ~= 'Engaged' then 
-          equip(idle) 
-	end 
+--[[ Toggle idle refresh ( ALT F9 ) or ( //gs c i ) ]]--		
+  if windower.wc_match(command, 'i|idle') then 
+    if idle ~= Wayfarer then 
+      idle = Wayfarer 
+      add_to_chat(200, 'Gearswap: Idle set to Wayfarer')
+      aftercast(spell)
     elseif idle == REG then 
       idle = REF 
       add_to_chat(200, 'Gearswap: Idle set to Refresh') 
-        if player.status ~= 'Engaged' then 
-          equip(idle) 
-        end 
+      aftercast(spell)
     end 
 	
---[[ Toggle Engaged ( F9 ) or ( //gs c e ) ]]--	
-  elseif command == 'e' then 
+--[[ Toggle DT ( F9 ) or ( //gs c ei ) ]]--	
+  elseif windower.wc_match(command, 'ei|ie|e i|i e|engaged idle|idle engaged') then 
     if engaged == PDT then 
+      idle = MDT 	
       engaged = MDT 
-      add_to_chat(200, 'Gearswap: engaged now MDT') 
-        if player.status == 'Engaged' then 
-          equip(engaged) 
-	end 
+      add_to_chat(200, 'Gearswap: engaged and idle now MDT') 
+      aftercast(spell)
     elseif engaged == MDT then 
-      engaged = BDT 
-      add_to_chat(200, 'Gearswap: engaged now BDT') 
-        if player.status == 'Engaged' then 
-          equip(engaged) 
-	end 
+      idle = BDT 	
+      engaged = BDT
+      add_to_chat(200, 'Gearswap: engaged and idle now BDT') 
+      aftercast(spell)
     elseif engaged == BDT then 
+      idle = DT 	
       engaged = DT 
-      add_to_chat(200, 'Gearswap: engaged now DT') 
-        if player.status == 'Engaged' then 
-	  equip(engaged) 
-	end 
+      add_to_chat(200, 'Gearswap: engaged and idle now DT')
+      aftercast(spell)
     elseif engaged == DT then 
+      idle = REF 	
       engaged = DD 
-      add_to_chat(200, 'Gearswap: engaged now DD') 
-        if player.status == 'Engaged' then 
-	  equip(engaged) 
-	end 
-    elseif engaged == DD then 
+      add_to_chat(200, 'Gearswap: engaged now DD idle Refresh')
+      aftercast(spell)
+    elseif engaged == DD then  
+      idle = PDT 	
       engaged = PDT 
-      add_to_chat(200, 'Gearswap: engaged now PDT') 
-        if player.status == 'Engaged' then 
-	  equip(engaged) 
-	end 
+      add_to_chat(200, 'Gearswap: engaged and idle now PDT')
+      aftercast(spell)
     end 
+	
+  elseif windower.wc_match(command, 'mdt|MDT') then
+    idle = MDT 	
+    engaged = MDT 
+    add_to_chat(200, 'Gearswap: engaged and idle now MDT') 
+    aftercast(spell)
   end 
 end 
 
