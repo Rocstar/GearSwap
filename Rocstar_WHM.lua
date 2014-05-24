@@ -150,7 +150,7 @@ function get_sets() pre = {} mid = {}
   mid.Stun = {main="Apamajas II"} 
   
 --[[ Refresh ]]--
-  REF = {main="Terra's Staff",sub="Oneiros Grip",
+  refresh = {main="Terra's Staff",sub="Oneiros Grip",
     ammo="Shadow Sachet",head="Wivre Hairpin",
     neck="Wiglen Gorget",ear1="Black Earring",
     ear2="Darkness Earring",body="Gendewitha Bliaut",
@@ -161,7 +161,7 @@ function get_sets() pre = {} mid = {}
 	
 --[[ Regen ]]--
 
-  REG = {main="Terra's Staff",sub="Oneiros Grip",
+  wayfarer = {main="Terra's Staff",sub="Oneiros Grip",
     ammo="Shadow Sachet",head="Wayfarer Circlet",
     neck="Wiglen Gorget",ear1="Black Earring",
     ear2="Darkness Earring",body="Wayfarer Robe",
