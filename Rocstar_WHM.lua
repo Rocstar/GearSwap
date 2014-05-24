@@ -306,11 +306,12 @@ function self_command(command)
       idle = Wayfarer 
       add_to_chat(200, 'Gearswap: Idle set to Wayfarer')
       aftercast(spell)
-    elseif idle ~= REF then 
+    elseif idle == Wayfarer then 
       idle = REF 
       add_to_chat(200, 'Gearswap: Idle set to Refresh') 
       aftercast(spell)
     end 
+	
 	
 --[[ Toggle DT ( F9 ) or ( //gs c ei ) ]]--	
   elseif windower.wc_match(command, 'ei|ie|e i|i e|engaged idle|idle engaged') then 
