@@ -194,7 +194,9 @@ function midcast(spell)
   if not mid[spell.english] then
    equip(mid.nuke, pre[spell.element])
   end
- elseif S{'Elemental Magic', 'Divine Magic'}:contains(spell.skill) then
+ elseif spell.skill == 'Elemental Magic' then
+  equip(mid.nuke, pre[spell.element])
+ elseif spell.skill == 'Divine Magic' then
   equip(mid.nuke, pre[spell.element])
  end
 end
