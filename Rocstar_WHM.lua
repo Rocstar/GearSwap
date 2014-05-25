@@ -183,18 +183,18 @@ function midcast(spell)
   send_command('cancel 71')
  elseif spell.english == 'Blink' and buffactive.blink then
   send_command('cancel 36')
- elseif spell.skill == 'EnfeeblingMagic' then
+ elseif spell.skill == 'Enfeebling Magic' then
   if spell.english == 'Blind' then
    equip(mid.INT_Enfeeb)
   else
    equip(mid.MND_Enfeeb)
   end
- elseif spell.skill == 'DarkMagic' then
+ elseif spell.skill == 'Dark Magic' then
   render(spell)
   if not mid[spell.english] then
    equip(mid.nuke, pre[spell.element])
   end
- elseif S{'ElementalMagic', 'DivineMagic'}:contains(spell.skill) then
+ elseif S{'Elemental Magic', 'Divine Magic'}:contains(spell.skill) then
   equip(mid.nuke, pre[spell.element])
  end
 end
