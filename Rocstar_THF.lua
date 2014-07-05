@@ -10,7 +10,7 @@ send_command('bind !f10 gs c a')
 
 ws_mod = {} 
 
-ws_mod.AGI_86_TO_100 = {} -- add ws gear here...
+ws_mod.AGI_86_TO_100 = {} -- add ws gear
 
 ws_mod.DEX_28_INT_28 = {} 
 
