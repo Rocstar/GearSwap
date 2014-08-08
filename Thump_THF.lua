@@ -1,5 +1,5 @@
 function get_sets() 
-send_command('@input /macro book 4;wait .1;input /macro set 1') 
+send_command('@input /macro book 1;wait .1;input /macro set 1') 
 send_command('bind !f8 gs c th') 
 send_command('bind !f9 gs c b') 
 send_command('bind !f10 gs c a') 
@@ -88,8 +88,7 @@ body="Manibozho Jerkin",hands="Manibozho Gloves",ring1="Epona's Ring",ring2="Raj
 back="Atheling Mantle",waist="Cetl Belt",legs="Manibozho Brais",feet="Manibozho Boots"} 
 
 sa = {head="Uk'uxkaj Cap",
-body="Pillager's Vest +1",hands="Raider's Armlets +2",
-feet="Iuitl Gaiters"} 
+body="Pillager's Vest +1",hands="Raider's Armlets +2"} 
 
 ta = {head="Lithelimb Cap",
 hands="Pillager's Armlets +1",
@@ -105,7 +104,12 @@ auto_stun = false
 movement_feet = true 
 sa_up = buffactive['Sneak Attack'] 
 ta_up = buffactive['Trick Attack']
-ws_default = ws end
+ws_default = ws 
+
+fish = {range="Ebisu Fishing Rod",head="Wivre Hairpin",neck="Fisher's Torque",
+body="Fisherman's Smock",hands="Fsh. Gloves",ring1="Puffin Ring",ring2="Noddy Ring",
+back="Nexus Cape",legs="Fisherman's Hose",feet="Waders"}
+end
 
 function precast(spell) 
  if windower.wc_match(spell.type, 'JobAbility|WeaponSkill') then 
@@ -257,6 +261,11 @@ function self_command(command)
   engaged = mdt 
   equip(engaged) 
   add_to_chat(200, 'Gearswap: engaged now MDT') 
+  
+ elseif windower.wc_match(command, 'f|F|fish|Fish|FISH') then 
+  idle = fish
+  equip(idle) 
+  add_to_chat(200, 'Gearswap: equip fishing set')
  end 
 end 
 
