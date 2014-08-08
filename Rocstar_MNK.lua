@@ -277,10 +277,7 @@ end
 
 function file_unload() 
   send_command('unbind !F1') 
-  
   send_command('unbind !F2') 
-  
   send_command('unbind !F3') 
-  
   send_command('unbind !F4') 
 end
