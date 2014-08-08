@@ -9,7 +9,7 @@ pre = {}
 
 pre.waltz = {ammo="",
 head="Lithelimb Cap",neck="",ear1="",ear2="",
-body="Otronif Harness",hands="Hesychast's Gloves +1",ring1="",ring2="",
+body="Otronif Harness",hands="Hes. Gloves +1",ring1="",ring2="",
 back="Iximulew Cape",waist="",legs="Otronif Brais",feet="Daihanshi Habaki"} 
 
 pre["Curing Waltz III"] = pre.waltz 
@@ -29,14 +29,14 @@ pre["Ascetic's Fury"] = pre.light_ws
 
 ws_normal = {ammo="Honed Tathlum",
 head="Felistris Mask",neck="Ej Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-body="Manibozho Jerkin",hands="Hesychast's Gloves +1",ring1="Epona's Ring",ring2="Enlivened Ring",
+body="Manibozho Jerkin",hands="Hes. Gloves +1",ring1="Epona's Ring",ring2="Enlivened Ring",
 back="Atheling Mantle",waist="Cetl Belt",legs="Manibozho Brais",feet="Manibozho Boots"} 
 
 DD = set_combine(ws_normal, {main="Nyepel"}) 
 
 ACC = {ammo="Honed Tathlum",
 head="Lithelimb Cap",neck="Ej Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
-body="Manibozho Jerkin",hands="Hesychast's Gloves",ring1="Epona's Ring",ring2="Enlivened Ring",
+body="Manibozho Jerkin",hands="Hes. Gloves +1",ring1="Epona's Ring",ring2="Enlivened Ring",
 back="Anchoret's Mantle",waist="Cetl Belt",legs="Manibozho Brais",feet="Manibozho Boots"} 
 
 Critical_Hit_Damage = set_combine(ws_normal, {head="Espial Cap",body="Espial Gambison",
@@ -283,4 +283,4 @@ function file_unload()
   send_command('unbind !F3') 
   
   send_command('unbind !F4') 
-end 
+end
